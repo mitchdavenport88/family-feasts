@@ -1,0 +1,71 @@
+/* https://fonts.google.com/specimen/Rubik */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap');
+
+/*  colorhunt palette https://colorhunt.co/palette/ffa45bffda77fbf6f0aee6e6 */
+:root {
+    --very-soft-cyan: #AEE6E6;
+    --light-grey: #FBF6F0;
+    --light-orange: #FFDA77;
+    --orange: #FFA45B;
+    --black: #000;
+    --white: #FAFAFA;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    font-family: 'Rubik', sans-serif;
+}
+
+body {
+    background-color: var(--light-grey);
+}
+
+/* navigation */
+
+.my-navbar {
+    background-color: var(--very-soft-cyan);
+    font-size: 1rem;
+}
+
+.my-logo {
+    font-size: 2rem;
+    color: var(--black);
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+    margin-left: 2.5%;
+}
+
+.my-navbar a {
+    color: var(--black);
+}
+
+.nav-item {
+    margin: 0 20px;
+    text-align: center;
+}
+
+.nav-link {
+    color: var(--black);
+    letter-spacing: 0.1rem;
+}
+
+.nav-link:hover {
+    color: var(--light-grey);
+}
+
+.my-burger {
+    color: var(--black);
+    border: 2px solid var(--black);
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    margin-right: 2.5%;
+}
+
+/* contents */
+
+.my-container {
+    margin-top: 74px;
+}
