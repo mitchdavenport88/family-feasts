@@ -37,3 +37,6 @@ As the site owner / admin, I'd want:
 * The ability to edit and delete any recipes regardless of who posted it.
 * The ability to remove user profiles if needed.
 * To be able to add new categories and edit and delete existing ones.
+
+### Skeleton
+[Initial idea - sketch](readme-docs/wireframes/initial-wireframe-sketch.jpg)
