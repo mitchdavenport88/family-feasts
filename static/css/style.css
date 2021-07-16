@@ -25,7 +25,7 @@ body {
 /* navigation */
 
 .my-navbar {
-    background-color: var(--very-soft-cyan);
+    background-color: var(--light-orange);
     font-size: 1rem;
 }
 
@@ -52,7 +52,7 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--light-grey);
+    color: var(--orange);
 }
 
 .my-burger {
@@ -68,4 +68,29 @@ body {
 
 .my-container {
     margin-top: 74px;
+}
+
+.page-title {
+    margin-bottom: 20px;
+    padding-top: 10px;
+}
+
+/* cards */
+
+.card {
+    border: 1px solid var(--orange);
+    background-color: var(--light-orange);
+    margin-bottom: 20px;
+}
+
+/* buttons */
+
+.my-btn {
+    background-color: var(--orange);
+    border: 1px solid var(--orange);
+}
+
+.my-btn:hover {
+    background-color: var(--light-orange);
+    border: 1px solid var(--orange);
 }
