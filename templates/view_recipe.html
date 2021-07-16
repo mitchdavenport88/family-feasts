@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1 class="text-center page-title">{{ recipe.recipe_name }}</h1>
+
+    <!-- <div class="recipe-container">
+        <div class="row m-0 recipe-contents">
+            <div class="col-6">
+                <ul>
+                    {% for ingredient in recipe.ingredients %}
+                        <li>{{ ingredient }}</li>     
+                    {% endfor %}     
+                </ul> 
+            </div>
+            <div class="col-6">
+                <ol>
+                    {% for step in recipe.recipe_steps %}
+                        <li>{{ step }}</li>     
+                    {% endfor %} 
+                </ol>
+            </div>
+        </div>    
+    </div> -->
+    
+{% endblock %}
