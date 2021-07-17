@@ -75,6 +75,39 @@ body {
     padding-top: 10px;
 }
 
+/* index.html */
+
+.hero-image {
+    height: 85vh;
+    background: url("../images/jimmy-dean-4-rwTZGSs2s-unsplash.jpg") no-repeat center;
+    background-size: cover;
+    padding: 0;
+}
+
+.hero-image-overlay {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(174, 230, 230, 0.2);
+}
+
+.hero-image-content {
+    text-align: center;
+    background-color: rgba(251, 246, 240, 0.75);
+    padding: 2%;
+    border-radius: 10px;
+    max-width: 80%;
+}
+
+.hero-image-quote { 
+    margin-bottom: 2%;   
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+} 
+
 /* cards */
 
 .card {
@@ -93,4 +126,18 @@ body {
 .my-btn:hover {
     background-color: var(--light-orange);
     border: 1px solid var(--orange);
+}
+
+/* media queries */
+
+/* max-width sm */
+@media only screen and (max-width: 575px) {
+    /* navigation */
+    .my-logo {
+        margin-left: 1%;
+        letter-spacing: 0.1rem;
+    }
+    .my-burger {
+        margin-right: 1%;
+    }    
 }
