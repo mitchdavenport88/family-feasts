@@ -1,13 +1,154 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <header class="container-fluid hero-image">
-        <div class="hero-image-overlay">
-            <div class="hero-image-content">
-                <h1 class="hero-image-quote">easy recipes to enjoy together!</h1>
-                <a href="{{ url_for('recipes') }}" class="btn my-btn">view recipes</a>  
+<!-- hero image -->
+<header class="container-fluid hero-image">
+    <div class="hero-image-overlay">
+        <!-- overlay box -->
+        <div class="hero-image-content">
+            <h1 class="hero-image-quote">easy recipes to enjoy together!</h1>
+            <a href="{{ url_for('recipes') }}" class="btn my-btn">view recipes</a>
+        </div>
+    </div>
+</header>
+
+<!-- about Family Feasts -->
+<section id="about">
+    <div class="container-fluid">
+        <h1 class="text-center page-title">about us</h1>
+        <div class="row">
+            <!-- save section -->
+            <div class="col-12 col-md-6 col-lg-4 about-card">
+                <div class="text-center">
+                    <div class="d-flex justify-content-center about-icons"><i class="fas fa-bookmark"></i></div>
+                    <h3>save</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Harum, esse magnam porro explicabo ratione sapiente ipsa cumque,
+                        facilis consectetur id quos delectus aliquam nostrum optio facere,
+                        quaerat hic. Sunt, modi.
+                    </p>
+                    <a href="#" class="btn my-btn">register now</a>
+                </div>
+            </div>
+            <!-- share section -->
+            <div class="col-12 col-md-6 col-lg-4 about-card">
+                <div class="text-center">
+                    <div class="d-flex justify-content-center about-icons"><i class="fas fa-share"></i></div>
+                    <h3>share</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Harum, esse magnam porro explicabo ratione sapiente ipsa cumque,
+                        facilis consectetur id quos delectus aliquam nostrum optio facere,
+                        quaerat hic. Sunt, modi.
+                    </p>
+                </div>
+            </div>
+            <!-- experiment section -->
+            <div class="col-12 col-md-6 offset-md-3 offset-lg-0 col-lg-4 about-card">
+                <div class="text-center">
+                    <div class="d-flex justify-content-center about-icons"><i class="fas fa-utensils"></i></div>
+                    <h3>experiment</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Harum, esse magnam porro explicabo ratione sapiente ipsa cumque,
+                        facilis consectetur id quos delectus aliquam nostrum optio facere,
+                        quaerat hic. Sunt, modi.
+                    </p>
+                    <a href="#" class="btn my-btn">view recipes</a>
+                </div>
             </div>
         </div>
-    </header>
+    </div>
+</section>
+
+<!-- why cook together -->
+<section id="why">
+    <div class="container-fluid">
+        <h1 class="text-center page-title">why cook together?</h1>
+        <!-- why section 1 -->
+        <div class="row">
+            <div class="col-12 col-lg-6 why-content">
+                <div class="why-content-box">
+                    <h4>boredom isn’t on the ingredient list</h4>
+                    <div class="underline"></div>
+                    <p>
+                        A boring kitchen is a quiet one, so fill the silence with bubbling pots, simmering pans, and a
+                        handful of does-this-look-done-to-you? to spend time together while creating colorful, flavorful
+                        meals. It’s productive, inclusive, fun, and rewarding for everyone. Plus, that roar of boiling water
+                        is just the kitchen cheering you on.
+                    </p>
+                </div>
+            </div>
+            <div class="d-none d-lg-block col-lg-6 why-content-pic">
+                <img src="static/images/why-section-pic1.jpg" alt="">
+            </div>
+        </div>
+        <!-- why section 2 -->
+        <div class="row">
+            <div class="d-none d-lg-block col-lg-6 why-content-pic">
+                <img src="static/images/why-section-pic2.jpg" alt="">
+            </div>
+            <div class="col-12 col-lg-6 why-content">
+                <div class="why-content-box">
+                    <h4>five-star encouragement</h4>
+                    <div class="underline"></div>
+                    <p>
+                        Motivate each other to go from couch to kitchen because you know that the sooner you start cooking
+                        together, the sooner you’ll be happily licking your plates. Take over the big kitchen island and
+                        spread out your fresh ingredients together, or develop an oven-maneuvering, fridge-opening,
+                        drawer-next-to-the-sink-reaching duet if you’re low on counter space. Teach your cooking partner a
+                        new skill and learn one in return.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- why section 3 -->
+        <div class="row">
+            <div class="col-12 col-lg-6 why-content">
+                <div class="why-content-box">
+                    <h4>faster slicing and dicing</h4>
+                    <div class="underline"></div>
+                    <p>
+                        Cooking together means you can divide and conquer any recipe that comes your way. With a built-in
+                        sous chef, cut down on prep time and act as sounding boards for your taste testing needs. Because
+                        truly, who isn’t happy to help by trying the pasta on the hunt for al dente perfection?
+                    </p>
+                </div>
+            </div>
+            <div class="d-none d-lg-block col-lg-6 why-content-pic">
+                <img src="static/images/why-section-pic3.jpg" alt="">
+            </div>
+        </div>
+        <!-- why section 4 -->
+        <div class="row">
+            <div class="d-none d-lg-block col-lg-6 why-content-pic">
+                <img src="static/images/why-section-pic4.jpg" alt="">
+            </div>
+            <div class="col-12 col-lg-6 why-content">
+                <div class="why-content-box">
+                    <h4>you’ve got the power</h4>
+                    <div class="underline"></div>
+                    <p>
+                        No waiting at trendy restaurants, no music playing too loudly to hear anything, no prix fixe menu
+                        obligations, and no reason to change out of your slippers. Cooking together at home helps you stay
+                        in the present, actively listen to one another, and actually empowers you on your quest for a common
+                        goal. A delicious meal, of course.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="footer">
+    <div class="social-icons">
+        <a href="https://www.instagram.com/" target="_blank" rel="noreferrer"><i
+                class="fab fa-instagram social-link"></i></a>
+        <a href="https://www.facebook.com/" target="_blank" rel="noreferrer"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/" target="_blank" rel="noreferrer"><i class="fab fa-twitter"></i></a>
+        <a href="https://pinterest.com/" target="_blank" rel="noreferrer"><i class="fab fa-pinterest-p"></i></a>
+    </div>
+</footer>
 
 {% endblock %}

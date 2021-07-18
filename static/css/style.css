@@ -27,6 +27,7 @@ body {
 .my-navbar {
     background-color: var(--light-orange);
     font-size: 1rem;
+    border-bottom: 1px solid var(--orange);
 }
 
 .my-logo {
@@ -77,9 +78,10 @@ body {
 
 /* index.html */
 
+/* hero image */
 .hero-image {
-    height: 85vh;
-    background: url("../images/jimmy-dean-4-rwTZGSs2s-unsplash.jpg") no-repeat center;
+    height: 83vh;
+    background: url("../images/hero-image.jpg") no-repeat center;
     background-size: cover;
     padding: 0;
 }
@@ -106,14 +108,86 @@ body {
     font-size: 2rem;
     font-weight: bold;
     letter-spacing: 0.1rem;
-} 
+}
 
-/* cards */
+/* about */
+.about-card {
+    margin-bottom: 20px;
+}
+
+.about-icons {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+/* why */
+#why {
+    margin-bottom: 20px;
+}
+
+.why-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.why-content-box {
+    padding: 4%;
+    border: 1px solid var(--orange);
+    background-color: var(--light-orange);
+    border-radius: 10px;
+}
+
+.why-content-box p {
+    margin: 0;
+}
+
+.why-content-pic {
+    padding: 0;
+}
+
+.why-content-pic img {
+    height: 350px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.underline {
+    height: 1px;
+    width: 60%;
+    border-top: 1.75px var(--orange) solid;
+    margin: 0 auto 8px;
+}
+
+/* recipe cards */
 
 .card {
     border: 1px solid var(--orange);
     background-color: var(--light-orange);
     margin-bottom: 20px;
+}
+
+/* footer */
+
+#footer {
+    background-color: var(--light-orange);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1% 2.5%;
+    border-top: 1px solid var(--orange);
+}
+
+#footer a {
+    color: var(--black);
+    font-size: 1.5rem;
+    padding: 5px;
+    margin: 0 10px;
+}
+
+#footer a:hover {
+    color: var(--orange);
 }
 
 /* buttons */
@@ -129,6 +203,18 @@ body {
 }
 
 /* media queries */
+
+/* max-width lg */
+@media only screen and (max-width: 991px) {  
+    /* index.html */
+    #why {
+        margin-bottom: 0px;
+    }
+    .why-content-box {
+        padding: 2.5%;
+        margin-bottom: 20px;
+    }
+}
 
 /* max-width sm */
 @media only screen and (max-width: 575px) {
