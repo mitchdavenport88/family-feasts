@@ -136,7 +136,7 @@ body {
     padding: 4%;
     border: 1px solid var(--orange);
     background-color: var(--light-orange);
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .why-content-box p {
@@ -160,12 +160,55 @@ body {
     margin: 0 auto 8px;
 }
 
-/* recipe cards */
+/* recipes.html */
 
 .card {
     border: 1px solid var(--orange);
     background-color: var(--light-orange);
     margin-bottom: 20px;
+}
+
+/* view_recipes.html */
+
+.recipe-info-row {   
+    width: 100%;
+    margin: 0 auto;
+}
+
+.recipe-info-card {
+    border: 1px solid var(--orange);
+    border-radius: 5px;
+}
+
+.recipe-info-pic {
+    object-fit: cover;
+    width: 100%;
+    height: 348px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.recipe-info-box {
+    background-color: var(--light-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 40px;
+}
+
+.recipe-info-box p {
+    margin-bottom: 0px;
+}
+
+.ingredients-container, 
+.method-container {
+    margin-top: 20px;
+}
+
+.ingredients-container li, 
+.method-container li {
+    margin-bottom: 8px;
 }
 
 /* footer */
@@ -226,4 +269,26 @@ body {
     .my-burger {
         margin-right: 1%;
     }    
+}
+
+/* min-width md */
+@media only screen and (min-width: 767px) {
+    /* view_recipes.html */
+    .recipe-info-card-row{
+        height: 100%;
+    }
+    .recipe-info-card {
+        height: 350px;
+    }
+    .recipe-info-box {
+        height: 25%;
+    }
+    .recipe-info-pic {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-top-right-radius: 0px;
+    }
+    .recipe-info-box:not(:last-child) {
+    border-bottom: 1px solid var(--orange);
+    }
 }

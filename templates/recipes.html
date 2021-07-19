@@ -1,22 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-
-    <h1 class="text-center page-title">recipes</h1>
     
-    <div class="row m-0">
-        {% for recipe in recipes %}
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="card">
-                    <img src="{{ recipe.recipe_image }}" class="card-img-top" alt="{{ recipe.recipe_name }}">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">{{ recipe.recipe_name }}</h5>
-                        <div class="d-grid col-8 mx-auto">
-                            <a href="{{ url_for('view_recipe', id=recipe._id) }}" class="btn my-btn d-flex justify-content-center">view recipe</a>    
+    <div class="container-fluid">
+        <h1 class="text-center page-title">recipes</h1>
+            <div class="row">
+                {% for recipe in recipes %}
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div class="card">
+                            <img src="{{ recipe.recipe_image }}" class="card-img-top" alt="{{ recipe.recipe_name }}">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">{{ recipe.recipe_name }}</h5>
+                                <div class="col-8 offset-2">
+                                    <a href="{{ url_for('view_recipe', id=recipe._id) }}" class="btn my-btn d-flex justify-content-center">
+                                        view recipe
+                                    </a>    
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
-        {% endfor %}
     </div>
+
+    
 
 {% endblock %}

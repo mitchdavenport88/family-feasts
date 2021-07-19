@@ -1,25 +1,56 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h1 class="text-center page-title">{{ recipe.recipe_name }}</h1>
+    <div class="container-fluid">
+        <h1 class="text-center page-title">{{ recipe.recipe_name }}</h1>
+        <div class="row recipe-info-row">
+            <div class="col-12 col-md-8 offset-md-2 recipe-info-card">
+                <div class="row recipe-info-card-row">
+                    <div class="col-12 col-md-8 p-0">
+                        <img class="recipe-info-pic" src="{{ recipe.recipe_image }}" alt="{{ recipe.recipe_name }}">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="row" style="height: 100%;">
+                            <div class="col-6 col-md-12 recipe-info-box">
+                                <p>prep time: {{ recipe.prep_time }}</p>
+                            </div>
+                            <div class="col-6 col-md-12 recipe-info-box">
+                                <p>cook time: {{ recipe.cook_time }}</p>
+                            </div>
+                            <div class="col col-md-12 recipe-info-box">
+                                <p>serves: {{ recipe.servings }}</p>
+                            </div>
+                            <div class="col col-md-12 recipe-info-box">
+                                <p>{{ recipe.category_name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- <div class="recipe-container">
-        <div class="row m-0 recipe-contents">
-            <div class="col-6">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 ingredients-container">
+                <h4 class="text-center">ingredients</h4>
+                <div class="underline"></div>
                 <ul>
                     {% for ingredient in recipe.ingredients %}
-                        <li>{{ ingredient }}</li>     
-                    {% endfor %}     
-                </ul> 
+                        <li>{{ ingredient }}</li>
+                    {% endfor %}
+                </ul>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 method-container">
+                <h4 class="text-center">method</h4>
+                <div class="underline"></div>
                 <ol>
                     {% for step in recipe.recipe_steps %}
-                        <li>{{ step }}</li>     
-                    {% endfor %} 
+                        <li>{{ step }}</li>
+                    {% endfor %}
                 </ol>
             </div>
-        </div>    
-    </div> -->
-    
+        </div>
+    </div>
+
 {% endblock %}
