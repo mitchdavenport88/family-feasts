@@ -1,0 +1,46 @@
+{% from "_render_field.html" import render_field %}
+{% extends "base.html" %}
+{% block content %}
+
+    <h1 class="text-center page-title">add recipe</h1>
+
+    <div class="container-fluid" style="margin-bottom: 20px;">
+        <div class="row">
+            <form class="col-12 col-md-8 offset-md-2" method="POST" action="{{ url_for('add_recipe') }}"
+                style="background-color: lightcoral; padding-top: 2%; padding-bottom: 2%;">
+                {{ form.csrf_token }}
+                <div class="row">
+                    <div class="col-10 offset-1">
+                        {{ render_field(form.recipe_name, placeholder=form.recipe_name.label.text) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-10 offset-1">
+                        {{ render_field(form.recipe_image, placeholder="copy & paste the image url in here") }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5 offset-1">
+                        <!-- categories select -->
+                    </div>
+                    <div class="col-5 ">
+                        {{ render_field(form.servings) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5 offset-1">
+                        {{ render_field(form.prep_time) }}
+                    </div>
+                    <div class="col-5">
+                        {{ render_field(form.cook_time) }}
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="reset" class="btn btn-primary">clear</button>
+                    <button type="submit" class="btn btn-primary">submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
