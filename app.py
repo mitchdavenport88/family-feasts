@@ -5,7 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField
+from wtforms import StringField, IntegerField, SelectField
 from wtforms.validators import DataRequired
 
 if os.path.exists("env.py"):
@@ -49,18 +49,23 @@ class addForm(FlaskForm):
                              validators=[DataRequired()])
     servings = IntegerField('number of servings',
                             validators=[DataRequired()])
+    category_name = SelectField('category')
 
 
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
     form = addForm()
+    # https://stackoverflow.com/questions/28133859/how-to-populate-wtform-select-field-using-mongokit-pymongo
+    form.category_name.choices = [(category['category_name'])
+                                  for category in mongo.db.categories.find()]
     if form.validate_on_submit():
         recipe = {
             "recipe_name": request.form.get("recipe_name").title(),
             "recipe_image": request.form.get("recipe_image"),
             "servings": request.form.get("servings"),
             "prep_time": request.form.get("prep_time"),
-            "cook_time": request.form.get("cook_time")
+            "cook_time": request.form.get("cook_time"),
+            "category_name": request.form.get("category_name")
         }
         mongo.db.recipes.insert_one(recipe)
         return redirect(url_for("recipes"))

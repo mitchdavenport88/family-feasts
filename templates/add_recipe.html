@@ -21,7 +21,7 @@
                 </div>
                 <div class="row">
                     <div class="col-5 offset-1">
-                        <!-- categories select -->
+                        {{ render_field(form.category_name, class="form-select") }}
                     </div>
                     <div class="col-5 ">
                         {{ render_field(form.servings) }}
