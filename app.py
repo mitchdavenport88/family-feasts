@@ -4,9 +4,6 @@ from flask import (
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SelectField
-from wtforms.validators import DataRequired
 
 if os.path.exists("env.py"):
     import env
@@ -37,28 +34,10 @@ def view_recipe(id):
     return render_template("view_recipe.html", recipe=recipe)
 
 
-# Intro to Flask-WTF series - Pretty Printed
-# (https://www.youtube.com/watch?v=vzaXBm-ZVOQ)
-class addForm(FlaskForm):
-    recipe_name = StringField('recipe name',
-                              validators=[DataRequired()])
-    recipe_image = StringField('recipe img (url)')
-    prep_time = IntegerField('prep time (mins)',
-                             validators=[DataRequired()])
-    cook_time = IntegerField('cooking time (mins)',
-                             validators=[DataRequired()])
-    servings = IntegerField('number of servings',
-                            validators=[DataRequired()])
-    category_name = SelectField('category')
-
-
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
-    form = addForm()
-    # https://stackoverflow.com/questions/28133859/how-to-populate-wtform-select-field-using-mongokit-pymongo
-    form.category_name.choices = [(category['category_name'])
-                                  for category in mongo.db.categories.find()]
-    if form.validate_on_submit():
+    categories = mongo.db.categories.find()
+    if request.method == "POST":
         recipe = {
             "recipe_name": request.form.get("recipe_name").title(),
             "recipe_image": request.form.get("recipe_image"),
@@ -69,7 +48,7 @@ def add_recipe():
         }
         mongo.db.recipes.insert_one(recipe)
         return redirect(url_for("recipes"))
-    return render_template("add_recipe.html", form=form)
+    return render_template("add_recipe.html", categories=categories)
 
 
 if __name__ == "__main__":

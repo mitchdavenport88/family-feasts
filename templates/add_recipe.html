@@ -1,46 +1,85 @@
-{% from "_render_field.html" import render_field %}
 {% extends "base.html" %}
 {% block content %}
 
-    <h1 class="text-center page-title">add recipe</h1>
+<h1 class="text-center page-title">add recipe</h1>
 
-    <div class="container-fluid" style="margin-bottom: 20px;">
+<section class="container-fluid">
+    <form class="col-12 col-md-8 offset-md-2 my-form" method="POST" action="{{ url_for('add_recipe') }}">
         <div class="row">
-            <form class="col-12 col-md-8 offset-md-2" method="POST" action="{{ url_for('add_recipe') }}"
-                style="background-color: lightcoral; padding-top: 2%; padding-bottom: 2%;">
-                {{ form.csrf_token }}
-                <div class="row">
-                    <div class="col-10 offset-1">
-                        {{ render_field(form.recipe_name, placeholder=form.recipe_name.label.text) }}
-                    </div>
+            <div class="col-10 offset-1">
+                <div class="mb-3">
+                    <label for="recipe_name" class="form-label">recipe name</label>
+                    <input type="text" id="recipe_name" name="recipe_name" class="form-control" placeholder="" required>
                 </div>
-                <div class="row">
-                    <div class="col-10 offset-1">
-                        {{ render_field(form.recipe_image, placeholder="copy & paste the image url in here") }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-5 offset-1">
-                        {{ render_field(form.category_name, class="form-select") }}
-                    </div>
-                    <div class="col-5 ">
-                        {{ render_field(form.servings) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-5 offset-1">
-                        {{ render_field(form.prep_time) }}
-                    </div>
-                    <div class="col-5">
-                        {{ render_field(form.cook_time) }}
-                    </div>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <button type="reset" class="btn btn-primary">clear</button>
-                    <button type="submit" class="btn btn-primary">submit</button>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-10 offset-1">
+                <div class="mb-3">
+                    <label for="recipe_image" class="form-label">recipe image</label>
+                    <input type="url" id="recipe_image" name="recipe_image" class="form-control" placeholder="">
+                </div> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 offset-1">
+                <div class="mb-3">
+                    <label for="category_name" class="form-label">category</label>
+                    <select id="category_name" name="category_name" class="form-control form-select" required>
+                        {% for category in categories %}
+                        <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div> 
+            </div>
+            <div class="col-5">
+                <div class="mb-3">
+                    <label for="servings" class="form-label">servings</label>
+                    <input type="number" id="servings" name="servings" class="form-control" placeholder="" min="1" required>
+                </div> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 offset-1">
+                <div class="mb-3">
+                    <label for="prep_time" class="form-label">prep time</label>
+                    <input type="number" id="prep_time" name="prep_time" class="form-control" placeholder="" min="1" required>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="mb-3">
+                    <label for="cook_time" class="form-label">cook time</label>
+                    <input type="number" id="cook_time" name="cook_time" class="form-control" placeholder="" min="1" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10 offset-1">
+                <div class="mb-3">
+                    <label for="" class="form-label">ingredients</label>
+                    <textarea class="form-control" id=""></textarea>
+                </div>    
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10 offset-1">
+                <div class="mb-3">
+                    <label for="" class="form-label">method</label>
+                    <textarea class="form-control" id=""></textarea>
+                </div>    
+            </div>
+        </div> 
+        <div class="d-flex justify-content-center">
+            <button type="reset" class="btn my-clear-btn m-2">clear</button>
+            <button type="submit" class="btn my-btn m-2">submit</button>
+        </div>
+    </form>
+</section>
+
+
+        
+
+                          
+                
 
 {% endblock %}

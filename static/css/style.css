@@ -69,6 +69,7 @@ body {
 
 .my-container {
     margin-top: 74px;
+    min-height: 91vh;
 }
 
 .page-title {
@@ -243,6 +244,25 @@ body {
 .my-btn:hover {
     background-color: var(--light-orange);
     border: 1px solid var(--orange);
+}
+
+.my-clear-btn {
+    background-color: var(--very-soft-cyan);
+}
+
+.my-clear-btn:hover {
+    background-color: var(--white);
+    border: 1px solid var(--very-soft-cyan);
+}
+
+/* recipe forms */
+
+.my-form {
+    background-color: var(--light-orange);
+    padding: 2% 0;
+    border: 1px solid var(--orange);
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 /* media queries */
