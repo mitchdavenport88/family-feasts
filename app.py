@@ -36,18 +36,21 @@ def view_recipe(id):
 
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
-    categories = mongo.db.categories.find()
     if request.method == "POST":
+        # https://www.w3schools.com/python/ref_string_splitlines.asp
         recipe = {
             "recipe_name": request.form.get("recipe_name").title(),
             "recipe_image": request.form.get("recipe_image"),
+            "category_name": request.form.get("category_name"),
             "servings": request.form.get("servings"),
             "prep_time": request.form.get("prep_time"),
             "cook_time": request.form.get("cook_time"),
-            "category_name": request.form.get("category_name")
+            "ingredients": request.form.get("ingredients").splitlines(),
+            "recipe_steps": request.form.get("recipe_steps").splitlines()
         }
         mongo.db.recipes.insert_one(recipe)
         return redirect(url_for("recipes"))
+    categories = mongo.db.categories.find()    
     return render_template("add_recipe.html", categories=categories)
 
 
