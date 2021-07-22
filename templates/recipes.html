@@ -10,10 +10,13 @@
                             <img src="{{ recipe.recipe_image }}" class="card-img-top" alt="{{ recipe.recipe_name }}">
                             <div class="card-body">
                                 <h5 class="card-title text-center">{{ recipe.recipe_name }}</h5>
-                                <div class="col-8 offset-2">
-                                    <a href="{{ url_for('view_recipe', id=recipe._id) }}" class="btn my-btn d-flex justify-content-center">
+                                <div class="col d-flex justify-content-center">
+                                    <a href="{{ url_for('edit_recipe', id=recipe._id) }}" class="btn my-btn m-2">
+                                        edit recipe
+                                    </a>
+                                    <a href="{{ url_for('view_recipe', id=recipe._id) }}" class="btn my-btn m-2">
                                         view recipe
-                                    </a>    
+                                    </a> 
                                 </div>
                             </div>
                         </div>
