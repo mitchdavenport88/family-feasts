@@ -49,7 +49,7 @@ def add_recipe():
             "recipe_steps": request.form.get("recipe_steps").splitlines()
         }
         mongo.db.recipes.insert_one(recipe)
-        return redirect(url_for("recipes"))
+        return render_template("view_recipe.html", recipe=recipe)
     categories = mongo.db.categories.find()
     return render_template("add_recipe.html", categories=categories)
 
@@ -68,7 +68,7 @@ def edit_recipe(id):
             "recipe_steps": request.form.get("recipe_steps").splitlines()
         }
         mongo.db.recipes.update({"_id": ObjectId(id)}, submit)
-        return redirect(url_for("recipes"))
+        return render_template("view_recipe.html", recipe=submit)
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
     categories = mongo.db.categories.find()
     return render_template("edit_recipe.html", categories=categories,

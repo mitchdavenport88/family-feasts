@@ -67,7 +67,7 @@
                 <div class="mb-3">
                     <label for="ingredients" class="form-label">ingredients</label>
                     <!-- Stephen https://stackoverflow.com/questions/8627902/how-to-add-a-new-line-in-textarea-element -->
-                    <textarea class="form-control" id="ingredients" name="ingredients">
+                    <textarea class="form-control my-textarea" id="ingredients" name="ingredients">
                         {%- for ingredient in recipe.ingredients -%}
                             {{ ingredient }}&#10;
                         {%- endfor -%}
@@ -80,7 +80,7 @@
                 <div class="mb-3">
                     <label for="recipe_steps" class="form-label">method</label>
                     <!-- Stephen https://stackoverflow.com/questions/8627902/how-to-add-a-new-line-in-textarea-element -->
-                    <textarea class="form-control" id="recipe_steps" name="recipe_steps">
+                    <textarea class="form-control my-textarea" id="recipe_steps" name="recipe_steps">
                         {%- for step in recipe.recipe_steps -%}
                             {{ step }}&#10;
                         {%- endfor -%}
