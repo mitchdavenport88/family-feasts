@@ -26,6 +26,7 @@
                 <div class="mb-3">
                     <label for="category_name" class="form-label">category</label>
                     <select id="category_name" name="category_name" class="form-control form-select" required>
+                        <option value="" selected disabled>select one of the following</option>
                         {% for category in categories %}
                         <option value="{{ category.category_name }}">{{ category.category_name }}</option>
                         {% endfor %}

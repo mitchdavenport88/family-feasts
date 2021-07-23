@@ -9,6 +9,7 @@
     --orange: #FFA45B;
     --black: #000;
     --white: #FAFAFA;
+    --delete: #fC6634;
 }
 
 * {
@@ -202,6 +203,19 @@ body {
     margin-bottom: 0px;
 }
 
+.recipe-info-box:nth-child(1) {
+    border-right: 1px solid var(--orange);
+    border-bottom: 1px solid var(--orange);
+}
+
+.recipe-info-box:nth-child(2) {
+    border-bottom: 1px solid var(--orange);
+}
+
+.recipe-info-box:nth-child(4) {
+    border-left: 1px solid var(--orange);
+}
+
 .ingredients-container, 
 .method-container {
     margin-top: 20px;
@@ -264,6 +278,16 @@ body {
     border: 1px solid var(--very-soft-cyan);
 }
 
+.my-delete-btn {
+    background-color: var(--delete);
+    border: 1px solid var(--delete);
+}
+
+.my-delete-btn:hover {
+    background-color: var(--light-orange);
+    border: 1px solid var(--delete);
+}
+
 /* recipe forms */
 
 .my-form {
@@ -319,5 +343,8 @@ body {
     }
     .recipe-info-box:not(:last-child) {
     border-bottom: 1px solid var(--orange);
+    }
+    .recipe-info-box:nth-child(4) {
+        border-left: 0;
     }
 }
