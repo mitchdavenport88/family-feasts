@@ -212,6 +212,14 @@ body {
     margin-bottom: 8px;
 }
 
+/* forms */
+
+.my-textarea {
+    height: 110px;
+    resize: none;
+}
+
+
 /* footer */
 
 #footer {
@@ -248,6 +256,7 @@ body {
 
 .my-clear-btn {
     background-color: var(--very-soft-cyan);
+    border: 1px solid #a3d4d4;
 }
 
 .my-clear-btn:hover {
