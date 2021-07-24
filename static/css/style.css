@@ -226,6 +226,21 @@ body {
     margin-bottom: 8px;
 }
 
+/* modals */
+
+.modal-content {
+    background-color: var(--light-orange);
+    border: 1px solid var(--orange);
+}
+
+.modal-header {
+    border-bottom: 0;
+}
+
+.modal-footer {
+    border-top: 0;
+}
+
 /* forms */
 
 .my-textarea {
