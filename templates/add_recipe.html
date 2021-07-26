@@ -71,8 +71,11 @@
             </div>
         </div> 
         <div class="d-flex justify-content-center">
-            <button type="reset" class="btn my-clear-btn m-2">clear</button>
-            <button type="submit" class="btn my-btn m-2">submit</button>
+            <a href="{{ url_for('recipes') }}" class="btn my-clear-btn m-2">
+                cancel
+            </a>
+            <button type="reset" class="btn my-clear-btn m-2">clear form</button>
+            <button type="submit" class="btn my-btn m-2">add recipe</button>
         </div>
     </form>
 </section>

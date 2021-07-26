@@ -356,6 +356,9 @@ body {
         border-bottom-left-radius: 5px;
         border-top-right-radius: 0px;
     }
+    .recipe-info-box:nth-child(1) {
+        border-right: 0;
+    }
     .recipe-info-box:not(:last-child) {
     border-bottom: 1px solid var(--orange);
     }
