@@ -170,6 +170,11 @@ body {
     margin-bottom: 20px;
 }
 
+.card-img,
+.card-img-top {
+    height: 275px;
+}
+
 /* view_recipes.html */
 
 .recipe-info-row {   

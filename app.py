@@ -37,10 +37,15 @@ def view_recipe(id):
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
     if request.method == "POST":
+        recipe_url = request.form.get("recipe_image")
+        if recipe_url == "":
+            # https://www.cleanpng.com/png-free-lunch-free-content-clip-art-youth-luncheon-cl-167343/
+            recipe_url = url_for('static',
+                                 filename='images/default-recipe-image.png')
         # https://www.w3schools.com/python/ref_string_splitlines.asp
         recipe = {
             "recipe_name": request.form.get("recipe_name").title(),
-            "recipe_image": request.form.get("recipe_image"),
+            "recipe_image": recipe_url,
             "category_name": request.form.get("category_name"),
             "servings": request.form.get("servings"),
             "prep_time": request.form.get("prep_time"),
