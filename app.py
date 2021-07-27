@@ -4,6 +4,7 @@ from flask import (
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from werkzeug.security import generate_password_hash, check_password_hash
 
 if os.path.exists("env.py"):
     import env
@@ -85,6 +86,26 @@ def edit_recipe(id):
 def delete_recipe(id):
     mongo.db.recipes.remove({"_id": ObjectId(id)})
     return redirect(url_for("recipes"))
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        # Check that username isnt taken
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+        if existing_user:
+            # Insert message to say its taken
+            return redirect(url_for("register"))
+        register = {
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        mongo.db.users.insert_one(register)
+        session["user"] = request.form.get("username").lower()
+        # Insert message to say registration complete 
+        # Link to profile when made
+    return render_template("register.html")
 
 
 if __name__ == "__main__":
