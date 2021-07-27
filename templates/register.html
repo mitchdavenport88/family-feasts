@@ -23,12 +23,27 @@
                     </div>
                 </div>
             </div>
+            <!-- confirm password -->
+            <div class="row">
+                <div class="col-10 offset-1">
+                    <div class="mb-3">
+                        <label for="confirm-password" class="form-label">confirm password</label>
+                        <input type="password" id="confirm-password" name="confirm-password" class="form-control" required>
+                    </div>
+                </div>
+            </div>
             <!-- buttons -->
             <div class="d-flex justify-content-center">
-                <a href="{{ url_for('recipes') }}" class="btn my-clear-btn m-2">
+                <a href="{{ url_for('home') }}" class="btn my-clear-btn m-2">
                     cancel
                 </a>
                 <button type="submit" class="btn my-btn m-2">register</button>
+            </div>
+            <!-- link for log in -->
+            <div class="row">
+                <div class="col-10 offset-1 text-center">
+                    <p class="form-link">already registered? <a href="">log in.</a></p>
+                </div>
             </div>
         </form>
     </section>

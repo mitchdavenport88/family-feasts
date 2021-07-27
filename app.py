@@ -95,17 +95,23 @@ def register():
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
+        password = request.form.get("password")
+        confirm_password = request.form.get("confirm-password")
         if existing_user:
             flash("the username you've chosen is taken!")
             return redirect(url_for("register"))
-        register = {
-            "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password"))
-        }
-        mongo.db.users.insert_one(register)
-        session["user"] = request.form.get("username").lower()
-        flash("registration complete!")
-        return redirect(url_for("recipes"))# Link to profile when made
+        elif password != confirm_password:
+            flash("the passwords entered didn't match!")
+            return redirect(url_for("register"))
+        else:
+            register = {
+                "username": request.form.get("username").lower(),
+                "password": generate_password_hash(request.form.get("password"))
+            }
+            mongo.db.users.insert_one(register)
+            session["user"] = request.form.get("username").lower()
+            flash("registration complete!")
+            return redirect(url_for("recipes"))  # Link to profile when made
     return render_template("register.html")
 
 

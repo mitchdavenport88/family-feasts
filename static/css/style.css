@@ -318,6 +318,15 @@ body {
     margin-bottom: 20px;
 }
 
+.form-link {
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+.form-link a {
+    font-weight: bold;
+}
+
 /* flash messages */
 
 .flash-message {
