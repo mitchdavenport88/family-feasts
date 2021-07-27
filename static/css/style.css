@@ -318,6 +318,18 @@ body {
     margin-bottom: 20px;
 }
 
+/* flash messages */
+
+.flash-message {
+    padding: 1% 0 0 0;
+    text-align: center;
+}
+
+.flash-message h3 {
+    color: var(--delete);
+    margin: 0;
+}
+
 /* media queries */
 
 /* max-width lg */

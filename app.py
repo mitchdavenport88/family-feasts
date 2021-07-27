@@ -75,6 +75,7 @@ def edit_recipe(id):
         }
         mongo.db.recipes.update({"_id": ObjectId(id)}, submit)
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
+        flash("your recipe has been updated!")
         return render_template("view_recipe.html", recipe=recipe)
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
     categories = mongo.db.categories.find()
@@ -85,17 +86,17 @@ def edit_recipe(id):
 @app.route("/delete_recipe/<id>")
 def delete_recipe(id):
     mongo.db.recipes.remove({"_id": ObjectId(id)})
+    flash("your recipe has been deleted!")
     return redirect(url_for("recipes"))
 
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        # Check that username isnt taken
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
         if existing_user:
-            # Insert message to say its taken
+            flash("the username you've chosen is taken!")
             return redirect(url_for("register"))
         register = {
             "username": request.form.get("username").lower(),
@@ -103,8 +104,8 @@ def register():
         }
         mongo.db.users.insert_one(register)
         session["user"] = request.form.get("username").lower()
-        # Insert message to say registration complete 
-        # Link to profile when made
+        flash("registration complete!")
+        return redirect(url_for("recipes"))# Link to profile when made
     return render_template("register.html")
 
 

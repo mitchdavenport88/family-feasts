@@ -51,6 +51,19 @@
 
     <!-- my-container adds padding to stop navbar overlapping content -->
     <section class="my-container">
+        <div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="row">
+                            <div class="col-12 col-md-10 offset-md-1 flash-message">
+                                <h3>{{ message }}</h3>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
         {% block content %}
         {% endblock %}
     </section>
