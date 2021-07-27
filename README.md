@@ -40,3 +40,27 @@ As the site owner / admin, I'd want:
 
 ### Skeleton
 [Initial idea - sketch](readme-docs/wireframes/initial-wireframe-sketch.jpg)
+
+Home - [desktop](readme-docs/wireframes/home-desktop.png) | 
+[tablet](readme-docs/wireframes/home-tablet.png) | 
+[mobile](readme-docs/wireframes/home-phone.png).
+
+Register and login forms - [desktop](readme-docs/wireframes/userforms-desktop.png) | 
+[tablet](readme-docs/wireframes/userforms-tablet.png) | 
+[mobile](readme-docs/wireframes/userforms-phone.png).
+
+View recipes - [desktop](readme-docs/wireframes/recipe-menu-desktop.png) | 
+[tablet](readme-docs/wireframes/recipe-menu-phone.png) | 
+[mobile](readme-docs/wireframes/recipe-menu-tablet.png).
+
+Individual recipe page - [desktop](readme-docs/wireframes/view-recipe-desktop.png) | 
+[tablet](readme-docs/wireframes/view-recipe-tablet.png) | 
+[mobile](readme-docs/wireframes/view-recipe-phone.png).
+
+Add and update recipes - [desktop](readme-docs/wireframes/recipe-forms-desktop.png) | 
+[tablet](readme-docs/wireframes/recipe-forms-tablet.png) | 
+[mobile](readme-docs/wireframes/recipe-forms-phone.png).
+
+User profile - [desktop](readme-docs/wireframes/userprofile-desktop.png) | 
+[tablet](readme-docs/wireframes/userprofile-tablet.png) | 
+[mobile](readme-docs/wireframes/userprofile-phone.png).
