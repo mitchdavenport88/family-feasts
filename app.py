@@ -142,10 +142,14 @@ def login():
 def user_profile(username):
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-
     if session["user"]:
         return render_template("user_profile.html", username=username)
+    return redirect(url_for("login"))
 
+
+@app.route("/logout")
+def logout():
+    session.pop("user")
     return redirect(url_for("login"))
 
 
