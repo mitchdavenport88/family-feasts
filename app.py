@@ -52,7 +52,8 @@ def add_recipe():
             "prep_time": request.form.get("prep_time"),
             "cook_time": request.form.get("cook_time"),
             "ingredients": request.form.get("ingredients").splitlines(),
-            "recipe_steps": request.form.get("recipe_steps").splitlines()
+            "recipe_steps": request.form.get("recipe_steps").splitlines(),
+            "author": session["user"]
         }
         mongo.db.recipes.insert_one(recipe)
         return render_template("view_recipe.html", recipe=recipe)
@@ -71,7 +72,8 @@ def edit_recipe(id):
             "prep_time": request.form.get("prep_time"),
             "cook_time": request.form.get("cook_time"),
             "ingredients": request.form.get("ingredients").splitlines(),
-            "recipe_steps": request.form.get("recipe_steps").splitlines()
+            "recipe_steps": request.form.get("recipe_steps").splitlines(),
+            "author": session["user"]
         }
         mongo.db.recipes.update({"_id": ObjectId(id)}, submit)
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})

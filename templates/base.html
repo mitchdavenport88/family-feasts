@@ -38,21 +38,24 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('recipes') }}">recipes</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('user_profile', username=session['user']) }}">profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('add_recipe') }}">add recipe</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}">log out</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('register') }}">register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('login') }}">log in</a>
-                    </li>
+                    {% if session.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('add_recipe') }}">add recipe</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('user_profile', username=session['user']) }}">profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('logout') }}">log out</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login') }}">log in</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('register') }}">register</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
