@@ -39,7 +39,7 @@ As the site owner / admin, I'd want:
 * To be able to add new categories and edit and delete existing ones.
 
 ### Skeleton
-[Initial idea - sketch](readme-docs/wireframes/initial-wireframe-sketch.jpg)
+Initial idea - [sketch](readme-docs/wireframes/initial-wireframe-sketch.jpg)
 
 Home - [desktop](readme-docs/wireframes/home-desktop.png) | 
 [tablet](readme-docs/wireframes/home-tablet.png) | 
@@ -64,6 +64,9 @@ Add and update recipes - [desktop](readme-docs/wireframes/recipe-forms-desktop.p
 User profile - [desktop](readme-docs/wireframes/userprofile-desktop.png) | 
 [tablet](readme-docs/wireframes/userprofile-tablet.png) | 
 [mobile](readme-docs/wireframes/userprofile-phone.png).
+
+## Testing
+Separate testing document can be found here - [testing documentation.](TESTING.md)
 
 ## Deployment
 ### Heroku deployment
