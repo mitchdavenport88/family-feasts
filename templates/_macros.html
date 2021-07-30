@@ -54,3 +54,38 @@
     </div>
 
 {% endmacro %}
+
+{% macro delete_profile_modal(username) %}
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn my-delete-btn m-2" data-bs-toggle="modal" data-bs-target="#delete-profile-modal-{{ username }}">
+        delete profile
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="delete-profile-modal-{{ username }}" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">
+                        deleting {{ username }}'s profile...
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    are you sure you want to delete your account?
+                </div>
+                <div class="modal-body text-center">
+                    this action is irreversible and all your recipes will be lost
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="btn my-clear-btn" data-bs-dismiss="modal">close</button>
+                    <a href="{{ url_for('delete_profile', user=username) }}" class="btn my-delete-btn m-2">
+                        delete profile
+                    </a>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}

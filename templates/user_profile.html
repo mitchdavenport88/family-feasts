@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import recipe_card %}
+{% from "_macros.html" import recipe_card, delete_profile_modal %}
 {% block content %}
 
     <div class="container-fluid">
@@ -13,9 +13,7 @@
                     add recipe
                 </a>
             {% endif %}
-            <a href="" class="btn my-delete-btn m-2">
-                delete profile
-            </a>      
+            {{ delete_profile_modal(username) }}    
         </div>
         {% if user_recipes|length > 0 %}
             <h1 class="text-center page-title">my recipes</h1>

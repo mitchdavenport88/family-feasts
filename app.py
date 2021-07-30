@@ -157,6 +157,15 @@ def logout():
     return redirect(url_for("login"))
 
 
+@app.route("/delete_profile/<user>")
+def delete_profile(user):
+    mongo.db.users.remove({"username": user})
+    session.pop("user")
+    #  Removes all recipes by the user
+    mongo.db.recipes.remove({"author": user})
+    return redirect(url_for("home"))
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
