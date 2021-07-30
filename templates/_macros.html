@@ -1,3 +1,28 @@
+{% macro recipe_card(recipe) %}
+
+    <div class="col-12 col-md-4 col-lg-3">
+        <div class="card">
+            <img src="{{ recipe.recipe_image }}" class="card-img-top" alt="{{ recipe.recipe_name }}">
+            <div class="card-body">
+                <h5 class="card-title text-center">{{ recipe.recipe_name }}</h5>
+                <div class="d-flex flex-wrap justify-content-center">
+                    <a href="{{ url_for('view_recipe', id=recipe._id) }}" class="btn my-btn m-2">
+                        view recipe
+                    </a>
+                        {% if session.user|lower == recipe.author|lower %}
+                        <a href="{{ url_for('edit_recipe', id=recipe._id) }}" class="btn my-btn m-2">
+                            edit recipe
+                        </a>
+                        <!-- delete trigger and modal macro -->
+                        {{ delete_recipe_modal(recipe) }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}
+
 {% macro delete_recipe_modal(recipe) %}
 
     <!-- Button trigger modal -->

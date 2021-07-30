@@ -1,26 +1,28 @@
 {% extends "base.html" %}
+{% from "_macros.html" import recipe_card %}
 {% block content %}
 
-<div class="container-fluid">
-    <h1 class="text-center page-title">{{ username }}'s profile</h1>
-    <div class="d-flex flex-wrap justify-content-center">
-        <a href="{{ url_for('recipes') }}" class="btn my-btn m-2">
-            view recipes
-        </a>
-        <a href="{{ url_for('add_recipe') }}" class="btn my-btn m-2">
-            add recipe
-        </a>
-        <a href="{{ url_for('logout') }}" class="btn my-btn m-2">
-            log out
-        </a>      
-    </div>
-    <div class="row">
-        <div class="col-12 col-md-4 col-lg-3">
-            
+    <div class="container-fluid">
+        <h1 class="text-center page-title">{{ username }}'s profile</h1>
+        <div class="d-flex flex-wrap justify-content-center">
+            <a href="{{ url_for('recipes') }}" class="btn my-btn m-2">
+                view all recipes
+            </a>
+            <a href="{{ url_for('add_recipe') }}" class="btn my-btn m-2">
+                add recipe
+            </a>
+            <a href="" class="btn my-delete-btn m-2">
+                delete profile
+            </a>      
+        </div>
+        <h1 class="text-center page-title">my recipes</h1>
+        <div class="row">
+            {% for recipe in recipes %}
+                {% if session.user == recipe.author %}
+                    {{ recipe_card(recipe) }}
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
-</div>
-
-
 
 {% endblock %}
