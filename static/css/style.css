@@ -70,7 +70,11 @@ body {
 
 .my-container {
     margin-top: 74px;
-    min-height: 91vh;
+}
+
+/* https://css-tricks.com/couple-takes-sticky-footer/ */
+.content-container {
+    min-height: calc(100vh - 134px);
 }
 
 .page-title {
@@ -263,6 +267,7 @@ body {
     align-items: center;
     padding: 1% 2.5%;
     border-top: 1px solid var(--orange);
+    height: 60px;
 }
 
 #footer a {
