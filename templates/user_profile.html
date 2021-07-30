@@ -8,20 +8,33 @@
             <a href="{{ url_for('recipes') }}" class="btn my-btn m-2">
                 view all recipes
             </a>
-            <a href="{{ url_for('add_recipe') }}" class="btn my-btn m-2">
-                add recipe
-            </a>
+            {% if user_recipes|length > 0 %}
+                <a href="{{ url_for('add_recipe') }}" class="btn my-btn m-2">
+                    add recipe
+                </a>
+            {% endif %}
             <a href="" class="btn my-delete-btn m-2">
                 delete profile
             </a>      
         </div>
-        <h1 class="text-center page-title">my recipes</h1>
+        {% if user_recipes|length > 0 %}
+            <h1 class="text-center page-title">my recipes</h1>
+        {% endif %}
         <div class="row">
-            {% for recipe in recipes %}
-                {% if session.user == recipe.author %}
+            {% if user_recipes|length > 0 %}
+                {% for recipe in user_recipes %}
                     {{ recipe_card(recipe) }}
-                {% endif %}
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+                <h2 class="text-center page-title warning-message">
+                    you've not added any recipes yet!
+                </h2>
+                <div class="d-flex flex-wrap justify-content-center">
+                    <a href="{{ url_for('add_recipe') }}" class="btn my-btn m-2">
+                        add recipe
+                    </a>     
+                </div>
+            {% endif %}
         </div>
     </div>
 
