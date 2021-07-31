@@ -53,14 +53,14 @@
                                 <a class="nav-link" href="{{ url_for('user_profile', username=session['user']) }}">profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('logout') }}">log out</a>
+                                <a class="nav-link link-button" href="{{ url_for('logout') }}">log out</a>
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('login') }}">log in</a>
+                                <a class="nav-link link-button" href="{{ url_for('login') }}">log in</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('register') }}">register</a>
+                                <a class="nav-link link-button" href="{{ url_for('register') }}">register</a>
                             </li>
                         {% endif %}
                     </ul>
