@@ -10,7 +10,9 @@
                 <div class="col-10 offset-1">
                     <div class="mb-3">
                         <label for="username" class="form-label">username</label>
-                        <input type="text" id="username" name="username" class="form-control" required>
+                        <input type="text" id="username" name="username" class="form-control"
+                            pattern="[A-Za-z0-9]{5,}" required 
+                            title="username must be at least 5 characters long and can contain letters and numbers only - no spaces or special characters.">
                     </div>
                 </div>
             </div>
@@ -19,7 +21,8 @@
                 <div class="col-10 offset-1">
                     <div class="mb-3">
                         <label for="password" class="form-label">password</label>
-                        <input type="password" id="password" name="password" class="form-control" required>
+                        <input type="password" id="password" name="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}"
+                            required title="passwords must be at least 5 characters long and contain one number, one lowercase and one uppercase letter.">
                     </div>
                 </div>
             </div>
@@ -28,7 +31,8 @@
                 <div class="col-10 offset-1">
                     <div class="mb-3">
                         <label for="confirm-password" class="form-label">confirm password</label>
-                        <input type="password" id="confirm-password" name="confirm-password" class="form-control" required>
+                        <input type="password" id="confirm-password" name="confirm-password" class="form-control"
+                            required title="this password must match the password previously given.">
                     </div>
                 </div>
             </div>
