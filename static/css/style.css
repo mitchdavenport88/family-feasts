@@ -352,6 +352,17 @@ body {
     font-weight: bold;
 }
 
+#togglePassword, 
+#toggleConfirmPassword {
+    background-color: var(--orange);
+    border: 1px solid var(--orange);
+}
+
+#togglePassword:hover,
+#toggleConfirmPassword:hover {
+    background-color: var(--light-orange);
+}
+
 /* flash messages */
 
 .flash-message {
