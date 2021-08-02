@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 {% from "_macros.html" import recipe_card %}
 {% block content %}
-
-<div class="container-fluid">
-    <h1 class="text-center page-title">recipes</h1>
-    <div class="row">
-        {% for recipe in recipes %}
-            {{ recipe_card(recipe) }}
-        {% endfor %}
+    
+    <div class="container-fluid">
+        <h1 class="text-center page-title">recipes</h1>
+        <div class="row">
+            <!-- inserts cards used to display recipes -->
+            {% for recipe in recipes %}
+                {{ recipe_card(recipe) }}
+            {% endfor %}
+        </div>
     </div>
-</div>
-
-
 
 {% endblock %}

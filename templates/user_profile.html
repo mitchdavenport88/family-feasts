@@ -8,13 +8,17 @@
             <a href="{{ url_for('recipes') }}" class="btn my-btn m-2">
                 view all recipes
             </a>
+            <!-- shows add recipe button for users who have submitted before -->
             {% if user_recipes|length > 0 %}
                 <a href="{{ url_for('add_recipe') }}" class="btn my-btn m-2">
                     add recipe
                 </a>
             {% endif %}
+            <!-- inserts profile deletion button with confirmation modal -->
             {{ delete_profile_modal(username) }}    
         </div>
+        <!-- my recipes -->
+        <!-- shows users recipes if they've submitted one -->
         {% if user_recipes|length > 0 %}
             <h1 class="text-center page-title">my recipes</h1>
         {% endif %}
@@ -24,6 +28,7 @@
                     {{ recipe_card(recipe) }}
                 {% endfor %}
             {% else %}
+                <!-- shows alternative button and text to users that haven't submitted a recipe -->
                 <h2 class="text-center page-title warning-message">
                     you've not added any recipes yet!
                 </h2>

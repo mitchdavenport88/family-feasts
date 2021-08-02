@@ -1,5 +1,5 @@
 // change bootstrap classes for register / login / logout depending on breakpoint
-// https://www.w3schools.com/howto/howto_js_media_queries.asp
+// code found on https://www.w3schools.com/howto/howto_js_media_queries.asp and edited accordingly
 function linksToButton(maxScreenWidth) {
     const buttonsToChange = document.getElementsByClassName('link-button');
     if (maxScreenWidth.matches) {

@@ -18,10 +18,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/favicon.io/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon.io/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon.io/favicon-16x16.png') }}">
-    <!-- https://medium.com/@aurelien.delogu/401-error-on-a-webmanifest-file-cb9e3678b9f3 -->
+    <!-- code to stop console error taken from https://medium.com/@aurelien.delogu/401-error-on-a-webmanifest-file-cb9e3678b9f3 -->
     <link rel="manifest" href="{{ url_for('static', filename='images/favicon.io/site.webmanifest') }}" crossorigin="use-credentials">
-    <!-- {% block styles %}
-    {% endblock %} -->
     <title>Family Feasts</title>
 </head>
 
@@ -68,8 +66,8 @@
             </div>
         </nav>
 
-        <!-- my-container adds padding to stop navbar overlapping content -->
         <section class="my-container">
+            <!-- flash messages appear between navbar and block content -->
             <div>
                 {% with messages = get_flashed_messages() %}
                     {% if messages %}
@@ -83,6 +81,7 @@
                     {% endif %}
                 {% endwith %}
             </div>
+            <!-- block content -->
             {% block content %}
             {% endblock %}
         </section>
@@ -90,8 +89,7 @@
     
     <footer id="footer">
         <div class="social-icons">
-            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer"><i
-                    class="fab fa-instagram social-link"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer"><i class="fab fa-instagram social-link"></i></a>
             <a href="https://www.facebook.com/" target="_blank" rel="noreferrer"><i class="fab fa-facebook-f"></i></a>
             <a href="https://twitter.com/" target="_blank" rel="noreferrer"><i class="fab fa-twitter"></i></a>
             <a href="https://pinterest.com/" target="_blank" rel="noreferrer"><i class="fab fa-pinterest-p"></i></a>
@@ -104,8 +102,6 @@
     </script>
     <!-- js scripts -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <!-- {% block scripts %}
-    {% endblock %} -->
 </body>
 
 </html>

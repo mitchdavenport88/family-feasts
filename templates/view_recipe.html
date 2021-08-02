@@ -12,7 +12,7 @@
                 <a href="{{ url_for('edit_recipe', id=recipe._id) }}" class="btn my-btn m-2">
                     edit recipe
                 </a>
-                <!-- delete trigger and modal -->
+                <!-- inserts recipe deletion button with confirmation modal -->
                 {{ delete_recipe_modal(recipe) }}
             {% endif %}
         </div>
@@ -25,10 +25,10 @@
                     <div class="col-12 col-md-4">
                         <div class="row" style="height: 100%;">
                             <div class="col-6 col-md-12 recipe-info-box">
-                                <p>prep time: {{ recipe.prep_time }}</p>
+                                <p>prep time: {{ recipe.prep_time }} mins</p>
                             </div>
                             <div class="col-6 col-md-12 recipe-info-box">
-                                <p>cook time: {{ recipe.cook_time }}</p>
+                                <p>cook time: {{ recipe.cook_time }} mins</p>
                             </div>
                             <div class="col col-md-12 recipe-info-box">
                                 <p>serves: {{ recipe.servings }}</p>

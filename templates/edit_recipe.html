@@ -77,7 +77,6 @@
                 <div class="col-10 offset-1">
                     <div class="mb-3">
                         <label for="ingredients" class="form-label">ingredients</label>
-                        <!-- Stephen https://stackoverflow.com/questions/8627902/how-to-add-a-new-line-in-textarea-element -->
                         <textarea class="form-control my-textarea" id="ingredients" name="ingredients"
                             placeholder="example: &#10;1 small onion &#10;2 cloves of garlic &#10;1 tbsp olive oil"
                             required title="Type your ingredients in here.">
@@ -94,7 +93,6 @@
                 <div class="col-10 offset-1">
                     <div class="mb-3">
                         <label for="recipe_steps" class="form-label">method</label>
-                        <!-- Stephen https://stackoverflow.com/questions/8627902/how-to-add-a-new-line-in-textarea-element -->
                         <textarea class="form-control my-textarea" id="recipe_steps" name="recipe_steps"
                             placeholder="example: &#10;finely chop the onion and crush the garlic cloves. &#10;heat the oil in a large frying pan over a medium heat."
                             required title="Write the steps of how to make your recipe here.">
@@ -108,11 +106,9 @@
             </div>               
             <!-- buttons -->
             <div class="d-flex justify-content-center">
-                <a href="{{ url_for('recipes') }}" class="btn my-clear-btn m-2">
-                    cancel
-                </a> 
+                <a href="{{ url_for('recipes') }}" class="btn my-clear-btn m-2">cancel</a> 
                 <button type="submit" class="btn my-btn m-2">update recipe</button>
-                <!-- delete trigger and modal -->
+                <!-- inserts recipe deletion button with confirmation modal -->
                 {{ delete_recipe_modal(recipe) }} 
             </div>
         </form>
