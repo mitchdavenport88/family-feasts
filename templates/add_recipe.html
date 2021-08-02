@@ -1,89 +1,105 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1 class="text-center page-title">add recipe</h1>
+    <h1 class="text-center page-title">add recipe</h1>
 
-<section class="container-fluid">
-    <form class="col-12 col-md-8 offset-md-2 my-form" method="POST" action="{{ url_for('add_recipe') }}">
-        <div class="row">
-            <div class="col-10 offset-1">
-                <div class="mb-3">
-                    <label for="recipe_name" class="form-label">recipe name</label>
-                    <input type="text" id="recipe_name" name="recipe_name" class="form-control" placeholder="" required>
+    <section class="container-fluid">
+        <form class="col-12 col-md-8 offset-md-2 my-form" method="POST" action="{{ url_for('add_recipe') }}">
+            <div class="row">
+                <!-- recipe name -->
+                <div class="col-10 offset-1">
+                    <div class="mb-3">
+                        <label for="recipe_name" class="form-label">recipe name</label>
+                        <input type="text" id="recipe_name" name="recipe_name" class="form-control" 
+                            pattern="[A-Za-z\d\s\-,'&]{1,30}" required
+                            title="Recipe's can be no longer then 30 characters long. Name's can contain the special characters of -,'& only.">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-10 offset-1">
-                <div class="mb-3">
-                    <label for="recipe_image" class="form-label">recipe image</label>
-                    <input type="url" id="recipe_image" name="recipe_image" class="form-control" placeholder="">
-                </div> 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-5 offset-1">
-                <div class="mb-3">
-                    <label for="category_name" class="form-label">category</label>
-                    <select id="category_name" name="category_name" class="form-control form-select" required>
-                        <option value="" selected disabled>select one of the following</option>
-                        {% for category in categories %}
-                        <option value="{{ category.category_name }}">{{ category.category_name }}</option>
-                        {% endfor %}
-                    </select>
-                </div> 
-            </div>
-            <div class="col-5">
-                <div class="mb-3">
-                    <label for="servings" class="form-label">servings</label>
-                    <input type="number" id="servings" name="servings" class="form-control" placeholder="" min="1" required>
-                </div> 
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-5 offset-1">
-                <div class="mb-3">
-                    <label for="prep_time" class="form-label">prep time</label>
-                    <input type="number" id="prep_time" name="prep_time" class="form-control" placeholder="" min="1" required>
+            <div class="row">
+                <!-- recipe image (url) -->
+                <div class="col-10 offset-1">
+                    <div class="mb-3">
+                        <label for="recipe_image" class="form-label">recipe image</label>
+                        <input type="url" id="recipe_image" name="recipe_image" class="form-control" 
+                        placeholder="url link to image (starts with http:// or https://)" 
+                        title="Must start with http:// or https://">
+                    </div> 
                 </div>
             </div>
-            <div class="col-5">
-                <div class="mb-3">
-                    <label for="cook_time" class="form-label">cook time</label>
-                    <input type="number" id="cook_time" name="cook_time" class="form-control" placeholder="" min="1" required>
+            <div class="row">
+                <!-- category (dropdown) -->
+                <div class="col-5 offset-1">
+                    <div class="mb-3">
+                        <label for="category_name" class="form-label">category</label>
+                        <select id="category_name" name="category_name" class="form-control form-select" required>
+                            <option value="" selected disabled>select one of the following</option>
+                            {% for category in categories %}
+                                <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div> 
+                </div>
+                <!-- servings (number) -->
+                <div class="col-5">
+                    <div class="mb-3">
+                        <label for="servings" class="form-label">servings</label>
+                        <input type="number" id="servings" name="servings" class="form-control" 
+                            required min="1" max="100" title="Value must be between 1-100.">
+                    </div> 
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-10 offset-1">
-                <div class="mb-3">
-                    <label for="ingredients" class="form-label">ingredients</label>
-                    <textarea class="form-control my-textarea" id="ingredients" name="ingredients"></textarea>
-                </div>    
+            <div class="row">
+                <!-- prep time (number) -->
+                <div class="col-5 offset-1">
+                    <div class="mb-3">
+                        <label for="prep_time" class="form-label">prep time (mins)</label>
+                        <input type="number" id="prep_time" name="prep_time" class="form-control" 
+                            required min="1" max="999" title="Value must be between 1-999.">
+                    </div>
+                </div>
+                <!-- cooking time (number) -->
+                <div class="col-5">
+                    <div class="mb-3">
+                        <label for="cook_time" class="form-label">cook time (mins)</label>
+                        <input type="number" id="cook_time" name="cook_time" class="form-control" 
+                            required min="1" max="999" title="Value must be between 1-999.">
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-10 offset-1">
-                <div class="mb-3">
-                    <label for="recipe_steps" class="form-label">method</label>
-                    <textarea class="form-control my-textarea" id="recipe_steps" name="recipe_steps"></textarea>
-                </div>    
+            <div class="row">
+                <!-- ingredients (list) -->
+                <div class="col-10 offset-1">
+                    <div class="mb-3">
+                        <label for="ingredients" class="form-label">ingredients</label>
+                        <textarea class="form-control my-textarea" id="ingredients" name="ingredients"
+                            placeholder="example: &#10;1 small onion &#10;2 cloves of garlic &#10;1 tbsp olive oil"
+                            required title="Type your ingredients in here."></textarea>
+                        <div class="form-text">note: each ingredient needs to be typed on its own line.</div>
+                    </div>
+                </div>
             </div>
-        </div> 
-        <div class="d-flex justify-content-center">
-            <a href="{{ url_for('recipes') }}" class="btn my-clear-btn m-2">
-                cancel
-            </a>
-            <button type="reset" class="btn my-clear-btn m-2">clear form</button>
-            <button type="submit" class="btn my-btn m-2">add recipe</button>
-        </div>
-    </form>
-</section>
-
-
-        
-
-                          
-                
+            <div class="row">
+                <!-- method (list) -->
+                <div class="col-10 offset-1">
+                    <div class="mb-3">
+                        <label for="recipe_steps" class="form-label">method</label>
+                        <textarea class="form-control my-textarea" id="recipe_steps" name="recipe_steps"
+                            placeholder="example: &#10;finely chop the onion and crush the garlic cloves. &#10;heat the oil in a large frying pan over a medium heat."
+                            required title="Write the steps of how to make your recipe here."></textarea>
+                        <div class="form-text">note: each step needs to be typed on its own line.</div>    
+                    </div>
+                </div>                    
+            </div>
+            <!-- buttons -->
+            <div class="d-flex justify-content-center">
+                <a href="{{ url_for('recipes') }}" class="btn my-clear-btn m-2">
+                    cancel
+                </a>
+                <button type="reset" class="btn my-clear-btn m-2">clear form</button>
+                <button type="submit" class="btn my-btn m-2">add recipe</button>
+            </div>
+        </form>
+    </section>
 
 {% endblock %}
