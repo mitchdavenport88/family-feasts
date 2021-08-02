@@ -17,12 +17,14 @@
                 </div>
             </div>
             <!-- password -->
+            <!-- https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a -->
             <div class="row">
                 <div class="col-10 offset-1">
                     <div class="mb-3">
                         <label for="password" class="form-label">password</label>
-                        <input type="password" id="password" name="password" class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}"
-                            required title="passwords must be at least 5 characters long and contain one number, one lowercase and one uppercase letter.">
+                        <input type="password" id="password" name="password" class="form-control"
+                            pattern="(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{5,}" required 
+                            title="passwords must be at least 5 characters long. they can contain any letter, number and must contain one or more of the following characters - @$!%*#?&">
                     </div>
                 </div>
             </div>
