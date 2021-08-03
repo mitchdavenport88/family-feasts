@@ -19,6 +19,7 @@
 
 body {
     background-color: var(--light-grey);
+    overflow-y: scroll;
 }
 
 /* base.html */

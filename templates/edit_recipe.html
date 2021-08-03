@@ -106,7 +106,7 @@
             </div>               
             <!-- buttons -->
             <div class="d-flex justify-content-center">
-                <a href="{{ url_for('recipes') }}" class="btn my-clear-btn m-2">cancel</a> 
+                <a href="{{ url_for('recipes', filter_by='all_recipes') }}" class="btn my-clear-btn m-2">cancel</a> 
                 <button type="submit" class="btn my-btn m-2">update recipe</button>
                 <!-- inserts recipe deletion button with confirmation modal -->
                 {{ delete_recipe_modal(recipe) }} 
