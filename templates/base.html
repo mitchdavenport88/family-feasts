@@ -20,7 +20,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon.io/favicon-16x16.png') }}">
     <!-- code to stop console error taken from https://medium.com/@aurelien.delogu/401-error-on-a-webmanifest-file-cb9e3678b9f3 -->
     <link rel="manifest" href="{{ url_for('static', filename='images/favicon.io/site.webmanifest') }}" crossorigin="use-credentials">
-    <title>Family Feasts</title>
+    <title>
+        {% if page_title %}
+            Family Feasts {{ "- " + page_title }}
+        {% else %}
+            Family Feasts
+        {% endif %}
+    </title>
 </head>
 
 <body>

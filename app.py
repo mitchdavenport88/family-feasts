@@ -20,7 +20,7 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("index.html", page_title="Home")
 
 
 @app.route("/recipes/<filter_by>")
@@ -30,13 +30,15 @@ def recipes(filter_by):
     categories = mongo.db.categories.find()
     recipe_count = list(mongo.db.recipes.find({"category_name": filter}))
     return render_template("recipes.html", recipes=recipes, filter=filter,
-                           categories=categories, recipe_count=recipe_count)
+                           categories=categories, recipe_count=recipe_count,
+                           page_title="Recipes")
 
 
 @app.route("/view_recipe/<id>")
 def view_recipe(id):
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
-    return render_template("view_recipe.html", recipe=recipe)
+    return render_template("view_recipe.html", recipe=recipe,
+                           page_title=recipe["recipe_name"])
 
 
 @app.route("/add_recipe", methods=["GET", "POST"])
@@ -60,9 +62,11 @@ def add_recipe():
             "author": session["user"]
         }
         mongo.db.recipes.insert_one(recipe)
-        return render_template("view_recipe.html", recipe=recipe)
+        return render_template("view_recipe.html", recipe=recipe,
+                               page_title=recipe["recipe_name"])
     categories = mongo.db.categories.find()
-    return render_template("add_recipe.html", categories=categories)
+    return render_template("add_recipe.html", categories=categories,
+                           page_title="Add Recipe")
 
 
 @app.route("/edit_recipe/<id>", methods=["GET", "POST"])
@@ -82,11 +86,12 @@ def edit_recipe(id):
         mongo.db.recipes.update({"_id": ObjectId(id)}, submit)
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
         flash("your recipe has been updated!")
-        return render_template("view_recipe.html", recipe=recipe)
+        return render_template("view_recipe.html", recipe=recipe,
+                               page_title=recipe["recipe_name"])
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
     categories = mongo.db.categories.find()
     return render_template("edit_recipe.html", categories=categories,
-                           recipe=recipe)
+                           recipe=recipe, page_title="Edit Recipe")
 
 
 @app.route("/delete_recipe/<id>")
@@ -120,7 +125,7 @@ def register():
         else:
             flash("the passwords entered didn't match!")
             return redirect(url_for("register"))
-    return render_template("register.html")
+    return render_template("register.html", page_title="Register")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -140,7 +145,7 @@ def login():
         else:
             flash("incorrect username or password entered")
             return redirect(url_for("login"))
-    return render_template("login.html")
+    return render_template("login.html", page_title="Log In")
 
 
 @app.route("/user_profile/<username>", methods=["GET", "POST"])
@@ -150,7 +155,8 @@ def user_profile(username):
     user_recipes = list(mongo.db.recipes.find({"author": session["user"]}))
     if session["user"]:
         return render_template("user_profile.html", username=username,
-                               user_recipes=user_recipes)
+                               user_recipes=user_recipes,
+                               page_title="My Profile")
     return redirect(url_for("login"))
 
 
