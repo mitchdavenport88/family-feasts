@@ -23,10 +23,14 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/recipes")
-def recipes():
+@app.route("/recipes/<filter_by>")
+def recipes(filter_by):
+    filter = filter_by
     recipes = mongo.db.recipes.find()
-    return render_template("recipes.html", recipes=recipes)
+    categories = mongo.db.categories.find()
+    recipe_count = list(mongo.db.recipes.find({"category_name": filter}))
+    return render_template("recipes.html", recipes=recipes, filter=filter,
+                           categories=categories, recipe_count=recipe_count)
 
 
 @app.route("/view_recipe/<id>")
