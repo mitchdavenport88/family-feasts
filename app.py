@@ -1,7 +1,6 @@
 import os
 from flask import (
-    Flask, flash, render_template,
-    redirect, request, session, url_for)
+    Flask, flash, render_template, redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -27,26 +26,89 @@ def home():
 def recipes(filter_by):
     recipes = mongo.db.recipes.find()
     filter = filter_by
+    # Use count to show / hide no recipe message
+    recipe_count = list(mongo.db.recipes.find({"category_name": filter}))
     # List of categories that we use to generate filter and add buttons
     categories = ["Recipes"]
-    recipe_count = list(mongo.db.recipes.find({"category_name": filter}))
     for category in mongo.db.categories.find():
         categories.append(category["category_name"])
-    # If the category passed is valid (in the db) then we show results
+    # If the filter name passed is valid (is in the db) then we show results
     if filter in categories:
         return render_template("recipes.html", recipes=recipes, filter=filter,
                                categories=categories, page_title="Recipes",
                                recipe_count=recipe_count)
-    # If the category passed isnt valid (not in the db) then we show all
+    # If filter name passed isnt valid (not in the db) then we show all recipes
     else:
         return redirect(url_for("recipes", filter_by="Recipes"))
 
 
 @app.route("/view_recipe/<id>")
 def view_recipe(id):
+    # Shows individual recipes based on thier db id
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
     return render_template("view_recipe.html", recipe=recipe,
                            page_title=recipe["recipe_name"])
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    # stops access to users that have registered already
+    if session.get("user"):
+        flash("you're already registered!")
+        return redirect(url_for("user_profile", username=session["user"]))
+    else:
+        if request.method == "POST":
+            existing_user = mongo.db.users.find_one(
+                {"username": request.form.get("username").lower()})
+            #  https://techmonger.github.io/4/secure-passwords-werkzeug/
+            #  https://www.youtube.com/watch?v=jJ4awOToB6k
+            password = generate_password_hash(request.form.get("password"))
+            if existing_user:
+                flash("the username you've chosen is taken!")
+                return redirect(url_for("register"))
+            elif check_password_hash(password,
+                                     request.form.get("confirm-password")):
+                register = {
+                    "username": request.form.get("username").lower(),
+                    "password": password
+                }
+                mongo.db.users.insert_one(register)
+                session["user"] = request.form.get("username").lower()
+                flash("registration complete!")
+                return redirect(url_for("user_profile",
+                                        username=session["user"]))
+            else:
+                flash("the passwords entered didn't match!")
+                return redirect(url_for("register"))
+        return render_template("register.html", page_title="Register")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    # stops access to users that have logged in already
+    if session.get("user"):
+        flash("you're already logged in!")
+        return redirect(url_for("user_profile", username=session["user"]))
+    else:
+        if request.method == "POST":
+            existing_user = mongo.db.users.find_one(
+                {"username": request.form.get("username").lower()})
+            if existing_user:
+                if check_password_hash(existing_user["password"],
+                                       request.form.get("password")):
+                    session["user"] = request.form.get("username").lower()
+                    return redirect(url_for("user_profile",
+                                            username=session["user"]))
+                else:
+                    flash("incorrect username or password entered")
+                    return redirect(url_for("login"))
+            else:
+                flash("incorrect username or password entered")
+                return redirect(url_for("login"))
+        return render_template("login.html", page_title="Log In")
+
+
+# Login required
 
 
 @app.route("/add_recipe", methods=["GET", "POST"])
@@ -107,53 +169,6 @@ def delete_recipe(id):
     mongo.db.recipes.remove({"_id": ObjectId(id)})
     flash("your recipe has been deleted!")
     return redirect(url_for("recipes", filter_by='Recipes'))
-
-
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    if request.method == "POST":
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
-        #  https://techmonger.github.io/4/secure-passwords-werkzeug/
-        #  https://www.youtube.com/watch?v=jJ4awOToB6k
-        password = generate_password_hash(request.form.get("password"))
-        if existing_user:
-            flash("the username you've chosen is taken!")
-            return redirect(url_for("register"))
-        elif check_password_hash(password,
-                                 request.form.get("confirm-password")):
-            register = {
-                "username": request.form.get("username").lower(),
-                "password": password
-            }
-            mongo.db.users.insert_one(register)
-            session["user"] = request.form.get("username").lower()
-            flash("registration complete!")
-            return redirect(url_for("user_profile", username=session["user"]))
-        else:
-            flash("the passwords entered didn't match!")
-            return redirect(url_for("register"))
-    return render_template("register.html", page_title="Register")
-
-
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
-        if existing_user:
-            if check_password_hash(existing_user["password"],
-                                   request.form.get("password")):
-                session["user"] = request.form.get("username").lower()
-                return redirect(url_for("user_profile",
-                                        username=session["user"]))
-            else:
-                flash("incorrect username or password entered")
-                return redirect(url_for("login"))
-        else:
-            flash("incorrect username or password entered")
-            return redirect(url_for("login"))
-    return render_template("login.html", page_title="Log In")
 
 
 @app.route("/user_profile/<username>", methods=["GET", "POST"])
