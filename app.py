@@ -108,94 +108,138 @@ def login():
         return render_template("login.html", page_title="Log In")
 
 
-# Login required
+@app.route("/logout")
+def logout():
+    # Prevents ability to logout if not logged in
+    if session.get("user"):
+        session.pop("user")
+        return redirect(url_for("login"))
+    else:
+        flash("you need to be logged in to perform this task!")
+        return redirect(url_for("login"))
 
 
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
-    if request.method == "POST":
-        recipe_url = request.form.get("recipe_image")
-        if recipe_url == "":
-            # https://www.cleanpng.com/png-free-lunch-free-content-clip-art-youth-luncheon-cl-167343/
-            recipe_url = url_for('static',
-                                 filename='images/default-recipe-image.png')
-        # https://www.w3schools.com/python/ref_string_splitlines.asp
-        recipe = {
-            "recipe_name": request.form.get("recipe_name").title(),
-            "recipe_image": recipe_url,
-            "category_name": request.form.get("category_name"),
-            "servings": request.form.get("servings"),
-            "prep_time": request.form.get("prep_time"),
-            "cook_time": request.form.get("cook_time"),
-            "ingredients": request.form.get("ingredients").splitlines(),
-            "recipe_steps": request.form.get("recipe_steps").splitlines(),
-            "author": session["user"]
-        }
-        mongo.db.recipes.insert_one(recipe)
-        return render_template("view_recipe.html", recipe=recipe,
-                               page_title=recipe["recipe_name"])
-    categories = mongo.db.categories.find()
-    return render_template("add_recipe.html", categories=categories,
-                           page_title="Add Recipe")
+    # Prevents unauthorized access to page
+    if not session.get("user"):
+        flash("you need to be a registered user to perform this task!")
+        return redirect(url_for("register"))
+    else:
+        if request.method == "POST":
+            recipe_url = request.form.get("recipe_image")
+            if recipe_url == "":
+                # https://www.cleanpng.com/png-free-lunch-free-content-clip-art-youth-luncheon-cl-167343/
+                recipe_url = url_for('static',
+                                     filename='images/def-recipe-image.png')
+            # https://www.w3schools.com/python/ref_string_splitlines.asp
+            recipe = {
+                "recipe_name": request.form.get("recipe_name").title(),
+                "recipe_image": recipe_url,
+                "category_name": request.form.get("category_name"),
+                "servings": request.form.get("servings"),
+                "prep_time": request.form.get("prep_time"),
+                "cook_time": request.form.get("cook_time"),
+                "ingredients": request.form.get("ingredients").splitlines(),
+                "recipe_steps": request.form.get("recipe_steps").splitlines(),
+                "author": session["user"]
+            }
+            mongo.db.recipes.insert_one(recipe)
+            return render_template("view_recipe.html", recipe=recipe,
+                                   page_title=recipe["recipe_name"])
+        categories = mongo.db.categories.find()
+        return render_template("add_recipe.html", categories=categories,
+                               page_title="Add Recipe")
 
 
 @app.route("/edit_recipe/<id>", methods=["GET", "POST"])
 def edit_recipe(id):
-    if request.method == "POST":
-        submit = {
-            "recipe_name": request.form.get("recipe_name").title(),
-            "recipe_image": request.form.get("recipe_image"),
-            "category_name": request.form.get("category_name"),
-            "servings": request.form.get("servings"),
-            "prep_time": request.form.get("prep_time"),
-            "cook_time": request.form.get("cook_time"),
-            "ingredients": request.form.get("ingredients").splitlines(),
-            "recipe_steps": request.form.get("recipe_steps").splitlines(),
-            "author": session["user"]
-        }
-        mongo.db.recipes.update({"_id": ObjectId(id)}, submit)
-        recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
-        flash("your recipe has been updated!")
-        return render_template("view_recipe.html", recipe=recipe,
-                               page_title=recipe["recipe_name"])
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
-    categories = mongo.db.categories.find()
-    return render_template("edit_recipe.html", categories=categories,
-                           recipe=recipe, page_title="Edit Recipe")
+    # Prevents unauthorized access to page
+    if not session.get("user"):
+        flash("you need to be a registered user to perform this task!")
+        return redirect(url_for("register"))
+    # Stops the deletion of recipes created by different users via the URL
+    elif session.get("user") != recipe["author"]:
+        flash("you can only edit your own entries!")
+        return redirect(url_for("recipes", filter_by='Recipes'))
+    else:
+        if request.method == "POST":
+            submit = {
+                "recipe_name": request.form.get("recipe_name").title(),
+                "recipe_image": request.form.get("recipe_image"),
+                "category_name": request.form.get("category_name"),
+                "servings": request.form.get("servings"),
+                "prep_time": request.form.get("prep_time"),
+                "cook_time": request.form.get("cook_time"),
+                "ingredients": request.form.get("ingredients").splitlines(),
+                "recipe_steps": request.form.get("recipe_steps").splitlines(),
+                "author": session["user"]
+            }
+            mongo.db.recipes.update({"_id": ObjectId(id)}, submit)
+            recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
+            flash("your recipe has been updated!")
+            return render_template("view_recipe.html", recipe=recipe,
+                                   page_title=recipe["recipe_name"])
+        categories = mongo.db.categories.find()
+        return render_template("edit_recipe.html", categories=categories,
+                               recipe=recipe, page_title="Edit Recipe")
 
 
 @app.route("/delete_recipe/<id>")
 def delete_recipe(id):
-    mongo.db.recipes.remove({"_id": ObjectId(id)})
-    flash("your recipe has been deleted!")
-    return redirect(url_for("recipes", filter_by='Recipes'))
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
+    # Stops unregistered users or those not logged in deleting recipes
+    if not session.get("user"):
+        flash("you need to be a registered user to perform this task!")
+        return redirect(url_for("register"))
+    # Stops the deletion of recipes created by different users via the URL
+    elif session.get("user") != recipe["author"]:
+        flash("you can only delete your own entries!")
+        return redirect(url_for("recipes", filter_by='Recipes'))
+    else:
+        mongo.db.recipes.remove({"_id": ObjectId(id)})
+        flash("your recipe has been deleted!")
+        return redirect(url_for("recipes", filter_by='Recipes'))
 
 
 @app.route("/user_profile/<username>", methods=["GET", "POST"])
 def user_profile(username):
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    user_recipes = list(mongo.db.recipes.find({"author": session["user"]}))
-    if session["user"]:
-        return render_template("user_profile.html", username=username,
-                               user_recipes=user_recipes,
-                               page_title="My Profile")
-    return redirect(url_for("login"))
-
-
-@app.route("/logout")
-def logout():
-    session.pop("user")
-    return redirect(url_for("login"))
+    # Prevents unauthorized access to page
+    if not session.get("user"):
+        flash("you dont have authorization to view this page!")
+        return redirect(url_for("login"))
+    # Users can only view thier own profile page
+    elif username != session.get("user"):
+        flash("you dont have authorization to view this page!")
+        return redirect(url_for("user_profile", username=session["user"]))
+    else:
+        username = mongo.db.users.find_one(
+            {"username": session["user"]})["username"]
+        user_recipes = list(mongo.db.recipes.find({"author": session["user"]}))
+        if session["user"]:
+            return render_template("user_profile.html", username=username,
+                                   user_recipes=user_recipes,
+                                   page_title="My Profile")
+        return redirect(url_for("login"))
 
 
 @app.route("/delete_profile/<user>")
 def delete_profile(user):
-    mongo.db.users.remove({"username": user})
-    session.pop("user")
-    #  Removes all recipes by the user
-    mongo.db.recipes.remove({"author": user})
-    return redirect(url_for("home"))
+    # Prevents unauthorized access to page
+    if not session.get("user"):
+        flash("you dont have authorization to perform this task!")
+        return redirect(url_for("login"))
+    # Users can only delete thier own profile
+    elif session.get("user") != user:
+        flash("you can only delete your own profile!")
+        return redirect(url_for("user_profile", username=session["user"]))
+    else:
+        mongo.db.users.remove({"username": user})
+        session.pop("user")
+        #  Removes all recipes by the user
+        mongo.db.recipes.remove({"author": user})
+        return redirect(url_for("home"))
 
 
 if __name__ == "__main__":
