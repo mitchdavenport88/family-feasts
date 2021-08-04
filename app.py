@@ -25,13 +25,21 @@ def home():
 
 @app.route("/recipes/<filter_by>")
 def recipes(filter_by):
-    filter = filter_by
     recipes = mongo.db.recipes.find()
-    categories = mongo.db.categories.find()
+    filter = filter_by
+    # List of categories that we use to generate filter and add buttons
+    categories = ["Recipes"]
     recipe_count = list(mongo.db.recipes.find({"category_name": filter}))
-    return render_template("recipes.html", recipes=recipes, filter=filter,
-                           categories=categories, recipe_count=recipe_count,
-                           page_title="Recipes")
+    for category in mongo.db.categories.find():
+        categories.append(category["category_name"])
+    # If the category passed is valid (in the db) then we show results
+    if filter in categories:
+        return render_template("recipes.html", recipes=recipes, filter=filter,
+                               categories=categories, page_title="Recipes",
+                               recipe_count=recipe_count)
+    # If the category passed isnt valid (not in the db) then we show all
+    else:
+        return redirect(url_for("recipes", filter_by="Recipes"))
 
 
 @app.route("/view_recipe/<id>")
@@ -98,7 +106,7 @@ def edit_recipe(id):
 def delete_recipe(id):
     mongo.db.recipes.remove({"_id": ObjectId(id)})
     flash("your recipe has been deleted!")
-    return redirect(url_for("recipes", filter_by='all_recipes'))
+    return redirect(url_for("recipes", filter_by='Recipes'))
 
 
 @app.route("/register", methods=["GET", "POST"])

@@ -5,18 +5,17 @@
     <div class="container-fluid">
         <h1 class="text-center page-title">recipes</h1>
         <div class="d-flex flex-wrap justify-content-center">
-            <a href="{{ url_for('recipes', filter_by='all_recipes') }}" class="btn my-btn m-2">all recipes</a>
             {% for category in categories %}
-                <a href="{{ url_for('recipes', filter_by=category.category_name) }}" class="btn my-btn m-2">{{ category.category_name }}</a>
+                <a href="{{ url_for('recipes', filter_by=category) }}" class="btn my-btn m-2">{{ category }}</a>
             {% endfor %}
         </div>
         <div class="row">
             <!-- inserts cards used to display recipes -->
-            {% if recipe_count|length == 0 and filter != "all_recipes" %}
+            {% if recipe_count|length == 0 and filter != "Recipes" %}
                 <h2 class="text-center page-title warning-message">no recipes for this category yet!</h2>
             {% else %}    
                 {% for recipe in recipes %}
-                    {% if filter == "all_recipes" %}
+                    {% if filter == "Recipes" %}
                         {{ recipe_card(recipe) }}
                     {% elif recipe.category_name == filter %}
                         {{ recipe_card(recipe) }}    
