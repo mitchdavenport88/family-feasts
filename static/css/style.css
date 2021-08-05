@@ -135,7 +135,7 @@ body {
 
 .hero-image-content {
     text-align: center;
-    background-color: rgba(251, 246, 240, 0.75);
+    background-color: rgba(251, 246, 240, 0.9);
     padding: 2%;
     border-radius: 10px;
     max-width: 80%;
@@ -362,6 +362,16 @@ body {
 #togglePassword:hover,
 #toggleConfirmPassword:hover {
     background-color: var(--light-orange);
+}
+
+/* 404.html */
+
+.error-image {
+    height: 100vh;
+    width: 100%;
+    background: url("../images/hero-image.jpg") no-repeat center;
+    background-size: cover;
+    padding: 0;
 }
 
 /* flash messages */

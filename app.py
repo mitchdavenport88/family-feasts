@@ -24,8 +24,8 @@ def home():
 
 @app.route("/recipes/<filter_by>")
 def recipes(filter_by):
-    recipes = mongo.db.recipes.find()
     filter = filter_by
+    recipes = mongo.db.recipes.find()
     # Use count to show / hide no recipe message
     recipe_count = list(mongo.db.recipes.find({"category_name": filter}))
     # List of categories that we use to generate filter and add buttons
@@ -45,7 +45,7 @@ def recipes(filter_by):
 @app.route("/view_recipe/<id>")
 def view_recipe(id):
     # Shows individual recipes based on thier db id
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
+    recipe = mongo.db.recipes.find_one_or_404({"_id": ObjectId(id)})
     return render_template("view_recipe.html", recipe=recipe,
                            page_title=recipe["recipe_name"])
 
@@ -123,8 +123,8 @@ def logout():
 def add_recipe():
     # Prevents unauthorized access to page
     if not session.get("user"):
-        flash("you need to be a registered user to perform this task!")
-        return redirect(url_for("register"))
+        flash("you need to be logged in to perform this task!")
+        return redirect(url_for("login"))
     else:
         if request.method == "POST":
             recipe_url = request.form.get("recipe_image")
@@ -145,8 +145,7 @@ def add_recipe():
                 "author": session["user"]
             }
             mongo.db.recipes.insert_one(recipe)
-            return render_template("view_recipe.html", recipe=recipe,
-                                   page_title=recipe["recipe_name"])
+            return redirect(url_for("view_recipe", id=recipe["_id"]))
         categories = mongo.db.categories.find()
         return render_template("add_recipe.html", categories=categories,
                                page_title="Add Recipe")
@@ -154,7 +153,8 @@ def add_recipe():
 
 @app.route("/edit_recipe/<id>", methods=["GET", "POST"])
 def edit_recipe(id):
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
+    recipe = mongo.db.recipes.find_one_or_404({"_id": ObjectId(id)})
+    categories = mongo.db.categories.find()
     # Prevents unauthorized access to page
     if not session.get("user"):
         flash("you need to be a registered user to perform this task!")
@@ -162,7 +162,7 @@ def edit_recipe(id):
     # Stops the deletion of recipes created by different users via the URL
     elif session.get("user") != recipe["author"]:
         flash("you can only edit your own entries!")
-        return redirect(url_for("recipes", filter_by='Recipes'))
+        return redirect(url_for("user_profile", username=session["user"]))
     else:
         if request.method == "POST":
             submit = {
@@ -177,18 +177,15 @@ def edit_recipe(id):
                 "author": session["user"]
             }
             mongo.db.recipes.update({"_id": ObjectId(id)}, submit)
-            recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
             flash("your recipe has been updated!")
-            return render_template("view_recipe.html", recipe=recipe,
-                                   page_title=recipe["recipe_name"])
-        categories = mongo.db.categories.find()
+            return redirect(url_for("view_recipe", id=recipe["_id"]))
         return render_template("edit_recipe.html", categories=categories,
                                recipe=recipe, page_title="Edit Recipe")
 
 
 @app.route("/delete_recipe/<id>")
 def delete_recipe(id):
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(id)})
+    recipe = mongo.db.recipes.find_one_or_404({"_id": ObjectId(id)})
     # Stops unregistered users or those not logged in deleting recipes
     if not session.get("user"):
         flash("you need to be a registered user to perform this task!")
@@ -196,11 +193,11 @@ def delete_recipe(id):
     # Stops the deletion of recipes created by different users via the URL
     elif session.get("user") != recipe["author"]:
         flash("you can only delete your own entries!")
-        return redirect(url_for("recipes", filter_by='Recipes'))
+        return redirect(url_for("user_profile", username=session["user"]))
     else:
         mongo.db.recipes.remove({"_id": ObjectId(id)})
         flash("your recipe has been deleted!")
-        return redirect(url_for("recipes", filter_by='Recipes'))
+        return redirect(url_for("user_profile", username=session["user"]))
 
 
 @app.route("/user_profile/<username>", methods=["GET", "POST"])
@@ -214,11 +211,10 @@ def user_profile(username):
         flash("you dont have authorization to view this page!")
         return redirect(url_for("user_profile", username=session["user"]))
     else:
-        username = mongo.db.users.find_one(
-            {"username": session["user"]})["username"]
         user_recipes = list(mongo.db.recipes.find({"author": session["user"]}))
         if session["user"]:
-            return render_template("user_profile.html", username=username,
+            return render_template("user_profile.html",
+                                   username=session["user"],
                                    user_recipes=user_recipes,
                                    page_title="My Profile")
         return redirect(url_for("login"))
@@ -240,6 +236,11 @@ def delete_profile(user):
         #  Removes all recipes by the user
         mongo.db.recipes.remove({"author": user})
         return redirect(url_for("home"))
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html", error=e), 404
 
 
 if __name__ == "__main__":

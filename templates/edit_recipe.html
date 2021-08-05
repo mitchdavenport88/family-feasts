@@ -12,8 +12,8 @@
                     <div class="mb-3">
                         <label for="recipe_name" class="form-label">recipe name</label>
                         <input value="{{ recipe.recipe_name }}" type="text" id="recipe_name" name="recipe_name" 
-                            class="form-control" pattern="[A-Za-z\d\s\-,'&]{1,30}" required
-                            title="Recipe's can be no longer then 30 characters long. Name's can contain the special characters of -,'& only.">
+                            class="form-control" pattern="[A-Za-z\d\s\-,'&]{1,35}" required
+                            title="Recipe's can be no longer then 35 characters long. Name's can contain the special characters of -,'& only.">
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                     <div class="mb-3">
                         <label for="prep_time" class="form-label">prep time (mins)</label>
                         <input value="{{ recipe.prep_time }}" type="number" id="prep_time" name="prep_time"
-                            class="form-control" required min="1" max="999" title="Value must be between 1-999.">
+                            class="form-control" required min="0" max="999" title="Value must be between 0-999.">
                     </div>
                 </div>
                 <!-- cooking time (number) -->
@@ -68,7 +68,7 @@
                     <div class="mb-3">
                         <label for="cook_time" class="form-label">cook time (mins)</label>
                         <input value="{{ recipe.cook_time }}" type="number" id="cook_time" name="cook_time"
-                            class="form-control" required min="1" max="999" title="Value must be between 1-999.">
+                            class="form-control" required min="0" max="999" title="Value must be between 0-999.">
                     </div>
                 </div>
             </div> 
