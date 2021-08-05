@@ -195,7 +195,7 @@ def delete_recipe(id):
         flash("you can only delete your own entries!")
         return redirect(url_for("user_profile", username=session["user"]))
     else:
-        mongo.db.recipes.remove({"_id": ObjectId(id)})
+        mongo.db.recipes.delete_one({"_id": ObjectId(id)})
         flash("your recipe has been deleted!")
         return redirect(url_for("user_profile", username=session["user"]))
 
@@ -241,6 +241,11 @@ def delete_profile(user):
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html", error=e), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template("500.html", error=e), 500
 
 
 if __name__ == "__main__":
