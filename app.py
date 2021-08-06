@@ -22,24 +22,19 @@ def home():
     return render_template("index.html", page_title="Home")
 
 
-@app.route("/recipes/<filter_by>")
-def recipes(filter_by):
-    filter = filter_by
-    recipes = mongo.db.recipes.find()
-    # Use count to show / hide no recipe message
-    recipe_count = list(mongo.db.recipes.find({"category_name": filter}))
-    # List of categories that we use to generate filter and add buttons
-    categories = ["Recipes"]
-    for category in mongo.db.categories.find():
-        categories.append(category["category_name"])
-    # If the filter name passed is valid (is in the db) then we show results
-    if filter in categories:
-        return render_template("recipes.html", recipes=recipes, filter=filter,
-                               categories=categories, page_title="Recipes",
-                               recipe_count=recipe_count)
-    # If filter name passed isnt valid (not in the db) then we show all recipes
+@app.route("/recipes/<filter>")
+def recipes(filter):
+    categories = [(category["category_name"])
+                  for category in mongo.db.categories.find()]
+    if filter not in categories and filter != "all":
+        flash("this category does not exist!")
+        return redirect(url_for("recipes", filter="all"))
+    elif filter in categories:
+        recipes = list(mongo.db.recipes.find({"category_name": filter}))
     else:
-        return redirect(url_for("recipes", filter_by="Recipes"))
+        recipes = list(mongo.db.recipes.find())
+    return render_template("recipes.html", recipes=recipes,
+                           categories=categories)
 
 
 @app.route("/view_recipe/<id>")
