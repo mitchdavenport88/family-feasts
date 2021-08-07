@@ -122,15 +122,10 @@ def add_recipe():
         return redirect(url_for("login"))
     else:
         if request.method == "POST":
-            recipe_url = request.form.get("recipe_image")
-            if recipe_url == "":
-                # https://www.cleanpng.com/png-free-lunch-free-content-clip-art-youth-luncheon-cl-167343/
-                recipe_url = url_for('static',
-                                     filename='images/def-recipe-image.png')
             # https://www.w3schools.com/python/ref_string_splitlines.asp
             recipe = {
                 "recipe_name": request.form.get("recipe_name").title(),
-                "recipe_image": recipe_url,
+                "recipe_image": request.form.get("recipe_image"),
                 "category_name": request.form.get("category_name"),
                 "servings": request.form.get("servings"),
                 "prep_time": request.form.get("prep_time"),

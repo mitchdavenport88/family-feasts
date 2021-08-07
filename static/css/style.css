@@ -439,6 +439,13 @@ body {
     }    
 }
 
+/* min-width sm */
+@media only screen and (min-width: 576px) {
+    .card-group>.card {
+        margin-bottom: 20px;
+    }    
+}
+
 /* min-width md */
 @media only screen and (min-width: 767px) {
     /* view_recipes.html */

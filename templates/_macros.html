@@ -1,9 +1,13 @@
 <!-- inserts cards used to display recipes -->
 {% macro recipe_card(recipe) %}
 
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 card-group">
         <div class="card">
-            <img src="{{ recipe.recipe_image }}" class="card-img-top" alt="{{ recipe.recipe_name }}">
+            {% if recipe.recipe_image %}
+                <img class="card-img-top" src="{{ recipe.recipe_image }}"  alt="{{ recipe.recipe_name }}">
+            {% else %}
+                <img class="card-img-top" src="{{ url_for('static', filename='images/def-recipe-image.png') }}" alt="default reciped picture">
+            {% endif %}
             <div class="card-body">
                 <h5 class="card-title text-center">{{ recipe.recipe_name }}</h5>
                 <div class="d-flex flex-wrap justify-content-center">

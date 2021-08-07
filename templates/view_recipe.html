@@ -20,7 +20,11 @@
             <div class="col-12 col-md-8 offset-md-2 recipe-info-card">
                 <div class="row recipe-info-card-row">
                     <div class="col-12 col-md-8 p-0">
-                        <img class="recipe-info-pic" src="{{ recipe.recipe_image }}" alt="{{ recipe.recipe_name }}">
+                        {% if recipe.recipe_image %}
+                            <img class="recipe-info-pic" src="{{ recipe.recipe_image }}" alt="{{ recipe.recipe_name }}">
+                        {% else %}
+                            <img class="recipe-info-pic" src="{{ url_for('static', filename='images/def-recipe-image.png') }}" alt="default reciped picture">
+                        {% endif %}
                     </div>
                     <div class="col-12 col-md-4">
                         <div class="row" style="height: 100%;">
