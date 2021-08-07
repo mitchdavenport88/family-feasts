@@ -5,7 +5,7 @@
     <h1 class="text-center page-title">edit recipe</h1>
 
     <section class="container-fluid">
-        <form class="col-12 col-md-8 offset-md-2 my-form" method="POST" action="{{ url_for('edit_recipe', id=recipe._id) }}">
+        <form class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 my-form" method="POST" action="{{ url_for('edit_recipe', id=recipe._id) }}">
             <div class="row">
                 <!-- recipe name -->
                 <div class="col-10 offset-1">
@@ -31,7 +31,7 @@
             </div>
             <div class="row">
                 <!-- category (dropdown) -->
-                <div class="col-5 offset-1">
+                <div class="col-10 col-sm-5 offset-1">
                     <div class="mb-3">
                         <label for="category_name" class="form-label">category</label>
                         <select id="category_name" name="category_name" class="form-control form-select" required>
@@ -46,7 +46,7 @@
                     </div> 
                 </div>
                 <!-- servings (number) -->
-                <div class="col-5">
+                <div class="col-10 offset-1 col-sm-5 offset-sm-0">
                     <div class="mb-3">
                         <label for="servings" class="form-label">servings</label>
                         <input value="{{ recipe.servings }}" type="number" id="servings" name="servings"
@@ -56,7 +56,7 @@
             </div>
             <div class="row">
                 <!-- prep time (number) -->
-                <div class="col-5 offset-1">
+                <div class="col-10 col-sm-5 offset-1">
                     <div class="mb-3">
                         <label for="prep_time" class="form-label">prep time (mins)</label>
                         <input value="{{ recipe.prep_time }}" type="number" id="prep_time" name="prep_time"
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <!-- cooking time (number) -->
-                <div class="col-5">
+                <div class="col-10 offset-1 col-sm-5 offset-sm-0">
                     <div class="mb-3">
                         <label for="cook_time" class="form-label">cook time (mins)</label>
                         <input value="{{ recipe.cook_time }}" type="number" id="cook_time" name="cook_time"
@@ -105,7 +105,7 @@
                 </div>
             </div>               
             <!-- buttons -->
-            <div class="d-flex justify-content-center">
+            <div class="d-flex flex-wrap justify-content-center">
                 <a href="{{ url_for('recipes', filter='all') }}" class="btn my-clear-btn m-2">cancel</a> 
                 <button type="submit" class="btn my-btn m-2">update recipe</button>
                 <!-- inserts recipe deletion button with confirmation modal -->
