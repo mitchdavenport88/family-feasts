@@ -34,7 +34,7 @@ def recipes(filter):
     else:
         recipes = list(mongo.db.recipes.find())
     return render_template("recipes.html", recipes=recipes,
-                           categories=categories)
+                           categories=categories, filter=filter)
 
 
 @app.route("/view_recipe/<id>")

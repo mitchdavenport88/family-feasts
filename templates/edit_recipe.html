@@ -14,6 +14,7 @@
                         <input value="{{ recipe.recipe_name }}" type="text" id="recipe_name" name="recipe_name" 
                             class="form-control" pattern="[A-Za-z\d\s\-,'&]{1,35}" required
                             title="Recipe's can be no longer then 35 characters long. Name's can contain the special characters of -,'& only.">
+                        <div class="form-text">recipe name can be a maximum of 35 characters.</div>
                     </div>
                 </div>
             </div>
@@ -26,6 +27,7 @@
                             name="recipe_image" class="form-control" 
                             placeholder="url link to image (starts with http:// or https://)"
                             title="Must start with http:// or https://">
+                        <div class="form-text">url link to image must start with http:// or https://</div>
                     </div> 
                 </div>
             </div>

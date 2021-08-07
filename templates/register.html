@@ -13,6 +13,7 @@
                         <input type="text" id="username" name="username" class="form-control"
                             pattern="[A-Za-z0-9]{5,}" required 
                             title="Username must be at least 5 characters long and can contain letters and numbers only - no spaces or special characters.">
+                        <div class="form-text">username must be at least 5 characters and can contain letters and numbers only.</div>
                     </div>
                 </div>
             </div>
@@ -28,6 +29,7 @@
                                 title="Passwords must be at least 5 characters long. They can contain any letter, number and must contain one or more of the following characters - @$!%*#?&">
                             <span class="input-group-text far fa-eye" id="togglePassword"></span>
                         </div>
+                        <div class="form-text">password must contain at least one of the following @$!%*#?& and be at least 5 characters</div>
                     </div>
                 </div>
             </div>
@@ -41,7 +43,6 @@
                                 required title="This password must match the password previously given.">
                             <span class="input-group-text far fa-eye" id="toggleConfirmPassword"></span>
                         </div>
-                        
                     </div>
                 </div>
             </div>

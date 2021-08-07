@@ -3,7 +3,9 @@
 {% block content %}
     
     <div class="container-fluid">
-        <h1 class="text-center page-title">recipes</h1>
+
+        <h1 class="text-center page-title">{{ filter }} recipes</h1>
+
         <div class="d-flex flex-wrap justify-content-center">
             <a href="{{ url_for('recipes', filter='all') }}" class="btn my-btn m-2">all recipes</a>
             {% for category in categories %}

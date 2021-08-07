@@ -13,6 +13,7 @@
                         <input type="text" id="recipe_name" name="recipe_name" class="form-control" 
                             pattern="[A-Za-z\d\s\-,'&]{1,35}" required
                             title="Recipe's can be no longer then 35 characters long. Name's can contain the special characters of -,'& only.">
+                        <div class="form-text">recipe name can be a maximum of 35 characters.</div>
                     </div>
                 </div>
             </div>
@@ -21,9 +22,9 @@
                 <div class="col-10 offset-1">
                     <div class="mb-3">
                         <label for="recipe_image" class="form-label">recipe image</label>
-                        <input type="url" id="recipe_image" name="recipe_image" class="form-control" 
-                            placeholder="url link to image (starts with http:// or https://)" 
+                        <input type="url" id="recipe_image" name="recipe_image" class="form-control"
                             title="Must start with http:// or https://">
+                        <div class="form-text">url link to image must start with http:// or https://</div>
                     </div> 
                 </div>
             </div>
@@ -73,7 +74,7 @@
                     <div class="mb-3">
                         <label for="ingredients" class="form-label">ingredients</label>
                         <textarea class="form-control my-textarea" id="ingredients" name="ingredients"
-                            placeholder="example: &#10;1 small onion &#10;2 cloves of garlic &#10;1 tbsp olive oil"
+                            placeholder="example: &#10;1 small onion &#10;2 cloves of garlic"
                             required title="Type your ingredients in here."></textarea>
                         <div class="form-text">note: each ingredient needs to be typed on its own line.</div>
                     </div>
