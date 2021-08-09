@@ -37,6 +37,16 @@ def recipes(filter):
                            categories=categories, filter=filter)
 
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    search = request.form.get("search")
+    recipes = list(mongo.db.recipes.find({"$text": {"$search": search}}))
+    categories = [(category["category_name"])
+                  for category in mongo.db.categories.find()]
+    return render_template("recipes.html", recipes=recipes, filter="search",
+                           categories=categories, search=search)
+
+
 @app.route("/view_recipe/<id>")
 def view_recipe(id):
     # Shows individual recipes based on thier db id
