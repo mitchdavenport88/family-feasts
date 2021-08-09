@@ -1,20 +1,20 @@
 # Family Feasts
 
 ### Milestone Project Three
-Family Feasts is a cooking E-book that aims to build a library of recipes that will inspire households and families to get off the couch and into the kitchen to cook together! Any member of the family will be able to browse, search and follow recipes that have been posted up by the online community. Users will be encouraged to join the community by signing up and sharing their family favourites to encourage others to cook and spend time with their loved ones.
+Family Feasts is a cooking e-book that aims to build a library of recipes that will inspire households and families to get off the couch and into the kitchen to cook together! Any member of the family will be able to browse, search and follow recipes that have been posted up by the online community. Users will be encouraged to join the community by signing up to share their family favourites in order to encourage others to cook and spend time with their loved ones.
 
 ## Demo
 The live site can be viewed here - [Family Feasts](https://family-feasts.herokuapp.com/).
 
 GitHub repository can be viewed here - [mitchdavenport88/family-feasts](https://github.com/mitchdavenport88/family-feasts).
 
-<!-- add amiresponsive screenshot -->
+![Site Mockup](readme-docs/screenshots/amiresponsive-image1.jpg)
 
 ## UX
 ### Strategy
-The aim is to create a simple, user friendly recipe e-book using the functionality of creating, reading, updating and deleting data objects. The site is aimed at families or households to encourage them to cook together so must be suitable for all ages.
+The aim is to create a simple, user friendly recipe e-book using the functionality of creating, reading, updating and deleting data objects. The sites premise is built around the idea of getting households (primarily families) cooking together, spending time together and making tea time that little bit more exciting! Although the site will have a family orientated feel and be suited for users of all ages there is no reason why it shouldn’t also be suitable for other types of users such as couples and housemates as the message is still relevant.
 
-Any user will be able to view entries that have been uploaded to the platform. They will also be able to filter and search for recipes by using keywords or ingredients. Registered users will also be able to create, edit and delete their own recipes in addition and be able to view their uploaded recipes on their own personal profile page. The site’s admin will have all these privileges along with the ability to edit and delete other user’s entries along with being able to add further categories.
+Any user should be able to access and view recipes that have been uploaded to the platform. Results and information should be shown in an appropriate and clear way, with the user having the ability to filter and search for recipes by using keywords or ingredients. In order to create, edit and delete recipes users will have to register. Once registered users will also have access to their own personal profile page/dashboard where their uploaded recipes will be displayed. The site’s admin will have all these privileges along with the ability to edit and delete other user’s entries along with being able to add further content at a later date.
 
 ### User Stories
 As a first time user I'd like:
@@ -31,12 +31,45 @@ As a returning user I'd like:
 * To be able to create and post new recipes to the site.
 * Access to my own personal profile where I can view my posted recipes.
 * The ability to edit and delete my recipes.
-* Feedback when I’m interacting with the site and when inputting data.
+* Feedback when I’m interacting with the site and whilst inputting data.
 
-As the site owner / admin, I'd want:
+As the site owner / admin I want:
 * The ability to edit and delete any recipes regardless of who posted it.
 * The ability to remove user profiles if needed.
 * To be able to add new categories and edit and delete existing ones.
+
+### Scope - functionality
+* The site must have a section where recipes are displayed, for all to see.
+* Present the relevant information on each individual recipe on its own page following a pre-determined template.
+    * This information should be displayed in a visually appealing way.
+    * Information should be clear to understand and follow.
+* Allow users to login or register in order to be able to contribute towards the sites content (add, edit and delete recipes).
+* The user will be able to add, edit and delete recipes once logged in/registered.
+    * Methods of data input must be clear and easy to operate.
+    * Restrictions will need to be placed on what registered users can see and use verses what unregistered users can see and use.
+    * The site will need to feed relevant information back to the user when required and appropriate. 
+* We want the user to remain engaged throughout use so must be user-friendly and easy to navigate around.
+* Function as expected:
+    * Fully responsive on all devices.
+    * Links or buttons take you to the expected place or complete the expected task.
+    * External links must open in new windows.
+
+### Scope - content
+* A home page that tells the user all about Family Feasts and talks about the site’s message in more detail.
+* A recipes page, which the rest of the site will be built around.
+    * All recipes will need to be shown on this page in a visually appealing manner.
+    * Users will want the ability to interact with the page by filtering and searching for results.
+    * Each recipe card should act as a link to the recipe’s own page and to it's functions.
+* Individual recipe pages will follow a template, which will be populated with information pulled from the database.
+* Log in / registration forms will not only interact with the database but will grant authorization to add, edit and delete data objects via the site.
+* Logout function. (restricted)
+* A personalised profile page that shows recipes uploaded by the user. (restricted)
+* Add recipe form / page should add new data objects to the database and then display them on the recipes page. (restricted)
+* Edit recipe form / page will edit data that already exists in the database and update the information displayed on the site. (restricted)
+* Recipe deletion should remove the data object from the database, with information no longer able to be viewed by users. This could be a process where confirmation of deletion would be required. (restricted)
+
+<!-- ### Structure -->
+
 
 ### Skeleton
 Initial idea - [sketch](readme-docs/wireframes/initial-wireframe-sketch.jpg)
@@ -64,6 +97,9 @@ Add and update recipes - [desktop](readme-docs/wireframes/recipe-forms-desktop.p
 User profile - [desktop](readme-docs/wireframes/userprofile-desktop.png) | 
 [tablet](readme-docs/wireframes/userprofile-tablet.png) | 
 [mobile](readme-docs/wireframes/userprofile-phone.png).
+
+<!-- ### Surface -->
+
 
 ## Testing
 Separate testing document can be found here - [testing documentation.](TESTING.md)
