@@ -1,35 +1,30 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
 
     <h1 class="text-center page-title">register</h1>
 
     <section class="container-fluid">
         <form class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 my-form" method="POST" action="{{ url_for('register') }}">
+            {{ form.csrf_token }}
             <!-- username -->
             <div class="row">
                 <div class="col-10 offset-1">
                     <div class="mb-3">
-                        <label for="username" class="form-label">username</label>
-                        <input type="text" id="username" name="username" class="form-control"
-                            pattern="[A-Za-z0-9]{5,}" required 
-                            title="Username must be at least 5 characters long and can contain letters and numbers only - no spaces or special characters.">
+                        {{ wtf.form_field(form.username) }}
                         <div class="form-text">username must be at least 5 characters and can contain letters and numbers only.</div>
                     </div>
                 </div>
             </div>
             <!-- password -->
-            <!-- https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a -->
             <div class="row">
                 <div class="col-10 offset-1">
                     <div class="mb-3">
-                        <label for="password" class="form-label">password</label>
-                        <div class="input-group">
-                            <input type="password" id="password" name="password" class="form-control"
-                                pattern="(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{5,}" required 
-                                title="Passwords must be at least 5 characters long. They can contain any letter, number and must contain one or more of the following characters - @$!%*#?&">
+                        {{ wtf.form_field(form.password) }}
+                        <div class="form-text">password must be at least 5 characters long.</div>
+                        <!-- <div class="input-group">
                             <span class="input-group-text far fa-eye" id="togglePassword"></span>
-                        </div>
-                        <div class="form-text">password must contain at least one of the following @$!%*#?& and be at least 5 characters</div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -37,12 +32,10 @@
             <div class="row">
                 <div class="col-10 offset-1">
                     <div class="mb-3">
-                        <label for="confirm-password" class="form-label">confirm password</label>
-                        <div class="input-group">
-                            <input type="password" id="confirm-password" name="confirm-password" class="form-control"
-                                required title="This password must match the password previously given.">
+                        {{ wtf.form_field(form.confirm_password) }}
+                        <!-- <div class="input-group">
                             <span class="input-group-text far fa-eye" id="toggleConfirmPassword"></span>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

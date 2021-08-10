@@ -4,6 +4,12 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField
+from wtforms.validators import InputRequired, Length
+from wtforms_validators import AlphaNumeric
+from flask_bootstrap import Bootstrap
+
 
 if os.path.exists("env.py"):
     import env
@@ -15,6 +21,7 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
+Bootstrap(app)
 
 
 @app.route("/")
@@ -55,27 +62,45 @@ def view_recipe(id):
                            page_title=recipe["recipe_name"])
 
 
+class RegistrationForm(FlaskForm):
+    username = StringField('username',
+                           validators=[InputRequired(),
+                                       Length(min=5, max=20, message="username must be\
+                                           between 5 & 20 characters"),
+                                       AlphaNumeric("username can contain\
+                                           letters and numbers only")])
+    password = PasswordField('password',
+                             validators=[InputRequired(),
+                                         Length(min=5, max=20,
+                                         message="password must be between 5 &\
+                                             20 characters")])
+    confirm_password = PasswordField('confirm password',
+                                     validators=[InputRequired(),
+                                                 Length(min=5, max=20,
+                                                 message="password must be between\
+                                                     5 & 20 characters")])
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    form = RegistrationForm()
     # stops access to users that have registered already
     if session.get("user"):
         flash("you're already registered!")
         return redirect(url_for("user_profile", username=session["user"]))
     else:
-        if request.method == "POST":
+        if form.validate_on_submit():
             existing_user = mongo.db.users.find_one(
                 {"username": request.form.get("username").lower()})
-            #  https://techmonger.github.io/4/secure-passwords-werkzeug/
-            #  https://www.youtube.com/watch?v=jJ4awOToB6k
-            password = generate_password_hash(request.form.get("password"))
             if existing_user:
                 flash("the username you've chosen is taken!")
                 return redirect(url_for("register"))
-            elif check_password_hash(password,
-                                     request.form.get("confirm-password")):
+            elif (request.form.get("password") ==
+                  request.form.get("confirm_password")):
                 register = {
                     "username": request.form.get("username").lower(),
-                    "password": password
+                    "password": generate_password_hash(
+                        request.form.get("password"))
                 }
                 mongo.db.users.insert_one(register)
                 session["user"] = request.form.get("username").lower()
@@ -85,17 +110,34 @@ def register():
             else:
                 flash("the passwords entered didn't match!")
                 return redirect(url_for("register"))
-        return render_template("register.html", page_title="Register")
+        return render_template("register.html", page_title="Register",
+                               form=form)
+
+
+class LoginForm(FlaskForm):
+    username = StringField('username',
+                           validators=[InputRequired(),
+                                       Length(min=5, max=20,
+                                       message="username should be betwen 5 &\
+                                           20 characters"),
+                                       AlphaNumeric("username should contain\
+                                           letters and numbers only")])
+    password = PasswordField('password',
+                             validators=[InputRequired(),
+                                         Length(min=5, max=20,
+                                         message="password should be betwen 5\
+                                             & 20 characters")])
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    form = LoginForm()
     # stops access to users that have logged in already
     if session.get("user"):
         flash("you're already logged in!")
         return redirect(url_for("user_profile", username=session["user"]))
     else:
-        if request.method == "POST":
+        if form.validate_on_submit():
             existing_user = mongo.db.users.find_one(
                 {"username": request.form.get("username").lower()})
             if existing_user:
@@ -110,7 +152,7 @@ def login():
             else:
                 flash("incorrect username or password entered")
                 return redirect(url_for("login"))
-        return render_template("login.html", page_title="Log In")
+        return render_template("login.html", page_title="Log In", form=form)
 
 
 @app.route("/logout")
