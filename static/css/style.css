@@ -311,9 +311,19 @@ body {
 
 /* forms */
 
-.my-textarea {
-    height: 110px;
-    resize: none;
+#ingredients, 
+#recipe_steps {
+    min-height: 110px;
+}
+
+.help-block {
+    color: var(--delete);
+    font-size: .875em;
+    margin: 0;
+}
+
+.form-text {
+    margin: 0;
 }
 
 /* buttons */
