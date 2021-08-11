@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% from "_macros.html" import delete_recipe_modal %}
 {% block content %}
 
@@ -6,14 +7,12 @@
 
     <section class="container-fluid">
         <form class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 my-form" method="POST" action="{{ url_for('edit_recipe', id=recipe._id) }}">
+            {{ form.csrf_token }}
             <div class="row">
                 <!-- recipe name -->
                 <div class="col-10 offset-1">
                     <div class="mb-3">
-                        <label for="recipe_name" class="form-label">recipe name</label>
-                        <input value="{{ recipe.recipe_name }}" type="text" id="recipe_name" name="recipe_name" 
-                            class="form-control" pattern="[A-Za-z\d\s\-,'&]{1,35}" required
-                            title="Recipe's can be no longer then 35 characters long. Name's can contain the special characters of -,'& only.">
+                        {{ wtf.form_field(form.recipe_name, value=recipe.recipe_name) }}
                         <div class="form-text">recipe name can be a maximum of 35 characters.</div>
                     </div>
                 </div>
@@ -22,10 +21,7 @@
                 <!-- recipe image (url) -->
                 <div class="col-10 offset-1">
                     <div class="mb-3">
-                        <label for="recipe_image" class="form-label">recipe image</label>
-                        <input value="{{ recipe.recipe_image }}" type="url" id="recipe_image"
-                            name="recipe_image" class="form-control"
-                            title="Must start with http:// or https://">
+                        {{ wtf.form_field(form.recipe_image, value=recipe.recipe_image) }}
                         <div class="form-text">url link to image must start with http:// or https://</div>
                     </div> 
                 </div>
@@ -34,24 +30,13 @@
                 <!-- category (dropdown) -->
                 <div class="col-10 col-sm-5 offset-1">
                     <div class="mb-3">
-                        <label for="category_name" class="form-label">category</label>
-                        <select id="category_name" name="category_name" class="form-control form-select" required>
-                            {% for category in categories %}
-                                {% if category.category_name == recipe.category_name %}
-                                    <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>
-                                {% else %}
-                                    <option value="{{ category.category_name }}">{{ category.category_name }}</option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
+                        {{ wtf.form_field(form.category_name, class="form-select") }}
                     </div> 
                 </div>
                 <!-- servings (number) -->
                 <div class="col-10 offset-1 col-sm-5 offset-sm-0">
                     <div class="mb-3">
-                        <label for="servings" class="form-label">servings</label>
-                        <input value="{{ recipe.servings }}" type="number" id="servings" name="servings"
-                            class="form-control" required min="1" max="100" title="Value must be between 1-100.">
+                        {{ wtf.form_field(form.servings, value=recipe.servings) }}
                     </div> 
                 </div>
             </div>
@@ -59,17 +44,13 @@
                 <!-- prep time (number) -->
                 <div class="col-10 col-sm-5 offset-1">
                     <div class="mb-3">
-                        <label for="prep_time" class="form-label">prep time (mins)</label>
-                        <input value="{{ recipe.prep_time }}" type="number" id="prep_time" name="prep_time"
-                            class="form-control" required min="0" max="999" title="Value must be between 0-999.">
+                        {{ wtf.form_field(form.prep_time, value=recipe.prep_time) }}
                     </div>
                 </div>
                 <!-- cooking time (number) -->
                 <div class="col-10 offset-1 col-sm-5 offset-sm-0">
                     <div class="mb-3">
-                        <label for="cook_time" class="form-label">cook time (mins)</label>
-                        <input value="{{ recipe.cook_time }}" type="number" id="cook_time" name="cook_time"
-                            class="form-control" required min="0" max="999" title="Value must be between 0-999.">
+                        {{ wtf.form_field(form.cook_time, value=recipe.cook_time) }}
                     </div>
                 </div>
             </div> 
@@ -77,14 +58,7 @@
                 <!-- ingredients (list) -->
                 <div class="col-10 offset-1">
                     <div class="mb-3">
-                        <label for="ingredients" class="form-label">ingredients</label>
-                        <textarea class="form-control my-textarea" id="ingredients" name="ingredients"
-                            placeholder="example: &#10;1 small onion &#10;2 cloves of garlic &#10;1 tbsp olive oil"
-                            required title="Type your ingredients in here.">
-                            {%- for ingredient in recipe.ingredients -%}
-                                {{ ingredient }}&#10;
-                            {%- endfor -%}
-                        </textarea>
+                        {{ wtf.form_field(form.ingredients, placeholder="example:\n1 small onion\n2 cloves of garlic") }}
                         <div class="form-text">note: each ingredient needs to be typed on its own line.</div>
                     </div>    
                 </div>
@@ -93,18 +67,11 @@
                 <!-- method (list) -->
                 <div class="col-10 offset-1">
                     <div class="mb-3">
-                        <label for="recipe_steps" class="form-label">method</label>
-                        <textarea class="form-control my-textarea" id="recipe_steps" name="recipe_steps"
-                            placeholder="example: &#10;finely chop the onion and crush the garlic cloves. &#10;heat the oil in a large frying pan over a medium heat."
-                            required title="Write the steps of how to make your recipe here.">
-                            {%- for step in recipe.recipe_steps -%}
-                                {{ step }}&#10;
-                            {%- endfor -%}
-                        </textarea>
+                        {{ wtf.form_field(form.recipe_steps, placeholder="example:\nfinely chop the onion and crush the garlic cloves.\nheat the oil in a large frying pan over a medium heat.") }}
                         <div class="form-text">note: each step needs to be typed on its own line.</div> 
                     </div>    
                 </div>
-            </div>               
+            </div>        
             <!-- buttons -->
             <div class="d-flex flex-wrap justify-content-center">
                 <a href="{{ url_for('recipes', filter='all') }}" class="btn my-clear-btn m-2">cancel</a> 

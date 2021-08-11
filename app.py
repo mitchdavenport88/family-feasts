@@ -5,9 +5,10 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
-from wtforms.validators import InputRequired, Length
-from wtforms_validators import AlphaNumeric
+from wtforms import (
+    StringField, PasswordField, IntegerField, TextAreaField, SelectField)
+from wtforms.validators import InputRequired, Length, NumberRange
+from wtforms_validators import AlphaNumeric, ActiveUrl
 from flask_bootstrap import Bootstrap
 
 
@@ -118,14 +119,14 @@ class LoginForm(FlaskForm):
     username = StringField('username',
                            validators=[InputRequired(),
                                        Length(min=5, max=20,
-                                       message="username should be betwen 5 &\
+                                       message="username should be between 5 &\
                                            20 characters"),
                                        AlphaNumeric("username should contain\
                                            letters and numbers only")])
     password = PasswordField('password',
                              validators=[InputRequired(),
                                          Length(min=5, max=20,
-                                         message="password should be betwen 5\
+                                         message="password should be between 5\
                                              & 20 characters")])
 
 
@@ -166,14 +167,48 @@ def logout():
         return redirect(url_for("login"))
 
 
+class addRecipeForm(FlaskForm):
+    recipe_name = StringField('recipe name',
+                              validators=[InputRequired(),
+                                          Length(max=35,
+                                          message="recipe name can be no\
+                                              longer then 35 characters")])
+    recipe_image = StringField('recipe image',
+                               validators=[InputRequired(),
+                                           ActiveUrl(message="must start with\
+                                               http:// or https:// and be an active link")])
+    category_name = SelectField('category', choices=[('', 'select one of the following')] + [(category['category_name'], category['category_name']) for category in mongo.db.categories.find()],
+                                validators=[InputRequired()])
+    servings = IntegerField('servings',
+                            validators=[InputRequired(),
+                                        NumberRange(min=1, max=100,
+                                        message="value must be\
+                                            between 1-100")])
+    prep_time = IntegerField('prep time (mins)',
+                             validators=[InputRequired(),
+                                         NumberRange(min=0, max=999,
+                                         message="value must be\
+                                             between 0-999")])
+    cook_time = IntegerField('cook time (mins)',
+                             validators=[InputRequired(),
+                                         NumberRange(min=0, max=999,
+                                         message="value must be\
+                                             between 0-999")])
+    ingredients = TextAreaField('ingredients',
+                                validators=[InputRequired()])
+    recipe_steps = TextAreaField('method',
+                                 validators=[InputRequired()])
+
+
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
+    form = addRecipeForm()
     # Prevents unauthorized access to page
     if not session.get("user"):
         flash("you need to be logged in to perform this task!")
         return redirect(url_for("login"))
     else:
-        if request.method == "POST":
+        if form.validate_on_submit():
             # https://www.w3schools.com/python/ref_string_splitlines.asp
             recipe = {
                 "recipe_name": request.form.get("recipe_name").title(),
@@ -188,15 +223,19 @@ def add_recipe():
             }
             mongo.db.recipes.insert_one(recipe)
             return redirect(url_for("view_recipe", id=recipe["_id"]))
-        categories = mongo.db.categories.find()
-        return render_template("add_recipe.html", categories=categories,
-                               page_title="Add Recipe")
+        return render_template("add_recipe.html", page_title="Add Recipe",
+                               form=form)
 
 
 @app.route("/edit_recipe/<id>", methods=["GET", "POST"])
 def edit_recipe(id):
     recipe = mongo.db.recipes.find_one_or_404({"_id": ObjectId(id)})
     categories = mongo.db.categories.find()
+    form = addRecipeForm()
+    # https://stackoverflow.com/questions/12099741/how-do-you-set-a-default-value-for-a-wtforms-selectfield
+    form.category_name.data = (recipe["category_name"])
+    form.ingredients.data = ('\n'.join(str(ing) for ing in recipe["ingredients"]))
+    form.recipe_steps.data = ('\n'.join(str(ing) for ing in recipe["recipe_steps"]))
     # Prevents unauthorized access to page
     if not session.get("user"):
         flash("you need to be a registered user to perform this task!")
@@ -206,7 +245,7 @@ def edit_recipe(id):
         flash("you can only edit your own entries!")
         return redirect(url_for("user_profile", username=session["user"]))
     else:
-        if request.method == "POST":
+        if form.validate_on_submit():
             submit = {
                 "recipe_name": request.form.get("recipe_name").title(),
                 "recipe_image": request.form.get("recipe_image"),
@@ -222,7 +261,7 @@ def edit_recipe(id):
             flash("your recipe has been updated!")
             return redirect(url_for("view_recipe", id=recipe["_id"]))
         return render_template("edit_recipe.html", categories=categories,
-                               recipe=recipe, page_title="Edit Recipe")
+                               recipe=recipe, page_title="Edit Recipe", form=form)
 
 
 @app.route("/delete_recipe/<id>")
