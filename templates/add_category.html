@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+
+    <h1 id="categories" class="text-center page-title">add category</h1>
+
+    <form class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 my-form" method="POST" action="{{ url_for('add_category') }}">
+        {{ form.csrf_token }}
+        <div class="row">
+            <!-- add category -->
+            <div class="col-10 offset-1">
+                <div class="mb-3">
+                    {{ wtf.form_field(form.category_name) }}
+                    <div class="form-text">category name can be a maximum of 10 characters.</div>
+                </div>
+            </div>
+        </div>
+        <!-- buttons -->
+        <div class="d-flex flex-wrap justify-content-center">
+            <button type="submit" class="btn my-btn m-2">add category</button>
+        </div>
+    </form>
+
+{% endblock %}
+
+    
+
+

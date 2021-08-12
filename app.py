@@ -75,12 +75,7 @@ class addRecipeForm(FlaskForm):
                                            ActiveUrl(message="must start with\
                                                http:// or https:// and\
                                                    be an active link")])
-    category_name = SelectField(
-        'category', choices=[
-            ('', 'select one of the following')] + [(
-                category['category_name'], category['category_name'])
-                for category in mongo.db.categories.find()], validators=[
-                    InputRequired()])
+    category_name = SelectField('category', validators=[InputRequired()])
     servings = IntegerField('servings',
                             validators=[InputRequired(),
                                         NumberRange(min=1, max=100,
@@ -100,7 +95,21 @@ class addRecipeForm(FlaskForm):
     recipe_steps = TextAreaField('method', validators=[InputRequired()])
 
 
+# Class for login form
+class addCategoryForm(FlaskForm):
+    category_name = StringField('category name',
+                                validators=[InputRequired(),
+                                            Length(min=1, max=10,
+                                                   message="category name\
+                                                       should be a maximum of\
+                                                           10 characters"),
+                                            AlphaNumeric("category name should\
+                                                contain letters and numbers\
+                                                    only")])
+
+
 # Routes #
+
 
 # Home / Index page
 @app.route("/")
@@ -141,11 +150,16 @@ def search():
     recipes = list(mongo.db.recipes.find({"$text": {"$search": search}}))
     categories = [(category["category_name"])
                   for category in mongo.db.categories.find()]
+    if session.get("user"):
+        user_details = mongo.db.users.find_one({"username": session["user"]})
+    else:
+        user_details = None
     return render_template("recipes.html",
                            recipes=recipes,
                            filter="search",
                            categories=categories,
                            search=search,
+                           user_details=user_details,
                            page_title="Search Results")
 
 
@@ -247,6 +261,10 @@ def logout():
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
     form = addRecipeForm()
+    form.category_name.choices = [
+        ('', 'select one of the following')] + [
+            (category['category_name'], category['category_name'])
+            for category in mongo.db.categories.find()]
     # Prevents unauthorized access to page
     if not session.get("user"):
         flash("you need to be logged in to perform this task!")
@@ -278,6 +296,10 @@ def add_recipe():
 def edit_recipe(id):
     recipe = mongo.db.recipes.find_one_or_404({"_id": ObjectId(id)})
     form = addRecipeForm()
+    form.category_name.choices = [
+        ('', 'select one of the following')] + [
+            (category['category_name'], category['category_name'])
+            for category in mongo.db.categories.find()]
     # https://stackoverflow.com/questions/12099741/how-do-you-set-a-default-value-for-a-wtforms-selectfield
     # sets the dropdown menu to the recipes category
     form.category_name.data = (recipe["category_name"])
@@ -393,6 +415,31 @@ def delete_profile(user):
         #  Removes all recipes by the user
         mongo.db.recipes.remove({"author": user})
         return redirect(url_for("home"))
+
+
+# Add category function
+@app.route("/add_category", methods=["GET", "POST"])
+def add_category():
+    # Prevents unauthorized access to page
+    if not session.get("user"):
+        flash("you dont have authorization to access this page!")
+        return redirect(url_for("login"))
+    else:
+        user_details = mongo.db.users.find_one({"username": session["user"]})
+        if not user_details["is_admin"]:
+            flash("you dont have authorization to access this page!")
+            return redirect(url_for("user_profile",
+                                    username=session["user"]))
+        elif user_details["is_admin"]:
+            form = addCategoryForm()
+            if form.validate_on_submit():
+                category = {
+                    "category_name": request.form.get("category_name").lower()
+                }
+                mongo.db.categories.insert_one(category)
+                flash("the category has been added!")
+                return redirect("add_category")
+            return render_template("add_category.html", form=form)
 
 
 # 404 page not found error

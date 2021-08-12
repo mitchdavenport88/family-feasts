@@ -16,7 +16,7 @@
             {% endif %}
             <!-- shows add category button for admin only -->
             {% if user_details.is_admin %}
-                <a href="#categories" class="btn my-btn m-2">
+                <a href="{{ url_for('add_category') }}" class="btn my-btn m-2">
                     add category
                 </a>
             {% else %}
@@ -46,9 +46,6 @@
                 </div>
             {% endif %}
         </div>
-        {% if user_details.is_admin %}
-            <h1 id="categories" class="text-center page-title">categories</h1>
-        {% endif %}
     </div>
 
 {% endblock %}
