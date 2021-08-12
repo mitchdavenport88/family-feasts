@@ -114,6 +114,10 @@ def home():
 def recipes(filter):
     categories = [(category["category_name"])
                   for category in mongo.db.categories.find()]
+    if session.get("user"):
+        user_details = mongo.db.users.find_one({"username": session["user"]})
+    else:
+        user_details = None
     if filter not in categories and filter != "all":
         flash("this category does not exist!")
         return redirect(url_for("recipes",
@@ -125,7 +129,9 @@ def recipes(filter):
     return render_template("recipes.html",
                            recipes=recipes,
                            categories=categories,
-                           filter=filter)
+                           user_details=user_details,
+                           filter=filter,
+                           page_title=(filter.title() + " Recipes"))
 
 
 # Search bar on recipes page
@@ -139,7 +145,8 @@ def search():
                            recipes=recipes,
                            filter="search",
                            categories=categories,
-                           search=search)
+                           search=search,
+                           page_title="Search Results")
 
 
 # Individual recipe pages
@@ -147,8 +154,13 @@ def search():
 def view_recipe(id):
     # Shows individual recipes based on thier db id
     recipe = mongo.db.recipes.find_one_or_404({"_id": ObjectId(id)})
+    if session.get("user"):
+        user_details = mongo.db.users.find_one({"username": session["user"]})
+    else:
+        user_details = None
     return render_template("view_recipe.html",
                            recipe=recipe,
+                           user_details=user_details,
                            page_title=recipe["recipe_name"])
 
 
@@ -173,7 +185,8 @@ def register():
                 register = {
                     "username": request.form.get("username").lower(),
                     "password": generate_password_hash(
-                        request.form.get("password"))
+                        request.form.get("password")),
+                    "is_admin": bool(False)
                 }
                 mongo.db.users.insert_one(register)
                 session["user"] = request.form.get("username").lower()
@@ -274,15 +287,20 @@ def edit_recipe(id):
     # inserts the recipe steps into the textarea
     form.recipe_steps.data = ('\n'.join(str(ing)
                               for ing in recipe["recipe_steps"]))
+    # Assigns user details to logged in users
+    if session.get("user"):
+        user_details = mongo.db.users.find_one({"username": session["user"]})
     # Prevents unauthorized access to page
     if not session.get("user"):
         flash("you need to be a registered user to perform this task!")
         return redirect(url_for("register"))
     # Stops the deletion of recipes created by different users via the URL
-    elif session.get("user") != recipe["author"]:
+    elif session.get("user") != recipe["author"] and not (
+         user_details["is_admin"]):
         flash("you can only edit your own entries!")
         return redirect(url_for("user_profile",
                                 username=session["user"]))
+    # grants edit authorization to recipes author or admin
     else:
         if form.validate_on_submit():
             submit = {
@@ -294,7 +312,8 @@ def edit_recipe(id):
                 "cook_time": request.form.get("cook_time"),
                 "ingredients": request.form.get("ingredients").splitlines(),
                 "recipe_steps": request.form.get("recipe_steps").splitlines(),
-                "author": session["user"]
+                # If admin edit recipe author will remain as
+                "author": recipe["author"]
             }
             mongo.db.recipes.update({"_id": ObjectId(id)}, submit)
             flash("your recipe has been updated!")
@@ -339,11 +358,15 @@ def user_profile(username):
         return redirect(url_for("user_profile",
                                 username=session["user"]))
     else:
-        user_recipes = list(mongo.db.recipes.find({"author": session["user"]}))
         if session["user"]:
+            user_recipes = list(mongo.db.recipes.find(
+                {"author": session["user"]}))
+            user_details = mongo.db.users.find_one(
+                {"username": session["user"]})
             return render_template("user_profile.html",
                                    username=session["user"],
                                    user_recipes=user_recipes,
+                                   user_details=user_details,
                                    page_title="My Profile")
         return redirect(url_for("login"))
 

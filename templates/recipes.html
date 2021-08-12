@@ -35,7 +35,7 @@
         <div class="row">
             {% if recipes|length > 0 %} 
                 {% for recipe in recipes %}
-                    {{ recipe_card(recipe) }}         
+                    {{ recipe_card(recipe, user_details) }}         
                 {% endfor %}
             {% else %}
                 {% if filter == "search" %}
