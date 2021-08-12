@@ -24,6 +24,26 @@
 
 {% endmacro %}
 
+{% macro category_card(category) %}
+
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 card-group">
+        <div class="card">          
+            <div class="card-body">
+                <h5 class="card-title text-center">{{ category.category_name }}</h5>
+                <div class="d-flex flex-wrap justify-content-center">
+                    <a href="" class="btn my-btn m-2">
+                        edit
+                    </a>
+                    <a href="{{ url_for('delete_category', id=category._id) }}" class="btn my-delete-btn m-2">
+                        delete
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}
+
 <!-- inserts recipe deletion confirmation modal with button -->
 {% macro delete_recipe_modal(recipe) %}
 

@@ -95,7 +95,7 @@ class addRecipeForm(FlaskForm):
     recipe_steps = TextAreaField('method', validators=[InputRequired()])
 
 
-# Class for login form
+# Class for add category form
 class addCategoryForm(FlaskForm):
     category_name = StringField('category name',
                                 validators=[InputRequired(),
@@ -417,9 +417,10 @@ def delete_profile(user):
         return redirect(url_for("home"))
 
 
-# Add category function
-@app.route("/add_category", methods=["GET", "POST"])
-def add_category():
+# Add category page
+@app.route("/manage_categories", methods=["GET", "POST"])
+def manage_categories():
+    categories = mongo.db.categories.find()
     # Prevents unauthorized access to page
     if not session.get("user"):
         flash("you dont have authorization to access this page!")
@@ -438,8 +439,29 @@ def add_category():
                 }
                 mongo.db.categories.insert_one(category)
                 flash("the category has been added!")
-                return redirect("add_category")
-            return render_template("add_category.html", form=form)
+                return redirect("manage_categories")
+            return render_template("manage_categories.html",
+                                   form=form,
+                                   categories=categories,
+                                   page_title="Manage Categories")
+
+
+# Delete category function
+@app.route("/delete_category/<id>", methods=["GET", "POST"])
+def delete_category(id):
+    if not session.get("user"):
+        flash("you dont have authorization to access this page!")
+        return redirect(url_for("login"))
+    else:
+        user_details = mongo.db.users.find_one({"username": session["user"]})
+    if not user_details["is_admin"]:
+        flash("you dont have authorization to access this page!")
+        return redirect(url_for("user_profile",
+                                username=session["user"]))
+    elif user_details["is_admin"]:
+        mongo.db.categories.delete_one({"_id": ObjectId(id)})
+        flash("the category has been deleted!")
+        return redirect(url_for("manage_categories"))
 
 
 # 404 page not found error

@@ -16,8 +16,8 @@
             {% endif %}
             <!-- shows add category button for admin only -->
             {% if user_details.is_admin %}
-                <a href="{{ url_for('add_category') }}" class="btn my-btn m-2">
-                    add category
+                <a href="{{ url_for('manage_categories') }}" class="btn my-btn m-2">
+                    manage categories
                 </a>
             {% else %}
                 <!-- inserts profile deletion button with confirmation modal for all users other then admin -->
