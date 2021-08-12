@@ -329,12 +329,16 @@ def edit_recipe(id):
 @app.route("/delete_recipe/<id>")
 def delete_recipe(id):
     recipe = mongo.db.recipes.find_one_or_404({"_id": ObjectId(id)})
+    # Assigns user details to logged in users
+    if session.get("user"):
+        user_details = mongo.db.users.find_one({"username": session["user"]})
     # Stops unregistered users or those not logged in deleting recipes
     if not session.get("user"):
         flash("you need to be a registered user to perform this task!")
         return redirect(url_for("register"))
     # Stops the deletion of recipes created by different users via the URL
-    elif session.get("user") != recipe["author"]:
+    elif session.get("user") != recipe["author"] and not (
+         user_details["is_admin"]):
         flash("you can only delete your own entries!")
         return redirect(url_for("user_profile",
                                 username=session["user"]))
