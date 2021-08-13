@@ -302,7 +302,12 @@ def edit_recipe(id):
             for category in mongo.db.categories.find()]
     # https://stackoverflow.com/questions/12099741/how-do-you-set-a-default-value-for-a-wtforms-selectfield
     # sets the dropdown menu to the recipes category
-    form.category_name.data = (recipe["category_name"])
+    if recipe["category_name"] not in list(category['category_name']
+                                           for category in
+                                           mongo.db.categories.find()):
+        form.category_name.data = ('')
+    else:
+        form.category_name.data = (recipe["category_name"])
     # inserts the recipe ingredients into the textarea
     form.ingredients.data = ('\n'.join(str(ing)
                              for ing in recipe["ingredients"]))

@@ -16,7 +16,7 @@
             <form class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3" method="POST" action="{{ url_for('search') }}">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" id="search" name="search" value="{{ search }}"
-                        placeholder="search by name or ingredient" required maxlength="25"
+                        placeholder="search all recipes by name or ingredient" required maxlength="25"
                         title="search can be no more then 25 characters long">
                     <button class="btn my-btn" type="submit"><i class="fas fa-search"></i></button>
                 </div>
@@ -44,6 +44,13 @@
                 {% else %}
                     <!-- this heading appears when recipe list length = 0 (no results) -->
                     <h2 class="text-center page-title warning-message">no recipes for this category yet!</h2>
+                    {% if session.get("user") %}
+                        <div class="d-flex flex-wrap justify-content-center">
+                            <a href="{{ url_for('add_recipe') }}" class="btn my-btn m-2">
+                                add recipe
+                            </a>     
+                        </div>
+                    {% endif %}
                 {% endif %}
             {% endif %}
         </div>

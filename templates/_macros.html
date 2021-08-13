@@ -1,3 +1,5 @@
+<!-- view_recipes.html -->
+
 <!-- inserts cards used to display recipes -->
 {% macro recipe_card(recipe, user_details) %}
 
@@ -17,26 +19,6 @@
                         <!-- delete trigger and modal macro -->
                         {{ delete_recipe_modal(recipe) }}
                     {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-{% endmacro %}
-
-{% macro category_card(category) %}
-
-    <div class="col-12 col-md-6 col-lg-4 col-xl-3 card-group">
-        <div class="card">          
-            <div class="card-body">
-                <h5 class="card-title text-center">{{ category.category_name }}</h5>
-                <div class="d-flex flex-wrap justify-content-center">
-                    <a href="" class="btn my-btn m-2">
-                        edit
-                    </a>
-                    <a href="{{ url_for('delete_category', id=category._id) }}" class="btn my-delete-btn m-2">
-                        delete
-                    </a>
                 </div>
             </div>
         </div>
@@ -73,6 +55,8 @@
 
 {% endmacro %}
 
+<!-- user_profile.html -->
+
 <!-- inserts profile deletion confirmation modal with button -->
 {% macro delete_profile_modal(username) %}
 
@@ -100,6 +84,54 @@
                     <a href="{{ url_for('delete_profile', user=username) }}" class="btn my-delete-btn m-2">
                         delete profile
                     </a>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}
+
+<!-- manage_categories.html -->
+
+<!-- inserts cards used to display categories -->
+{% macro category_card(category) %}
+
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3 card-group">
+        <div class="card">          
+            <div class="card-body">
+                <h5 class="card-title text-center">{{ category.category_name }}</h5>
+                <div class="d-flex flex-wrap justify-content-center">
+                    <!-- delete trigger and modal macro -->
+                    {{ delete_category_modal(category) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endmacro %}
+
+<!-- inserts category deletion confirmation modal with button -->
+{% macro delete_category_modal(category) %}
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn my-delete-btn m-2" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ category._id }}">
+        delete
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="delete-modal-{{ category._id }}" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">deleting category...</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">are you sure you want to delete the {{ category.category_name }} category?</div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="btn my-clear-btn" data-bs-dismiss="modal">close</button>
+                    <a href="{{ url_for('delete_category', id=category._id) }}" class="btn my-delete-btn m-2">
+                        delete
+                    </a>
                 </div>
             </div>
         </div>
