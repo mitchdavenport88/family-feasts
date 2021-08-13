@@ -4,12 +4,8 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_wtf import FlaskForm
-from wtforms import (
-    StringField, PasswordField, IntegerField, TextAreaField, SelectField)
-from wtforms.validators import InputRequired, Length, NumberRange
-from wtforms_validators import AlphaNumeric, ActiveUrl
 from flask_bootstrap import Bootstrap
+from forms import RegistrationForm, LoginForm, AddRecipeForm, AddCategoryForm
 
 if os.path.exists("env.py"):
     import env
@@ -23,97 +19,10 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 Bootstrap(app)
 
-# Form classes #
 
-
-# Class for registration form
-class RegistrationForm(FlaskForm):
-    username = StringField('username',
-                           validators=[InputRequired(),
-                                       Length(min=5, max=20,
-                                       message="username must be between 5 &\
-                                           20 characters"),
-                                       AlphaNumeric("username can contain\
-                                           letters and numbers only")])
-    password = PasswordField('password',
-                             validators=[InputRequired(),
-                                         Length(min=5, max=20,
-                                         message="password must be between 5 &\
-                                             20 characters")])
-    confirm_password = PasswordField('confirm password',
-                                     validators=[InputRequired(),
-                                                 Length(min=5, max=20,
-                                                 message="password must be between\
-                                                     5 & 20 characters")])
-
-
-# Class for login form
-class LoginForm(FlaskForm):
-    username = StringField('username',
-                           validators=[InputRequired(),
-                                       Length(min=5, max=20,
-                                       message="username should be between 5 &\
-                                           20 characters"),
-                                       AlphaNumeric("username should contain\
-                                           letters and numbers only")])
-    password = PasswordField('password',
-                             validators=[InputRequired(),
-                                         Length(min=5, max=20,
-                                         message="password should be between 5 &\
-                                             20 characters")])
-
-
-# Class for add and edit recipe forms
-class addRecipeForm(FlaskForm):
-    recipe_name = StringField('recipe name',
-                              validators=[InputRequired(),
-                                          Length(max=35,
-                                          message="recipe name can be no longer\
-                                              then 35 characters")])
-    recipe_image = StringField('recipe image',
-                               validators=[InputRequired(),
-                                           ActiveUrl(message="must start with\
-                                               http:// or https:// and\
-                                                   be an active link")])
-    category_name = SelectField('category', validators=[InputRequired()])
-    servings = IntegerField('servings',
-                            validators=[InputRequired(),
-                                        NumberRange(min=1, max=100,
-                                                    message="value must be\
-                                                        between 1-100")])
-    prep_time = IntegerField('prep time (mins)',
-                             validators=[InputRequired(),
-                                         NumberRange(min=0, max=999,
-                                                     message="value must be\
-                                                         between 0-999")])
-    cook_time = IntegerField('cook time (mins)',
-                             validators=[InputRequired(),
-                                         NumberRange(min=0, max=999,
-                                                     message="value must be\
-                                                         between 0-999")])
-    ingredients = TextAreaField('ingredients', validators=[InputRequired()])
-    recipe_steps = TextAreaField('method', validators=[InputRequired()])
-
-
-# Class for add category form
-class addCategoryForm(FlaskForm):
-    category_name = StringField('category name',
-                                validators=[InputRequired(),
-                                            Length(min=1, max=10,
-                                                   message="category name\
-                                                       should be a maximum of\
-                                                           10 characters"),
-                                            AlphaNumeric("category name should\
-                                                contain letters and numbers\
-                                                    only")])
-
-
-# Routes #
-
-
-# Home / Index page
 @app.route("/")
 def home():
+    """ Home page / index.html  """
     return render_template("index.html",
                            page_title="Home")
 
@@ -121,12 +30,12 @@ def home():
 # Recipes page
 @app.route("/recipes/<filter>")
 def recipes(filter):
-    categories = [(category["category_name"])
-                  for category in mongo.db.categories.find()]
     if session.get("user"):
         user_details = mongo.db.users.find_one({"username": session["user"]})
     else:
         user_details = None
+    categories = [(category["category_name"])
+                  for category in mongo.db.categories.find()]
     if filter not in categories and filter != "all":
         flash("this category does not exist!")
         return redirect(url_for("recipes",
@@ -146,14 +55,14 @@ def recipes(filter):
 # Search bar on recipes page
 @app.route("/search", methods=["GET", "POST"])
 def search():
-    search = request.form.get("search")
-    recipes = list(mongo.db.recipes.find({"$text": {"$search": search}}))
-    categories = [(category["category_name"])
-                  for category in mongo.db.categories.find()]
     if session.get("user"):
         user_details = mongo.db.users.find_one({"username": session["user"]})
     else:
         user_details = None
+    search = request.form.get("search")
+    recipes = list(mongo.db.recipes.find({"$text": {"$search": search}}))
+    categories = [(category["category_name"])
+                  for category in mongo.db.categories.find()]
     return render_template("recipes.html",
                            recipes=recipes,
                            filter="search",
@@ -166,12 +75,12 @@ def search():
 # Individual recipe pages
 @app.route("/view_recipe/<id>")
 def view_recipe(id):
-    # Shows individual recipes based on thier db id
-    recipe = mongo.db.recipes.find_one_or_404({"_id": ObjectId(id)})
     if session.get("user"):
         user_details = mongo.db.users.find_one({"username": session["user"]})
     else:
         user_details = None
+    # Shows individual recipes based on thier db id
+    recipe = mongo.db.recipes.find_one_or_404({"_id": ObjectId(id)})
     return render_template("view_recipe.html",
                            recipe=recipe,
                            user_details=user_details,
@@ -181,13 +90,13 @@ def view_recipe(id):
 # Registration form /page
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    form = RegistrationForm()
     # stops access to users that have registered already
     if session.get("user"):
         flash("you're already registered!")
         return redirect(url_for("user_profile",
                                 username=session["user"]))
     else:
+        form = RegistrationForm()
         if form.validate_on_submit():
             existing_user = mongo.db.users.find_one(
                 {"username": request.form.get("username").lower()})
@@ -200,7 +109,7 @@ def register():
                     "username": request.form.get("username").lower(),
                     "password": generate_password_hash(
                         request.form.get("password")),
-                    "is_admin": bool(False)
+                    "is_admin": False
                 }
                 mongo.db.users.insert_one(register)
                 session["user"] = request.form.get("username").lower()
@@ -218,13 +127,13 @@ def register():
 # Log in page / form
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    form = LoginForm()
     # stops access to users that have logged in already
     if session.get("user"):
         flash("you're already logged in!")
         return redirect(url_for("user_profile",
                                 username=session["user"]))
     else:
+        form = LoginForm()
         if form.validate_on_submit():
             existing_user = mongo.db.users.find_one(
                 {"username": request.form.get("username").lower()})
@@ -248,10 +157,10 @@ def login():
 # Log out function
 @app.route("/logout")
 def logout():
-    # Prevents ability to logout if not logged in
     if session.get("user"):
         session.pop("user")
         return redirect(url_for("login"))
+    # Prevents ability to logout if not logged in
     else:
         flash("you need to be logged in to perform this task!")
         return redirect(url_for("login"))
@@ -260,16 +169,16 @@ def logout():
 # Add recipe form / page
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
-    form = addRecipeForm()
-    form.category_name.choices = [
-        ('', 'select one of the following')] + [
-            (category['category_name'], category['category_name'])
-            for category in mongo.db.categories.find()]
     # Prevents unauthorized access to page
     if not session.get("user"):
         flash("you need to be logged in to perform this task!")
         return redirect(url_for("login"))
     else:
+        form = AddRecipeForm()
+        form.category_name.choices = [
+            ('', 'select one of the following')] + [
+                (category['category_name'], category['category_name'])
+                for category in mongo.db.categories.find()]
         if form.validate_on_submit():
             # https://www.w3schools.com/python/ref_string_splitlines.asp
             recipe = {
@@ -294,41 +203,41 @@ def add_recipe():
 # Edit recipe form / page
 @app.route("/edit_recipe/<id>", methods=["GET", "POST"])
 def edit_recipe(id):
-    recipe = mongo.db.recipes.find_one_or_404({"_id": ObjectId(id)})
-    form = addRecipeForm()
-    form.category_name.choices = [
-        ('', 'select one of the following')] + [
-            (category['category_name'], category['category_name'])
-            for category in mongo.db.categories.find()]
-    # https://stackoverflow.com/questions/12099741/how-do-you-set-a-default-value-for-a-wtforms-selectfield
-    # sets the dropdown menu to the recipes category
-    if recipe["category_name"] not in list(category['category_name']
-                                           for category in
-                                           mongo.db.categories.find()):
-        form.category_name.data = ('')
-    else:
-        form.category_name.data = (recipe["category_name"])
-    # inserts the recipe ingredients into the textarea
-    form.ingredients.data = ('\n'.join(str(ing)
-                             for ing in recipe["ingredients"]))
-    # inserts the recipe steps into the textarea
-    form.recipe_steps.data = ('\n'.join(str(ing)
-                              for ing in recipe["recipe_steps"]))
-    # Assigns user details to logged in users
-    if session.get("user"):
-        user_details = mongo.db.users.find_one({"username": session["user"]})
     # Prevents unauthorized access to page
     if not session.get("user"):
         flash("you need to be a registered user to perform this task!")
         return redirect(url_for("register"))
+    else:
+        # Assigns user details to logged in users
+        user_details = mongo.db.users.find_one({"username": session["user"]})
+        recipe = mongo.db.recipes.find_one_or_404({"_id": ObjectId(id)})
     # Stops the deletion of recipes created by different users via the URL
-    elif session.get("user") != recipe["author"] and not (
+    if session.get("user") != recipe["author"] and not (
          user_details["is_admin"]):
         flash("you can only edit your own entries!")
         return redirect(url_for("user_profile",
                                 username=session["user"]))
     # grants edit authorization to recipes author or admin
     else:
+        form = AddRecipeForm()
+        form.category_name.choices = [
+            ('', 'select one of the following')] + [
+                (category['category_name'], category['category_name'])
+                for category in mongo.db.categories.find()]
+        # https://stackoverflow.com/questions/12099741/how-do-you-set-a-default-value-for-a-wtforms-selectfield
+        # sets the dropdown menu to the recipes category
+        if recipe["category_name"] not in list(category['category_name']
+                                               for category in
+                                               mongo.db.categories.find()):
+            form.category_name.data = ('')
+        else:
+            form.category_name.data = (recipe["category_name"])
+        # inserts the recipe ingredients into the textarea
+        form.ingredients.data = ('\n'.join(str(ing)
+                                 for ing in recipe["ingredients"]))
+        # inserts the recipe steps into the textarea
+        form.recipe_steps.data = ('\n'.join(str(ing)
+                                  for ing in recipe["recipe_steps"]))
         if form.validate_on_submit():
             submit = {
                 "recipe_name": request.form.get("recipe_name").title(),
@@ -355,16 +264,16 @@ def edit_recipe(id):
 # Delete recipe function
 @app.route("/delete_recipe/<id>")
 def delete_recipe(id):
-    recipe = mongo.db.recipes.find_one_or_404({"_id": ObjectId(id)})
-    # Assigns user details to logged in users
-    if session.get("user"):
-        user_details = mongo.db.users.find_one({"username": session["user"]})
     # Stops unregistered users or those not logged in deleting recipes
     if not session.get("user"):
         flash("you need to be a registered user to perform this task!")
         return redirect(url_for("register"))
+    else:
+        # Assigns user details to logged in users
+        recipe = mongo.db.recipes.find_one_or_404({"_id": ObjectId(id)})
+        user_details = mongo.db.users.find_one({"username": session["user"]})
     # Stops the deletion of recipes created by different users via the URL
-    elif session.get("user") != recipe["author"] and not (
+    if session.get("user") != recipe["author"] and not (
          user_details["is_admin"]):
         flash("you can only delete your own entries!")
         return redirect(url_for("user_profile",
@@ -384,22 +293,20 @@ def user_profile(username):
         flash("you dont have authorization to view this page!")
         return redirect(url_for("login"))
     # Users can only view thier own profile page
-    elif username != session.get("user"):
+    if username != session.get("user"):
         flash("you dont have authorization to view this page!")
         return redirect(url_for("user_profile",
                                 username=session["user"]))
     else:
-        if session["user"]:
-            user_recipes = list(mongo.db.recipes.find(
-                {"author": session["user"]}))
-            user_details = mongo.db.users.find_one(
-                {"username": session["user"]})
-            return render_template("user_profile.html",
-                                   username=session["user"],
-                                   user_recipes=user_recipes,
-                                   user_details=user_details,
-                                   page_title="My Profile")
-        return redirect(url_for("login"))
+        user_recipes = list(mongo.db.recipes.find(
+            {"author": session["user"]}))
+        user_details = mongo.db.users.find_one(
+            {"username": session["user"]})
+        return render_template("user_profile.html",
+                               username=session["user"],
+                               user_recipes=user_recipes,
+                               user_details=user_details,
+                               page_title="My Profile")
 
 
 # Delete profile function
@@ -410,7 +317,7 @@ def delete_profile(user):
         flash("you dont have authorization to perform this task!")
         return redirect(url_for("login"))
     # Users can only delete thier own profile
-    elif session.get("user") != user:
+    if session.get("user") != user:
         flash("you can only delete your own profile!")
         return redirect(url_for("user_profile",
                                 username=session["user"]))
@@ -425,42 +332,43 @@ def delete_profile(user):
 # Add category page
 @app.route("/manage_categories", methods=["GET", "POST"])
 def manage_categories():
-    categories = mongo.db.categories.find()
     # Prevents unauthorized access to page
     if not session.get("user"):
         flash("you dont have authorization to access this page!")
         return redirect(url_for("login"))
     else:
         user_details = mongo.db.users.find_one({"username": session["user"]})
-        if not user_details["is_admin"]:
-            flash("you dont have authorization to access this page!")
-            return redirect(url_for("user_profile",
-                                    username=session["user"]))
-        elif user_details["is_admin"]:
-            form = addCategoryForm()
-            if form.validate_on_submit():
-                category = {
-                    "category_name": request.form.get("category_name").lower()
-                }
-                mongo.db.categories.insert_one(category)
-                flash("the category has been added!")
-                return redirect("manage_categories")
-            return render_template("manage_categories.html",
-                                   form=form,
-                                   categories=categories,
-                                   page_title="Manage Categories")
+    # Admin rights required
+    if not user_details["is_admin"]:
+        flash("you dont have authorization to access this page!")
+        return redirect(url_for("user_profile",
+                                username=session["user"]))
+    else:
+        form = AddCategoryForm()
+        categories = mongo.db.categories.find()
+        if form.validate_on_submit():
+            category = {
+                "category_name": request.form.get("category_name").lower()
+            }
+            mongo.db.categories.insert_one(category)
+            flash("the category has been added!")
+            return redirect("manage_categories")
+        return render_template("manage_categories.html",
+                               form=form,
+                               categories=categories,
+                               page_title="Manage Categories")
 
 
 # Delete category function
 @app.route("/delete_category/<id>", methods=["GET", "POST"])
 def delete_category(id):
     if not session.get("user"):
-        flash("you dont have authorization to access this page!")
+        flash("you dont have authorization to perform this task!")
         return redirect(url_for("login"))
     else:
         user_details = mongo.db.users.find_one({"username": session["user"]})
     if not user_details["is_admin"]:
-        flash("you dont have authorization to access this page!")
+        flash("you dont have authorization to perform this task!")
         return redirect(url_for("user_profile",
                                 username=session["user"]))
     elif user_details["is_admin"]:
