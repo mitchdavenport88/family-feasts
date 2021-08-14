@@ -14,7 +14,7 @@
     --orange: #FFA45B;
     --black: #000;
     --white: #FAFAFA;
-    --delete: #fC6634;
+    --delete: #FC6634;
 }
 
 body {
@@ -24,10 +24,10 @@ body {
 
 .container-fluid {
     max-width: 2000px;
-    margin: 0 auto
+    margin: 0 auto;
 }
 
-/* base.html */
+/*** base.html ***/
 
 /* navigation */
 .my-navbar {
@@ -114,7 +114,18 @@ body {
     color: var(--orange);
 }
 
-/* index.html */
+/* flash messages */
+.flash-message {
+    padding: 1% 0 0 0;
+    text-align: center;
+}
+
+.flash-message h3 {
+    color: var(--delete);
+    margin: 0;
+}
+
+/*** index.html ***/
 
 .hero-image {
     height: 83vh;
@@ -209,7 +220,7 @@ body {
     margin: 0 auto 8px;
 }
 
-/* recipes.html */
+/*** recipes.html ***/
 
 .card {
     border: 1px solid var(--orange);
@@ -224,11 +235,17 @@ body {
 .card-img-top {
     height: 300px;
     width: 100%;
+    -o-object-fit: cover;
     object-fit: cover;
+    -o-object-position: center;
     object-position: center;
 }
 
-/* view_recipes.html */
+.warning-message {
+    color: var(--delete);
+}
+
+/*** view_recipes.html ***/
 
 .recipe-info-row {   
     width: 100%;
@@ -294,22 +311,35 @@ body {
     margin-bottom: 8px;
 }
 
-/* modals */
+/*** 404.html & 500.html ***/
 
-.modal-content {
+.error-image {
+    height: 100vh;
+    width: 100%;
+    background: url("../images/hero-image.jpg") no-repeat center;
+    background-size: cover;
+    padding: 0;
+}
+
+/*** forms ***/
+
+.my-form {
     background-color: var(--light-orange);
+    padding: 2% 0;
     border: 1px solid var(--orange);
+    border-radius: 5px;
+    margin: 0 auto 20px auto;
+    max-width: 1200px;
 }
 
-.modal-header {
-    border-bottom: 0;
+.form-link {
+    margin-top: 8px;
+    margin-bottom: 0;
 }
 
-.modal-footer {
-    border-top: 0;
+.form-link a {
+    font-weight: bold;
 }
-
-/* forms */
 
 #ingredients, 
 #recipe_steps {
@@ -326,7 +356,7 @@ body {
     margin: 0;
 }
 
-/* buttons */
+/*** buttons ***/
 
 .my-btn {
     background-color: var(--orange);
@@ -358,84 +388,22 @@ body {
     border: 1px solid var(--delete);
 }
 
-/* forms */
+/*** modals ***/
 
-.my-form {
+.modal-content {
     background-color: var(--light-orange);
-    padding: 2% 0;
-    border: 1px solid var(--orange);
-    border-radius: 5px;
-    margin: 0 auto 20px auto;
-    max-width: 1200px;
-}
-
-.form-link {
-    margin-top: 8px;
-    margin-bottom: 0;
-}
-
-.form-link a {
-    font-weight: bold;
-}
-
-#togglePassword, 
-#toggleConfirmPassword {
-    background-color: var(--orange);
     border: 1px solid var(--orange);
 }
 
-#togglePassword:hover,
-#toggleConfirmPassword:hover {
-    background-color: var(--light-orange);
+.modal-header {
+    border-bottom: 0;
 }
 
-/* 404.html */
-
-.error-image {
-    height: 100vh;
-    width: 100%;
-    background: url("../images/hero-image.jpg") no-repeat center;
-    background-size: cover;
-    padding: 0;
+.modal-footer {
+    border-top: 0;
 }
 
-/* flash messages */
-
-.flash-message {
-    padding: 1% 0 0 0;
-    text-align: center;
-}
-
-.flash-message h3 {
-    color: var(--delete);
-    margin: 0;
-}
-
-.warning-message {
-    color: var(--delete);
-}
-
-/* media queries */
-
-/* max-width lg */
-@media only screen and (max-width: 991px) {  
-    /* index.html */
-    #why {
-        margin-bottom: 0px;
-    }
-    .why-content-box {
-        padding: 2.5%;
-        margin-bottom: 20px;
-    }
-}
-
-/* max-width md */
-@media only screen and (max-width: 767px) {  
-    /* view_recipes.html */
-    .recipe-info-card {
-        max-width: 500px;
-    }
-}
+/*** media queries ***/
 
 /* max-width sm */
 @media only screen and (max-width: 575px) {
@@ -447,6 +415,26 @@ body {
     .my-burger {
         margin-right: 1%;
     }    
+}
+
+/* max-width md */
+@media only screen and (max-width: 767px) {  
+    /* view_recipes.html */
+    .recipe-info-card {
+        max-width: 500px;
+    }
+}
+
+/* max-width lg */
+@media only screen and (max-width: 991px) {  
+    /* index.html */
+    #why {
+        margin-bottom: 0px;
+    }
+    .why-content-box {
+        padding: 2.5%;
+        margin-bottom: 20px;
+    }
 }
 
 /* min-width sm */
@@ -483,4 +471,3 @@ body {
         border-left: 0;
     }
 }
-
