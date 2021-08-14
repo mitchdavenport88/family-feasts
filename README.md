@@ -118,7 +118,21 @@ User profile - [desktop](readme-docs/wireframes/userprofile-desktop.png) |
 [tablet](readme-docs/wireframes/userprofile-tablet.png) | 
 [mobile](readme-docs/wireframes/userprofile-phone.png).
 
-<!-- ### Surface -->
+### Surface
+Family Feasts is a multi-page website that is built using Bootstraps grid system. I’ve used a combination of containers, rows and columns along with the built in flexbox capabilities to position content on the pages as well as making each page responsive at all breakpoints. 
+
+As is the trend the navigation bar is fixed at the top of the page, making for easier navigation around the site. It also houses both the websites logo and page links. The footer is of similar aesthetic to the navigation menu and will be at the bottom of every page housing social media links (via icons) as this is where a user would expect to find them.
+
+Each page has a similar layout of a page title followed by its content. I wanted to implement a minimalistic feel in order not to overpower the user with lots of information at once so in instances where there is a lot of information, such as on the recipes page I have displayed the content via cards that show just the relevant information and links. This approach wasn’t suitable in instances such as on the pages that feature just forms or the individual recipe pages so I used block colour to add some styling here. By displaying the forms or recipe information on a background of block colour in-keeps with the overall style of the site, adds some segregation and is more visually appealing whilst displaying the content in a more appropriate manner.
+
+As the site is aimed particularity at families, any design decisions made were done with this audience in mind. I found a colour palette that I thought was appropriate using [ColorHunt](https://colorhunt.co/). The main colour scheme is a combination of light orange (#FFDA77) and orange (#FFA45B) that work well together along with black text. There are instances where I wanted to use a contrasting colour (mainly with buttons) so used a soft cyan (#AEE6E6) and a dark orange/red (#FC6634) in these instances. The Google font Rubik is used throughout as I felt it works well with the colour scheme, looks a bit playful, it’s easy to read and works well for both the logo and general use throughout. Any imagery used is colourful, playful and fits in with the overall theme created. 
+
+![Color Hunt - color palette](readme-docs/screenshots/colorhunt-palette.png)
+
+<!-- ## Features -->
+
+
+<!-- ## Technologies -->
 
 
 ## Testing
@@ -163,3 +177,5 @@ You can clone a repository so that it can be worked on locally in an IDE such as
 6. Press **enter** and the clone will be created in your selected / current working directory (cwd).
 
 Taken from GitHub's documentation on cloning, which can be found [here.](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository#cloning-a-repository-to-github-desktop)
+
+<!-- ## Credits -->
