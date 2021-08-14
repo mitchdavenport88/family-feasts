@@ -62,14 +62,34 @@ As the site owner / admin I want:
     * Each recipe card should act as a link to the recipe’s own page and to it's functions.
 * Individual recipe pages will follow a template, which will be populated with information pulled from the database.
 * Log in / registration forms will not only interact with the database but will grant authorization to add, edit and delete data objects via the site.
-* Logout function. (restricted)
-* A personalised profile page that shows recipes uploaded by the user. (restricted)
-* Add recipe form / page should add new data objects to the database and then display them on the recipes page. (restricted)
-* Edit recipe form / page will edit data that already exists in the database and update the information displayed on the site. (restricted)
-* Recipe deletion should remove the data object from the database, with information no longer able to be viewed by users. This could be a process where confirmation of deletion would be required. (restricted)
+* Logout function (restricted).
+* A personalised profile page that shows recipes uploaded by the user (restricted).
+* Add recipe form / page should add new data objects to the database and then display them on the recipes page (restricted).
+* Edit recipe form / page will edit data that already exists in the database and update the information displayed on the site (restricted).
+* Recipe deletion should remove the data object from the database, with information no longer able to be viewed by users. This could be a process where confirmation of deletion would be required (restricted).
 
-<!-- ### Structure -->
-
+### Structure
+Based on the information gathered during the scope the basic structure of the page will be as follows:
+* Fixed navigation bar at the top of every page, with the Family Feasts logo and links to other pages. Links will alter for registered/unregistered users.
+* Home page with a hero image and some information about us.
+* Recipes page where all recipes will be displayed.
+    * Ability to search and filter results.
+    * Registered users will be able to delete and edit their own recipes from here too.
+    * Each card will link to the individual recipe page.
+* View recipe page will show basic information, an image, a list of ingredients and cooking instructions.
+    * Registered users will also be able to edit and delete their own recipes from here.
+* Login page will be a form that compares the data supplied against data that exists in the database to allow/deny entry.
+    * On success the user will be sent their user profile page.
+* Registration page will be a form that inputs the supplied data into the database for future logins.
+    * On success the user will be sent their user profile page.
+* User profile page will be tailored for the specific user and will show all their uploaded recipes. Once logged in the user will be able to add, edit and delete entries.
+    * Users will be able to delete their account, which will remove their data from the database.
+    * Logout function will be available at this point too.
+* Add recipe page / form will only be accessible by registered users. This form will input the supplied data into the database, and the recipe will then be viewable on the site.
+    * On successful entry the user will be sent to the newly inputted recipe page.
+* Edit recipe page / form will only be accessible by the recipes author or admin. The form will be pre-populated with the recipes existing data and any changes made will overwrite the existing data in the database.
+    * The recipe will then update instantly on the site.
+* Footer with social media links will be at the bottom of every page. 
 
 ### Skeleton
 Initial idea - [sketch](readme-docs/wireframes/initial-wireframe-sketch.jpg)
