@@ -318,16 +318,17 @@ def delete_profile(user):
         flash("you dont have authorization to perform this task!")
         return redirect(url_for("login"))
     # Users can only delete thier own profile
-    if session.get("user") != user:
+    if user == session.get("user"):
+        # Removes all recipes by the user
+        mongo.db.recipes.remove({"author": session.get("user")})
+        mongo.db.users.remove({"username": session.get("user")})
+        flash("profile deleted!")
+        session.pop("user")
+        return redirect(url_for("register"))
+    else:
         flash("you can only delete your own profile!")
         return redirect(url_for("user_profile",
                                 username=session["user"]))
-    else:
-        mongo.db.users.remove({"username": user})
-        session.pop("user")
-        #  Removes all recipes by the user
-        mongo.db.recipes.remove({"author": user})
-        return redirect(url_for("home"))
 
 
 # Add category page
