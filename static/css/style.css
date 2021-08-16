@@ -34,6 +34,7 @@ body {
     background-color: var(--light-orange);
     font-size: 1rem;
     border-bottom: 1px solid var(--orange);
+    min-height: 74px;
 }
 
 .my-logo {
@@ -74,6 +75,11 @@ body {
 /* content */
 .my-container {
     margin-top: 74px;
+}
+
+.my-row {
+    width: 100%;
+    margin: 0;
 }
 
 /* code for sticky footer was found on https://css-tricks.com/couple-takes-sticky-footer/ and edited accordingly */
@@ -411,6 +417,7 @@ body {
     .my-logo {
         margin-left: 1%;
         letter-spacing: 0.1rem;
+        font-size: 1.6rem;
     }
     .my-burger {
         margin-right: 1%;

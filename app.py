@@ -159,6 +159,7 @@ def login():
 def logout():
     if session.get("user"):
         session.pop("user")
+        flash("you've been logged out!")
         return redirect(url_for("login"))
     # Prevents ability to logout if not logged in
     else:
