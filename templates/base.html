@@ -15,11 +15,15 @@
     <!-- css stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     <!-- favicon made on favicon.io -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/favicon.io/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon.io/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon.io/favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="{{ url_for('static', filename='images/favicon.io/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{{ url_for('static', filename='images/favicon.io/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{{ url_for('static', filename='images/favicon.io/favicon-16x16.png') }}">
     <!-- code to stop console error taken from https://medium.com/@aurelien.delogu/401-error-on-a-webmanifest-file-cb9e3678b9f3 -->
-    <link rel="manifest" href="{{ url_for('static', filename='images/favicon.io/site.webmanifest') }}" crossorigin="use-credentials">
+    <link rel="manifest" href="{{ url_for('static', filename='images/favicon.io/site.webmanifest') }}"
+        crossorigin="use-credentials">
     <title>
         {% if page_title %}
             Family Feasts {{ "- " + page_title }}
@@ -54,7 +58,8 @@
                                 <a class="nav-link" href="{{ url_for('add_recipe') }}">add recipe</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('user_profile', username=session['user']) }}">profile</a>
+                                <a class="nav-link"
+                                    href="{{ url_for('user_profile', username=session['user']) }}">profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link link-button" href="{{ url_for('logout') }}">log out</a>
@@ -92,10 +97,11 @@
             {% endblock %}
         </section>
     </div>
-    
+
     <footer id="footer">
         <div class="social-icons">
-            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer"><i class="fab fa-instagram social-link"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noreferrer"><i
+                    class="fab fa-instagram social-link"></i></a>
             <a href="https://www.facebook.com/" target="_blank" rel="noreferrer"><i class="fab fa-facebook-f"></i></a>
             <a href="https://twitter.com/" target="_blank" rel="noreferrer"><i class="fab fa-twitter"></i></a>
             <a href="https://pinterest.com/" target="_blank" rel="noreferrer"><i class="fab fa-pinterest-p"></i></a>

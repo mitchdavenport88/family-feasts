@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% from "_macros.html" import category_card %}
-{% block content %}
 
+{% block content %}
 <div class="container-fluid">
     <h1 class="text-center page-title">add category</h1>
-
     <form class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 my-form" method="POST" action="{{ url_for('manage_categories') }}">
         {{ form.csrf_token }}
         <div class="row">
@@ -24,14 +23,12 @@
     </form>
 
     <h1 class="text-center page-title">manage categories</h1>
-
     <section class="row">
         {% for category in categories %}
             {{ category_card(category) }}
         {% endfor %}
     </section>    
 </div>
-
 {% endblock %}
 
     

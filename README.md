@@ -39,15 +39,13 @@ As the site owner / admin I want:
 * To be able to add new categories and edit and delete existing ones.
 
 ### Scope - functionality
-* The site must have a section where recipes are displayed, for all to see.
+* The site must have a section where all recipes are displayed, for all to see.
 * Present the relevant information on each individual recipe on its own page following a pre-determined template.
-    * This information should be displayed in a visually appealing way.
-    * Information should be clear to understand and follow.
 * Allow users to login or register in order to be able to contribute towards the sites content (add, edit and delete recipes).
 * The user will be able to add, edit and delete recipes once logged in/registered.
     * Methods of data input must be clear and easy to operate.
     * Restrictions will need to be placed on what registered users can see and use verses what unregistered users can see and use.
-    * The site will need to feed relevant information back to the user when required and appropriate. 
+* The site will need to feed relevant information back to the user when required and appropriate. 
 * We want the user to remain engaged throughout use so must be user-friendly and easy to navigate around.
 * Function as expected:
     * Fully responsive on all devices.
@@ -56,17 +54,19 @@ As the site owner / admin I want:
 
 ### Scope - content
 * A home page that tells the user all about Family Feasts and talks about the site’s message in more detail.
-* A recipes page, which the rest of the site will be built around.
-    * All recipes will need to be shown on this page in a visually appealing manner.
+* A recipes page, where all recipes will be displayed.
+    * All recipes shown on this page will have to be done so in a visually appealing manner.
     * Users will want the ability to interact with the page by filtering and searching for results.
     * Each recipe card should act as a link to the recipe’s own page and to it's functions.
 * Individual recipe pages will follow a template, which will be populated with information pulled from the database.
-* Log in / registration forms will not only interact with the database but will grant authorization to add, edit and delete data objects via the site.
-* Logout function (restricted).
+    * This information should be displayed in a visually appealing way.
+    * Information should be clear to understand and follow.
+* Log in / registration forms will grant/deny access to the sites features (adding, editing and deleting data objects).
+    * Logout function.
 * A personalised profile page that shows recipes uploaded by the user (restricted).
 * Add recipe form / page should add new data objects to the database and then display them on the recipes page (restricted).
 * Edit recipe form / page will edit data that already exists in the database and update the information displayed on the site (restricted).
-* Recipe deletion should remove the data object from the database, with information no longer able to be viewed by users. This could be a process where confirmation of deletion would be required (restricted).
+* Recipe deletion should remove the data object from the database, with information no longer able to be viewed by users (restricted).
 
 ### Structure
 Based on the information gathered during the scope the basic structure of the page will be as follows:
@@ -129,8 +129,33 @@ As the site is aimed particularity at families, any design decisions made were d
 
 ![Color Hunt - color palette](readme-docs/screenshots/colorhunt-palette.png)
 
-<!-- ## Features -->
+## Features
+### Page Layout
+* Responsive at all breakpoints. By using a combination of media queries, Bootstrap’s responsive grid and built in flexbox capabilities means the sites layout and contents will adapt to the device it’s being viewed on.
 
+### Navigational
+* Fixed navigation bar so links to any other section of the website are accessible at any point.
+* The logo is always in the top left of the page. This also has a secondary feature as a link back to the home page.
+* Navigation links on screen widths of lg and above are displayed inline at the top right of the page where a user would expect to find them.
+    * Different links will appear based on the user been logged in or not as some functions and pages are restricted.
+    * The log in, register and logout links appear as call-to-action buttons and invert colour when hovered over to encourage interaction.
+    * For the same reason I’ve put a hover class on the navigation links that makes the links orange when hovered over.
+* On screen widths of md and below these links are housed in a dropdown menu, which is toggled on/off via the click of a button. The button features Font Awesome’s icon “fa-bars”, which is associated with this dropdown menu function.
+    * The log in, register and logout call-to-action buttons will now appear as links that appear within the dropdown menu.
+
+### Home
+* A hero image of a family sat at the dinner table fills the majority of the page (83vh) when it first loads. I’ve used a hero image as I believe it sets the tone by giving a professional and modern feel as well as an initial wow factor. I’ve not gone 100vh with the image in this instance as I wanted to imply that there was further content below. 
+* A text overlay box is used to display a tagline of “easy recipes to enjoy together!” and a call-to-action button, which will take the user to the recipes page.
+* The about us section is broken down into three sub-categories; save, share and experiment, each talking about the Family feasts mission. 
+    * They feature call-to-action buttons to engage with the user and guide them to a relevant part of the site based on what they’re reading.
+    * The three sections are responsive and will stack on top of each other as the screen size decreases. 
+* Why cook together? section follows on from the about us section and adds a bit more context to the page. The images are responsive and get hidden on widths of md and below to display the text only across the width of the screen.
+* All buttons on the site will invert colour when hovered, showing the user it is clickable and to get them to engage with it.
+
+### Footer
+* I’ve used icons representing the social links in the footer of every page. Each icon is associated with the intended destination and clicking them will send the user there via a new window/tab. A hover class to match that found on the navigation bar links has been added again to encourage interaction.
+
+<!-- ### Features left to implement -->
 
 <!-- ## Technologies -->
 

@@ -1,51 +1,50 @@
 {% extends "base.html" %}
 {% from "_macros.html" import recipe_card, delete_profile_modal %}
-{% block content %}
 
-    <div class="container-fluid">
-        <h1 class="text-center page-title">{{ username }}'s profile</h1>
-        <div class="d-flex flex-wrap justify-content-center">
-            <a href="{{ url_for('recipes', filter='all') }}" class="btn my-btn m-2">
-                view all recipes
+{% block content %}
+<div class="container-fluid">
+    <h1 class="text-center page-title">{{ username }}'s profile</h1>
+    <div class="d-flex flex-wrap justify-content-center">
+        <a href="{{ url_for('recipes', filter='all') }}" class="btn my-btn m-2">
+            view all recipes
+        </a>
+        <!-- shows add recipe button for users who have submitted before -->
+        {% if user_recipes|length > 0 %}
+            <a href="{{ url_for('add_recipe') }}" class="btn my-btn m-2">
+                add recipe
             </a>
-            <!-- shows add recipe button for users who have submitted before -->
-            {% if user_recipes|length > 0 %}
+        {% endif %}
+        <!-- shows add category button for admin only -->
+        {% if user_details.is_admin %}
+            <a href="{{ url_for('manage_categories') }}" class="btn my-btn m-2">
+                manage categories
+            </a>
+        {% else %}
+            <!-- inserts profile deletion button with confirmation modal for all users other then admin -->
+            {{ delete_profile_modal(username) }}
+        {% endif %}  
+    </div>
+    <!-- my recipes -->
+    <!-- shows users recipes if they've submitted one -->
+    {% if user_recipes|length > 0 %}
+        <h1 class="text-center page-title">my recipes</h1>
+    {% endif %}
+    <div class="row">
+        {% if user_recipes|length > 0 %}
+            {% for recipe in user_recipes %}
+                {{ recipe_card(recipe) }}
+            {% endfor %}
+        {% else %}
+            <!-- shows alternative button and text to users that haven't submitted a recipe -->
+            <h2 class="text-center page-title warning-message">
+                you've not added any recipes yet!
+            </h2>
+            <div class="d-flex flex-wrap justify-content-center">
                 <a href="{{ url_for('add_recipe') }}" class="btn my-btn m-2">
                     add recipe
-                </a>
-            {% endif %}
-            <!-- shows add category button for admin only -->
-            {% if user_details.is_admin %}
-                <a href="{{ url_for('manage_categories') }}" class="btn my-btn m-2">
-                    manage categories
-                </a>
-            {% else %}
-                <!-- inserts profile deletion button with confirmation modal for all users other then admin -->
-                {{ delete_profile_modal(username) }}
-            {% endif %}  
-        </div>
-        <!-- my recipes -->
-        <!-- shows users recipes if they've submitted one -->
-        {% if user_recipes|length > 0 %}
-            <h1 class="text-center page-title">my recipes</h1>
+                </a>     
+            </div>
         {% endif %}
-        <div class="row">
-            {% if user_recipes|length > 0 %}
-                {% for recipe in user_recipes %}
-                    {{ recipe_card(recipe) }}
-                {% endfor %}
-            {% else %}
-                <!-- shows alternative button and text to users that haven't submitted a recipe -->
-                <h2 class="text-center page-title warning-message">
-                    you've not added any recipes yet!
-                </h2>
-                <div class="d-flex flex-wrap justify-content-center">
-                    <a href="{{ url_for('add_recipe') }}" class="btn my-btn m-2">
-                        add recipe
-                    </a>     
-                </div>
-            {% endif %}
-        </div>
     </div>
-
+</div>
 {% endblock %}

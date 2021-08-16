@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,17 +11,24 @@
     <!-- css stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     <!-- favicon made on favicon.io -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/favicon.io/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon.io/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon.io/favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ url_for('static', filename='images/favicon.io/site.webmanifest') }}" crossorigin="use-credentials">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="{{ url_for('static', filename='images/favicon.io/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{{ url_for('static', filename='images/favicon.io/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{{ url_for('static', filename='images/favicon.io/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='images/favicon.io/site.webmanifest') }}"
+        crossorigin="use-credentials">
     <title>Family Feasts - 404 Error</title>
 </head>
+
 <body>
     <section class="error-image">
         <div class="hero-image-overlay">
             <div class="hero-image-content">
-                <h1 class="hero-image-quote">404 page not found</h1>
+                <h1 class="hero-image-quote">
+                    404 page not found
+                </h1>
                 <div class="underline"></div>
                 <h3>{{ error }}</h3>
                 <a href="{{ url_for('home') }}" class="btn my-btn m-2">go back home</a>
@@ -28,4 +36,5 @@
         </div>
     </section>
 </body>
+
 </html>

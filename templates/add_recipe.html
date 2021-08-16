@@ -1,84 +1,88 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+
 {% block content %}
-
-    <h1 class="text-center page-title">add recipe</h1>
-
-    <section class="container-fluid">
-        <form class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 my-form" method="POST" action="{{ url_for('add_recipe') }}">
-            {{ form.csrf_token }}
-            <div class="row">
-                <!-- recipe name -->
-                <div class="col-10 offset-1">
-                    <div class="mb-3">
-                        {{ wtf.form_field(form.recipe_name) }}
-                        <div class="form-text">recipe name can be a maximum of 35 characters.</div>
-                    </div>
+<h1 class="text-center page-title">add recipe</h1>
+<div class="container-fluid">
+    <form class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 my-form" method="POST"
+        action="{{ url_for('add_recipe') }}">
+        {{ form.csrf_token }}
+        <div class="row">
+            <!-- recipe name -->
+            <div class="col-10 offset-1">
+                <div class="mb-3">
+                    {{ wtf.form_field(form.recipe_name) }}
+                    <div class="form-text">recipe name can be a maximum of 35 characters.</div>
                 </div>
             </div>
-            <div class="row">
-                <!-- recipe image (url) -->
-                <div class="col-10 offset-1">
-                    <div class="mb-3">
-                        {{ wtf.form_field(form.recipe_image) }}
-                        <div class="form-text">url link to image must start with http:// or https://</div>
-                    </div> 
+        </div>
+        <div class="row">
+            <!-- recipe image (url) -->
+            <div class="col-10 offset-1">
+                <div class="mb-3">
+                    {{ wtf.form_field(form.recipe_image) }}
+                    <div class="form-text">url link to image must start with http:// or https://</div>
                 </div>
             </div>
-            <div class="row">
-                <!-- category (dropdown) -->
-                <div class="col-10 col-sm-5 offset-1">
-                    <div class="mb-3">
-                        {{ wtf.form_field(form.category_name, class="form-select") }}
-                        <!-- <option value="" selected disabled>select one of the following</option> -->
-                    </div> 
-                </div>
-                <!-- servings (number) -->
-                <div class="col-10 offset-1 col-sm-5 offset-sm-0">
-                    <div class="mb-3">
-                        {{ wtf.form_field(form.servings) }}
-                    </div> 
+        </div>
+        <div class="row">
+            <!-- category (dropdown) -->
+            <div class="col-10 col-sm-5 offset-1">
+                <div class="mb-3">
+                    {{ wtf.form_field(form.category_name, class="form-select") }}
                 </div>
             </div>
-            <div class="row">
-                <!-- prep time (number) -->
-                <div class="col-10 col-sm-5 offset-1">
-                    <div class="mb-3">
-                        {{ wtf.form_field(form.prep_time) }}
-                    </div>
-                </div>
-                <!-- cooking time (number) -->
-                <div class="col-10 offset-1 col-sm-5 offset-sm-0">
-                    <div class="mb-3">
-                        {{ wtf.form_field(form.cook_time) }}
-                    </div>
+            <!-- servings (number) -->
+            <div class="col-10 offset-1 col-sm-5 offset-sm-0">
+                <div class="mb-3">
+                    {{ wtf.form_field(form.servings) }}
                 </div>
             </div>
-            <div class="row">
-                <!-- ingredients (list) -->
-                <div class="col-10 offset-1">
-                    <div class="mb-3">
-                        {{ wtf.form_field(form.ingredients, placeholder="example:\n1 small onion\n2 cloves of garlic") }}
-                        <div class="form-text">note: each ingredient needs to be typed on its own line.</div>                        
-                    </div>
+        </div>
+        <div class="row">
+            <!-- prep time (number) -->
+            <div class="col-10 col-sm-5 offset-1">
+                <div class="mb-3">
+                    {{ wtf.form_field(form.prep_time) }}
                 </div>
             </div>
-            <div class="row">
-                <!-- method (list) -->
-                <div class="col-10 offset-1">
-                    <div class="mb-3">
-                        {{ wtf.form_field(form.recipe_steps, placeholder="example:\nfinely chop the onion and crush the garlic cloves.\nheat the oil in a large frying pan over a medium heat.") }}  
-                        <div class="form-text">note: each step needs to be typed on its own line.</div> 
-                    </div>
-                </div>                    
+            <!-- cooking time (number) -->
+            <div class="col-10 offset-1 col-sm-5 offset-sm-0">
+                <div class="mb-3">
+                    {{ wtf.form_field(form.cook_time) }}
+                </div>
             </div>
-            <!-- buttons -->
-            <div class="d-flex flex-wrap justify-content-center">
-                <a href="{{ url_for('recipes', filter='all') }}" class="btn my-clear-btn m-2">cancel</a>
-                <a href="{{ url_for('add_recipe') }}" class="btn my-clear-btn m-2">clear form</a>
-                <button type="submit" class="btn my-btn m-2">add recipe</button>
+        </div>
+        <div class="row">
+            <!-- ingredients (list) -->
+            <div class="col-10 offset-1">
+                <div class="mb-3">
+                    {{ wtf.form_field(form.ingredients, placeholder="example:\n1 small onion\n2 cloves of garlic") }}
+                    <div class="form-text">note: each ingredient needs to be typed on its own line.</div>
+                </div>
             </div>
-        </form>
-    </section>
-
+        </div>
+        <div class="row">
+            <!-- method (list) -->
+            <div class="col-10 offset-1">
+                <div class="mb-3">
+                    {{ wtf.form_field(form.recipe_steps, placeholder="example:\nfinely chop the onion and crush the garlic cloves.\nheat the oil in a large frying pan over a medium heat.") }}
+                    <div class="form-text">note: each step needs to be typed on its own line.</div>
+                </div>
+            </div>
+        </div>
+        <!-- buttons -->
+        <div class="d-flex flex-wrap justify-content-center">
+            <a href="{{ url_for('recipes', filter='all') }}" class="btn my-clear-btn m-2">
+                cancel
+            </a>
+            <a href="{{ url_for('add_recipe') }}" class="btn my-clear-btn m-2">
+                clear form
+            </a>
+            <button type="submit" class="btn my-btn m-2">
+                add recipe
+            </button>
+        </div>
+    </form>
+</div>
 {% endblock %}

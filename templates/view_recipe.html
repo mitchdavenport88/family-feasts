@@ -1,74 +1,74 @@
 {% extends "base.html" %}
 {% from "_macros.html" import delete_recipe_modal %}
-{% block content %}
 
-    <div class="container-fluid">
-        <h1 class="text-center page-title">{{ recipe.recipe_name }}</h1>
-        <div class="d-flex flex-wrap justify-content-center">
-            <a href="{{ url_for('recipes', filter='all') }}" class="btn my-btn m-2">
-                back to recipes
+{% block content %}
+<div class="container-fluid">
+    <h1 class="text-center page-title">{{ recipe.recipe_name }}</h1>
+    <div class="d-flex flex-wrap justify-content-center">
+        <a href="{{ url_for('recipes', filter='all') }}" class="btn my-btn m-2">
+            back to recipes
+        </a>
+        {% if session.user|lower == recipe.author|lower or user_details.is_admin %}
+            <a href="{{ url_for('edit_recipe', id=recipe._id) }}" class="btn my-btn m-2">
+                edit recipe
             </a>
-            {% if session.user|lower == recipe.author|lower or user_details.is_admin %}
-                <a href="{{ url_for('edit_recipe', id=recipe._id) }}" class="btn my-btn m-2">
-                    edit recipe
-                </a>
-                <!-- inserts recipe deletion button with confirmation modal -->
-                {{ delete_recipe_modal(recipe) }}
-            {% endif %}
-        </div>
-        <div class="row recipe-info-row">
-            <div class="col-12 col-md-8 offset-md-2 recipe-info-card">
-                <div class="row recipe-info-card-row">
-                    <div class="col-12 col-md-8 p-0">
-                        <img class="recipe-info-pic" src="{{ recipe.recipe_image }}" alt="{{ recipe.recipe_name }}">
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <div class="row" style="height: 100%;">
-                            <div class="col-6 col-md-12 recipe-info-box">
-                                <p>prep time: {{ recipe.prep_time }} mins</p>
-                            </div>
-                            <div class="col-6 col-md-12 recipe-info-box">
-                                <p>cook time: {{ recipe.cook_time }} mins</p>
-                            </div>
-                            <div class="col col-md-12 recipe-info-box">
-                                <p>serves: {{ recipe.servings }}</p>
-                            </div>
-                            <div class="col col-md-12 recipe-info-box">
-                                <p>{{ recipe.category_name }}</p>
-                            </div>
+            <!-- inserts recipe deletion button with confirmation modal -->
+            {{ delete_recipe_modal(recipe) }}
+        {% endif %}
+    </div>
+    <div class="row recipe-info-row">
+        <div class="col-12 col-md-8 offset-md-2 recipe-info-card">
+            <div class="row recipe-info-card-row">
+                <div class="col-12 col-md-8 p-0">
+                    <img class="recipe-info-pic" src="{{ recipe.recipe_image }}" 
+                        alt="{{ recipe.recipe_name }}">
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="row" style="height: 100%;">
+                        <div class="col-6 col-md-12 recipe-info-box">
+                            <p>prep time: {{ recipe.prep_time }} mins</p>
+                        </div>
+                        <div class="col-6 col-md-12 recipe-info-box">
+                            <p>cook time: {{ recipe.cook_time }} mins</p>
+                        </div>
+                        <div class="col col-md-12 recipe-info-box">
+                            <p>serves: {{ recipe.servings }}</p>
+                        </div>
+                        <div class="col col-md-12 recipe-info-box">
+                            <p>{{ recipe.category_name }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-6 ingredients-container">
-                <h4 class="text-center">ingredients</h4>
-                <div class="underline"></div>
-                <ul>
-                    {% for ingredient in recipe.ingredients %}
-                        <li>{{ ingredient }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col-12 col-md-6 method-container">
-                <h4 class="text-center">method</h4>
-                <div class="underline"></div>
-                <ol>
-                    {% for step in recipe.recipe_steps %}
-                        <li>{{ step }}</li>
-                    {% endfor %}
-                </ol>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-6 ingredients-container">
+            <h4 class="text-center">ingredients</h4>
+            <div class="underline"></div>
+            <ul>
+                {% for ingredient in recipe.ingredients %}
+                    <li>{{ ingredient }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-12 col-md-6 method-container">
+            <h4 class="text-center">method</h4>
+            <div class="underline"></div>
+            <ol>
+                {% for step in recipe.recipe_steps %}
+                    <li>{{ step }}</li>
+                {% endfor %}
+            </ol>
         </div>
     </div>
-    <div class="container d-flex justify-content-center">
-        <button id="scroll-top-button" type="button" class="btn my-btn m-2" onclick="window.scrollTo(0, 0);">
-            back to top
-        </button>
-    </div>
-
+</div>
+<div class="container d-flex justify-content-center">
+    <button id="scroll-top-button" type="button" class="btn my-btn m-2" onclick="window.scrollTo(0, 0);">
+        back to top
+    </button>
+</div>
 {% endblock %}

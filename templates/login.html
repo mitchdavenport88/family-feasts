@@ -1,42 +1,40 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+
 {% block content %}
-
-    <h1 class="text-center page-title">log in</h1>
-
-    <section class="container-fluid">
-        <form class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 my-form" method="POST" action="{{ url_for('login') }}">
-            {{ form.csrf_token }}
-            <!-- username -->
-            <div class="row">
-                <div class="col-10 offset-1">
-                    <div class="mb-3">
-                        {{ wtf.form_field(form.username) }}
-                    </div>
+<h1 class="text-center page-title">log in</h1>
+<div class="container-fluid">
+    <form class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 my-form" method="POST" action="{{ url_for('login') }}">
+        {{ form.csrf_token }}
+        <!-- username -->
+        <div class="row">
+            <div class="col-10 offset-1">
+                <div class="mb-3">
+                    {{ wtf.form_field(form.username) }}
                 </div>
             </div>
-            <!-- password -->
-            <div class="row">
-                <div class="col-10 offset-1">
-                    <div class="mb-3">
-                        {{ wtf.form_field(form.password) }}
-                    </div>
+        </div>
+        <!-- password -->
+        <div class="row">
+            <div class="col-10 offset-1">
+                <div class="mb-3">
+                    {{ wtf.form_field(form.password) }}
                 </div>
             </div>
-            <!-- buttons -->
-            <div class="d-flex justify-content-center">
-                <a href="{{ url_for('home') }}" class="btn my-clear-btn m-2">cancel</a>
-                <button type="submit" class="btn my-btn m-2">log in</button>
+        </div>
+        <!-- buttons -->
+        <div class="d-flex justify-content-center">
+            <a href="{{ url_for('home') }}" class="btn my-clear-btn m-2">cancel</a>
+            <button type="submit" class="btn my-btn m-2">log in</button>
+        </div>
+        <!-- link for registration -->
+        <div class="row">
+            <div class="col-10 offset-1 text-center">
+                <p class="form-link">not registered?
+                    <a href="{{ url_for('register') }}"> register here.</a>
+                </p>
             </div>
-            <!-- link for registration -->
-            <div class="row">
-                <div class="col-10 offset-1 text-center">
-                    <p class="form-link">not registered?
-                        <a href="{{ url_for('register') }}"> register here.</a>
-                    </p>
-                </div>
-            </div>
-        </form>
-    </section>
-
+        </div>
+    </form>
+</div>
 {% endblock %}

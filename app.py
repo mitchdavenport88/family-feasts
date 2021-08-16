@@ -103,8 +103,8 @@ def register():
             if existing_user:
                 flash("the username you've chosen is taken!")
                 return redirect(url_for("register"))
-            elif (request.form.get("password")
-                  == request.form.get("confirm_password")):
+            elif (request.form.get("password") ==
+                  request.form.get("confirm_password")):
                 register = {
                     "username": request.form.get("username").lower(),
                     "password": generate_password_hash(

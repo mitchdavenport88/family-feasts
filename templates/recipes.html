@@ -1,59 +1,57 @@
 {% extends "base.html" %}
 {% from "_macros.html" import recipe_card %}
+
 {% block content %}
-    
-    <div class="container-fluid">
-        <!-- page title - filter name added dynamically -->
-        {% if filter == "search" %}
-            <!-- this heading appears only when the search function is used -->
-            <h1 class="text-center page-title">search results for <i>'{{ search }}'</i></h1>
-        {% else %}
-            <h1 class="text-center page-title">{{ filter }} recipes</h1>
-        {% endif %}     
-
-        <!-- search bar -->
-        <div class="row">
-            <form class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3" method="POST" action="{{ url_for('search') }}">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="search" name="search" value="{{ search }}"
-                        placeholder="search all recipes by name or ingredient" required maxlength="25"
-                        title="search can be no more then 25 characters long">
-                    <button class="btn my-btn" type="submit"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
-        </div>
-
-        <!-- filter buttons - added dynamically -->
-        <div class="d-flex flex-wrap justify-content-center">
-            <a href="{{ url_for('recipes', filter='all') }}" class="btn my-btn m-2">all recipes</a>
-            {% for category in categories %}
-                <a href="{{ url_for('recipes', filter=category) }}" class="btn my-btn m-2">{{ category }}</a>
+<div class="container-fluid">
+    <!-- page title - filter name added dynamically -->
+    {% if filter == "search" %}
+        <!-- this heading appears only when the search function is used -->
+        <h1 class="text-center page-title">search results for <i>'{{ search }}'</i></h1>
+    {% else %}
+        <h1 class="text-center page-title">{{ filter }} recipes</h1>
+    {% endif %}     
+    <!-- search bar -->
+    <div class="row">
+        <form class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3" method="POST" action="{{ url_for('search') }}">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="search" name="search" value="{{ search }}"
+                    placeholder="search all recipes by name or ingredient" required maxlength="25"
+                    title="search can be no more then 25 characters long">
+                <button class="btn my-btn" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+    <!-- filter buttons - added dynamically -->
+    <div class="d-flex flex-wrap justify-content-center">
+        <a href="{{ url_for('recipes', filter='all') }}" class="btn my-btn m-2">all recipes</a>
+        {% for category in categories %}
+            <a href="{{ url_for('recipes', filter=category) }}" class="btn my-btn m-2">
+                {{ category }}
+            </a>
+        {% endfor %}
+    </div>
+    <!-- recipe cards - depends on filter -->
+    <div class="row">
+        {% if recipes|length > 0 %} 
+            {% for recipe in recipes %}
+                {{ recipe_card(recipe, user_details) }}         
             {% endfor %}
-        </div>
-
-        <!-- recipe cards - depends on filter -->
-        <div class="row">
-            {% if recipes|length > 0 %} 
-                {% for recipe in recipes %}
-                    {{ recipe_card(recipe, user_details) }}         
-                {% endfor %}
+        {% else %}
+            {% if filter == "search" %}
+                <!-- heading appears only when the search function is used and length = 0 (no results) -->
+                <h2 class="text-center page-title warning-message">no recipes containing <i>'{{ search }}'</i></h2>
             {% else %}
-                {% if filter == "search" %}
-                    <!-- heading appears only when the search function is used and length = 0 (no results) -->
-                    <h2 class="text-center page-title warning-message">no recipes containing <i>'{{ search }}'</i></h2>
-                {% else %}
-                    <!-- this heading appears when recipe list length = 0 (no results) -->
-                    <h2 class="text-center page-title warning-message">no recipes for this category yet!</h2>
-                    {% if session.get("user") %}
-                        <div class="d-flex flex-wrap justify-content-center">
-                            <a href="{{ url_for('add_recipe') }}" class="btn my-btn m-2">
-                                add recipe
-                            </a>     
-                        </div>
-                    {% endif %}
+                <!-- this heading appears when recipe list length = 0 (no results) -->
+                <h2 class="text-center page-title warning-message">no recipes for this category yet!</h2>
+                {% if session.get("user") %}
+                    <div class="d-flex flex-wrap justify-content-center">
+                        <a href="{{ url_for('add_recipe') }}" class="btn my-btn m-2">
+                            add recipe
+                        </a>     
+                    </div>
                 {% endif %}
             {% endif %}
-        </div>
+        {% endif %}
     </div>
-
+</div>
 {% endblock %}
