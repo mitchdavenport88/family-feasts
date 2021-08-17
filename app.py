@@ -314,21 +314,22 @@ def user_profile(username):
 @app.route("/delete_profile/<user>")
 def delete_profile(user):
     # Prevents unauthorized access to page
-    if not session.get("user"):
+    if "user" not in session:
         flash("you dont have authorization to perform this task!")
         return redirect(url_for("login"))
     # Users can only delete thier own profile
-    if user == session.get("user"):
-        # Removes all recipes by the user
-        mongo.db.recipes.remove({"author": session.get("user")})
-        mongo.db.users.remove({"username": session.get("user")})
-        flash("profile deleted!")
-        session.pop("user")
-        return redirect(url_for("register"))
     else:
-        flash("you can only delete your own profile!")
-        return redirect(url_for("user_profile",
-                                username=session["user"]))
+        if user == session["user"]:
+            # Removes all recipes by the user
+            mongo.db.recipes.remove({"author": session["user"]})
+            mongo.db.users.remove({"username": session["user"]})
+            session.pop("user")
+            flash("profile deleted!")
+            return redirect(url_for("register"))
+        else:
+            flash("you can only delete your own profile!")
+            return redirect(url_for("user_profile",
+                                    username=session["user"]))
 
 
 # Add category page
@@ -396,5 +397,4 @@ def internal_server_error(e):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            # Change to debug=False before submission
-            debug=True)
+            debug=False)
