@@ -47,7 +47,7 @@ These are the steps I went through testing my website and it's functionality.
 2. Clicked on all buttons checking that they do what they should.
 3. Checked when numerous buttons are used that they are responsive and will stack on top of each other. They should remain centrally aligned to their containers as they decrease in width.
 
-Page and section headings:
+**Page and section headings:**
 1. Checked that page/section title's are always aligned centrally and positioned correctly.
 
 **Home:**
@@ -72,10 +72,10 @@ Page and section headings:
     * Checked that an orange submit button is built into the right hand side of the input field and loads showing an icon of a magnifying glass. Button has the same hover class as all other buttons.
 3. Test search function:
     * Text input is required to search.
-    * Searched for "egg".
+    * Searched for egg.
         * Title changed to “search results for egg”.
         * All recipe cards for the recipes that have egg in their titles or ingredients list are now shown below.
-    * Searched for something that doesn’t exist – "swede":
+    * Searched for something that doesn’t exist – swede:
         * Title changed to “search results for swede”.
         * No cards appear. A message stating "no recipes containing ‘swede’" appears where the cards would otherwise.
 4. Buttons used to filter recipes shown are dynamically generated using information from the categories section in the database. Checked that all categories in the database have a button.
@@ -98,7 +98,7 @@ Page and section headings:
 1. Checked that the correct recipe title is displayed at the top of the page.
 2. The appropriate buttons based on the user’s registration status appear in a row underneath the title.
     * "back to recipes" button appears for every user and returns the user to the recipes page.
-    * Additional buttons "delete recipe" and "edit recipe" should show here if the recipe was uploaded by the user currently logged in or if they have admin rights.
+    * Additional buttons: "delete recipe" and "edit recipe" should show here if the recipe was uploaded by the user currently logged in or if they have admin rights.
 3. Checked that the correct information is pulled from the database and displayed as expected with the image, times, servings and category name displayed in a table while the ingredients and method are listed below side by side.
 4. On screen widths of below 768px the table adapts to smaller screen sizes now displaying the times, servings and category name underneath the image. The lists are still below the table but now positioned one on top of another.
 5. Checked that the "back to top" button has a matching hover class and scrolls the page back to the top on click.
@@ -106,8 +106,8 @@ Page and section headings:
 **Register:**
 1. Checked the number of input fields, 3 in total: username, password and confirm password. Each having a relevant label and input instructions where necessary. 
 2. Tested the buttons and link:
-    * Pressed cancel, which takes me back to the home page.
-    * Pressed register to try and send an empty form. Input required error message appears as it should.
+    * Pressed "cancel", which takes me back to the home page.
+    * Pressed "register" to try and send an empty form. Input required error message appears as it should.
     * Clicked the log in link, which took me to the login page.
 3. Checked that if a username already exists or the passwords dont match that the relevant flash message appears.
 4. Tested that the form validated the inputted data correctly when the criteria from step 3 is met. The form will then only send once the following conditions are met:
@@ -116,45 +116,41 @@ Page and section headings:
     * Passwords should also be between 5 and 20 characters long and are also required.
         * Checked error message appears under the input field if criteria isn't met.
 5. On successful completion of the form I'm directed to my newly created user profile page and a flash message displays “registration complete!”
-6. Once registered and logged in this page is unaccessable. If I attempt to access this page via the URL then I should get redirected back to my user profile page and a flash message reading “you’re already registered” appears.
 
 **Log in:**
 1. Checked the number of input fields, 2 in total: username and password. Each having a relevant label.
 2. Tested the buttons and link:
-    * Pressed cancel, which takes me back to the home page.
-    * Pressed log in to try and send an empty form. Input required error message appears as it should.
+    * Pressed "cancel", which takes me back to the home page.
+    * Pressed "log in" to try and send an empty form. Input required error message appears as it should.
     * Clicked the register here link, which took me to the register page.
 3. Tested that the form validated the inputted data correctly, the criteria is the same as that in the registration form. The form will only send if all the conditions are met.
     * Checked error message appears under the input field if criteria isn't met.
 4. On successful completion of the form the data is cross-referenced against data in the database:
-    * If neither field match anything in the database then a flash message stating "incorrect username or password entered".
+    * If neither field match anything in the database then a flash message stating "incorrect username or password entered" appears.
     * On successful completion of the form I'm directed to my existing user profile page.
-5. Once logged in this page is unaccessable. If I attempt to access this page via the URL then I should get redirected back to my user profile page and a flash message reading “you’re already logged in!” appears.
 
 **Log out:**
 1. When logged in the logout button should be located at the top right of the screen in the navigation bar. On screen widths below 992px the button becomes a link, which is found in the dropdown menu.
 2. When the button or link is clicked I'm logged out, I get redirected to the login page and a flash message appears reading “you’ve been logged out!”
 3. My session cookie should have been removed so I should no longer have access to any unauthorized content:
     * Tried to access the add recipe page via the URL. I get redirected to the login page and the flash message reads “you need to be logged in to perform this task!”
-4. This feature is accessable only if you are logged in. If I attempt to access this via the URL then I should get redirected to the login page and a flash message reading “you need to be logged in to perform this task!”
 
 **User profile:**
 1. Checked that the user’s username is displayed at the top of the page.
 2. Seen that the “view all recipes”, “add recipe” and “delete profile” buttons are located underneath the title.
     * Checked that when the user has admin rights the “delete profile” button becomes the “manage categories” button.
 3. If the registered user has previously uploaded any recipes then:
-    * Checked that recipe cards display recipes uploaded by that user only under the heading of my recipes.
+    * Checked that recipe cards display recipes uploaded by that user only under the heading of "my recipes".
     * Check the cards will have the appropriate buttons to take any further action.
-4. If no recipes have been created by the registered user then a flash message to say “you’ve not added any recipes yet!” appears and a call-to-action button appears to add a recipe.
-5. Each users profile is only accessible to them. If I try to access this page via the URL then I should get redirected to either the login page or my user profile page told via a flash message “you don’t have authorization to access this page!”
+4. If no recipes have been created by the registered user then a message to say “you’ve not added any recipes yet!” appears and a call-to-action button appears to add a recipe.
 
 **Add recipe:**
 1. Checked the number of input fields, 8 in total: recipe name, recipe image, category, servings, prep time, cook time, ingredients and method.
     * Each have a relevant label and input instructions were necessary.
 2. Tested the buttons:
-    * Pressed cancel - takes me to the recipes page.
-    * Pressed clear form – reloads the page.
-    * Pressed add recipe to try and send an empty form. Input required error message appears.
+    * Pressed "cancel" - takes me to the recipes page.
+    * Pressed "clear form" – reloads the page.
+    * Pressed "add recipe" to try and send an empty form. Input required error message appears.
 3. Tested that the form validated the inputted data correctly. The form will then only send if all fields are filled in and the following conditions are met:
     * Recipe name is no longer than 35 characters long. 
     * Recipe image is an active URL link.
@@ -162,19 +158,17 @@ Page and section headings:
     * Serving is an integer between 1 and 100.
     * Timings are an integer between 0 and 999.
     * Ingredients and method are required.
-        * Error messages will appear under the input fields if requirements aren't met.
+        * Error messages appear under the input fields if requirements aren't met.
 4. On successful completion of the form I get redirected to the newly created recipe page, which will show the recipe I’ve just added.
-5. This page is only accessable to registered users when they’re logged in. If I attempt to access this page via the URL whilst logged out then I should get redirected back to the login page and a flash message reading “you need to be logged in to perform this task!” appears.
 
 **Edit recipe:**
-1. The form is the same as that found on the add recipe page but this time all text fields will be pre-populated with the data of the recipe you’re editing.
+1. Checked the form is the same as that found on the add recipe page and pre-populated with the data of the recipe I'm editing.
 2. Tested the buttons:
-    * Pressed cancel - takes me to the recipes page.
-    * Pressed update recipe – the recipes page will load with a flash message of “your recipe has been updated!”
+    * Pressed "cancel" - takes me to the recipes page.
+    * Pressed "update recipe" – the recipe page will load with a flash message of “your recipe has been updated!”
     * Pressed delete recipe – deletion modal pops up. 
 3. Tested that the form validates the data inputted correctly, the criteria is the same as the add recipe form. All fields are required and the form will only send if all conditions are met.
-4. On successful completion of the form I get redirected to the recipes page, which will show the updated recipe information.
-5. This page is only accessable to the registered user whose recipe it is or a user that has admin rights. If I attempt to access this page via the URL otherwise then I should get redirected back to either the login page or user profile blocking any unauthorized editing.
+4. On successful completion of the form I get redirected to the recipes page, which will show the updated recipe information and a flash message states that "recipe has been updated".
 
 **Manage categories:**
 1. Checked that there is only one input field; category name. It should have the relevant label and input instructions.
@@ -192,10 +186,9 @@ Page and section headings:
     * In three columns on screen widths between 992px and 1200px.
     * In two columns on screen widths between 768px and 992px.
     * In one column on screen widths below 768px.
-8. This page is only accessable to users that have admin rights (is_admin: True) set up in the database. If I try to access this page via the URL logged out or as a normal registered user then I should get redirected to either the login page or my user profile page told via a flash message “you don’t have authorization to access this page!”
 
 **Delete functions:**
-1. Checked that all deletion buttons prompt the “are you sure” modal to appear to proceed with the deletion.
+1. Checked that all deletion buttons prompt the “are you sure...” modal to appear to proceed with the deletion.
     * The close button closes the modal with no action taken.
     * The delete button triggers the deletion process.
 2. Deleting a recipe:
@@ -212,3 +205,26 @@ Page and section headings:
     * On successful deletion the manage categories page reloads and a flash message saying “the category has been deleted!” appears.
     * Checked that the category no longer appears on the recipes page (as a button) or in the dropdown menu on either the edit/add recipe forms.
     * Checked that this action can only be done by someone with admin rights.
+
+### Defensive design / "brute forcing"
+I put measures in place in my app.py to stop instances of certain types of user being able to access certain features, run certain functions or access pages (sometimes known as brute forcing). Below shows a table illustrating the tests I did to check the accesses and restrictions I put in place work based on a user’s login/registration status or admin rights. The table indicates how the site responds in these instances.
+
+![defensive design testing table](readme-docs/screenshots/access-test-table.jpg)
+
+## Responsiveness
+Whilst building my site I have been checking my progress and testing any changes made using Chrome DevTools at different breakpoints. I try to push my work to GitHub as often as possible so I can physically see the live site on either my desktop or iPhone via Heroku. I do this at varying stages of the build and especially when new features get added, as I find physically seeing something more beneficial than a projection.
+
+I have physically tested my site on my iPhone 6 using both Safari and Chrome. I have tested for responsiveness on other devices using DevTools along with the Responsive Design Mode on Firefox. Using these tools I have tested on numerous mobile devices such as the Moto G4, Galaxy X9 and the iPhone range as well as numerous tablet devices in both landscape and portrait views.
+
+![recipe as seen on an iPad](readme-docs/screenshots/recipe-ipad.jpg)
+
+## Browser compatibility
+I have physically tested my website by completing my manual testing plan on the following browsers and devices:
+* Chrome (desktop and iPhone).
+* Firefox (desktop).
+* Microsoft Edge (desktop).
+* Safari (iPhone).
+
+I also tested compatibility at varying screen sizes to test the responsiveness on each Browser using Chrome DevTools along with the Responsive Design Mode on Firefox or the Inspect tool on Microsoft Edge.
+
+![recipe as seen on Microsoft Edge](readme-docs/screenshots/recipe-as-seen-on-msedge.jpg)
