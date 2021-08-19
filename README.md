@@ -165,8 +165,28 @@ I’ve used a document-based database within MongoDB to store my data as shown i
 
 ![Database schema](readme-docs/screenshots/db-categories.jpg)
 
-<!-- ## Technologies -->
-
+## Technologies
+* HTML.
+* CSS.
+* JavaScript.
+* Python.
+* Flask framework with external libraries.
+* Gitpod (IDE).
+* Git and GitHub. Used for version control and hosting my repository.
+* [Heroku.](https://id.heroku.com/) Used to host my site.
+* [MongoDB.](https://www.mongodb.com/) Database used to store data.
+* [Font Awesome.](https://fontawesome.com/) Adds icons throughout the site to increase UX.
+* [Bootstrap 5.](https://getbootstrap.com/) Grid layout, responsive design and basic styling.
+* [Favicon.io.](https://favicon.io/) Created favicon's, which are visible in browser tabs and the bookmarks bar.
+* [Google fonts.](https://fonts.google.com/specimen/Rubik) Rubik was imported and used throughout.
+* [Balsamiq.](https://balsamiq.com/) Program used for drawing the wireframes.
+* [RandomKeygen.](https://randomkeygen.com/) Secure password and keygen generator used for secret key.
+* [Am I responsive?](http://ami.responsivedesign.is/) Gives a visual representation of how the website looks on different devices. Also used to produce the mock-up shown above.
+* [TinyPNG.](https://tinypng.com/) Reduces file size of the image files used.
+* [AutoPrefixer.](https://autoprefixer.github.io/) Adds vendor prefixes to CSS code for use on additional browsers.
+* W3C [HTML](https://validator.w3.org/) & [CSS](https://jigsaw.w3.org/css-validator/) validators.
+* [JSHint.](https://jshint.com/) JavaScript validator.
+* [PEP8 online.](http://pep8online.com/) Checks python code meets PEP8 requirements.
 
 ## Testing
 Separate testing document can be found here - [testing documentation.](TESTING.md)
@@ -208,6 +228,8 @@ You can clone a repository so that it can be worked on locally in an IDE such as
 4. Open your local IDE and in the terminal navigate to the working directory of where you wish to insert the cloned directory.
 5. Type `git clone` followed by the link you copied in step 3 into the terminal, this will look something like this: `git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY`
 6. Press **enter** and the clone will be created in your selected / current working directory (cwd).
+
+You will need to reinstall all the dependencies used, you can do this by running the following `pip3 install -r requirements.txt` in the terminal. A new `env.py` file will also have to be created to include all the variables used when flask is initially setting up. These variables are also used in the **Config Vars** section when deployed to Heroku.
 
 Taken from GitHub's documentation on cloning, which can be found [here.](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository#cloning-a-repository-to-github-desktop)
 
