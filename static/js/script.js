@@ -1,5 +1,5 @@
 // Code found on https://www.w3schools.com/howto/howto_js_media_queries.asp and edited accordingly
-/* Changes register / login / logout links to buttons depending on breakpoint */
+/** Checks page width and changes register / login / logout links to buttons depending on breakpoint */
 function linksToButton(maxScreenWidth) {
     const buttonsToChange = document.getElementsByClassName('link-button');
     if (maxScreenWidth.matches) {

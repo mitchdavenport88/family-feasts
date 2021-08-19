@@ -1,7 +1,10 @@
+# Pretty Printed Intro to Flask-WTF series (5 videos)
+# (https://www.youtube.com/watch?v=vzaXBm-ZVOQ)
 from flask_wtf import FlaskForm
 from wtforms import (
     StringField, PasswordField, IntegerField, TextAreaField, SelectField)
 from wtforms.validators import InputRequired, Length, NumberRange
+# Additional validators found on https://pypi.org/project/wtforms-validators/
 from wtforms_validators import AlphaNumeric, ActiveUrl
 
 
