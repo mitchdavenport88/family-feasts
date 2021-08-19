@@ -141,12 +141,12 @@ These are the steps I went through testing my website and it's functionality.
     * Checked that when the user has admin rights the “delete profile” button becomes the “manage categories” button.
 3. If the registered user has previously uploaded any recipes then:
     * Checked that recipe cards display recipes uploaded by that user only under the heading of "my recipes".
-    * Check the cards will have the appropriate buttons to take any further action.
-4. If no recipes have been created by the registered user then a message to say “you’ve not added any recipes yet!” appears and a call-to-action button appears to add a recipe.
+    * Check the cards all have the appropriate buttons to take any further action.
+4. If no recipes have been created by the registered user then a message to say “you’ve not added any recipes yet!” appears. A call-to-action button also appears in order to add a recipe.
 
 **Add recipe:**
 1. Checked the number of input fields, 8 in total: recipe name, recipe image, category, servings, prep time, cook time, ingredients and method.
-    * Each have a relevant label and input instructions were necessary.
+    * Each have a relevant label and input instructions where necessary.
 2. Tested the buttons:
     * Pressed "cancel" - takes me to the recipes page.
     * Pressed "clear form" – reloads the page.

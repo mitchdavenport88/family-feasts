@@ -130,7 +130,7 @@ As the site is aimed particularity at families, any design decisions made were d
 ![Color Hunt - color palette](readme-docs/screenshots/colorhunt-palette.png)
 
 ## Features
-### Page Layout
+<!-- ### Page Layout
 * Responsive at all breakpoints. By using a combination of media queries, Bootstrap’s responsive grid and built in flexbox capabilities means the sites layout and contents will adapt to the device it’s being viewed on.
 
 ### Navigational
@@ -153,9 +153,17 @@ As the site is aimed particularity at families, any design decisions made were d
 * All buttons on the site will invert colour when hovered, showing the user it is clickable and to get them to engage with it.
 
 ### Footer
-* I’ve used icons representing the social media links in the footer of every page. Each icon is associated with the intended destination and clicking them will send the user there via a new window/tab. A hover class to match that found on the navigation bar links has been added again to encourage interaction.
+* I’ve used icons representing the social media links in the footer of every page. Each icon is associated with the intended destination and clicking them will send the user there via a new window/tab. A hover class to match that found on the navigation bar links has been added again to encourage interaction. -->
 
 <!-- ### Features left to implement -->
+
+## Database design
+I’ve used a document-based database within MongoDB to store my data as shown in the course content. After assessing the needs of my site I decided that a database containing three collections would be suitable. The schema of my database is shown below.
+* **Recipes:** Holds all data on the recipes, this data is pulled by the site as and when required to display recipes. Users are able to add to the collection, edit data that exists in the collection and delete data from the collection in the form of recipes.
+* **Categories:** Holds the recipe category names that are used throughout the site and is read in instances such as when dynamically adding buttons on the recipes page and selectable options in the dropdown menu’s on forms. Adding and deleting data to this collection is only allowed by users with is_admin rights.
+* **Users:** Holds data regarding the user. Data in this collection will be read when logging in, created whilst registering and can be deleted if necessary. Data stored within this collection will also aid in the controlling of admin/user privileges. 
+
+![Database schema](readme-docs/screenshots/db-categories.jpg)
 
 <!-- ## Technologies -->
 
