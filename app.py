@@ -457,7 +457,7 @@ def delete_category(id):
         return redirect(url_for("manage_categories"))
 
 
-# Code for error pages was found here and was edited accordingly
+# Code for error pages found here and was edited accordingly
 # https://www.youtube.com/watch?v=3O4ZmH5aolg
 @app.errorhandler(404)
 def page_not_found(e):
@@ -466,7 +466,7 @@ def page_not_found(e):
                            error=e), 404
 
 
-# Code for error pages was found here and was edited accordingly
+# Code for error pages found here and was edited accordingly
 # https://www.youtube.com/watch?v=3O4ZmH5aolg
 @app.errorhandler(500)
 def internal_server_error(e):
