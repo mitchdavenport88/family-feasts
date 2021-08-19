@@ -233,4 +233,42 @@ You will need to reinstall all the dependencies used, you can do this by running
 
 Taken from GitHub's documentation on cloning, which can be found [here.](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository#cloning-a-repository-to-github-desktop)
 
-<!-- ## Credits -->
+## Credits
+### Code
+* Media queries with JavaScript code used to turn links into call-to-action buttons was [found here.](https://www.w3schools.com/howto/howto_js_media_queries.asp)
+* Code to make sticky footer was found on [css-tricks.com](https://css-tricks.com/couple-takes-sticky-footer/) and edited accordingly.
+* I learned about using macros to reuse code blocks by watching the following:
+    * [teclado.](https://www.youtube.com/watch?app=desktop&v=q9na89PgzGk&t=357s)
+    * [Pretty Printed.](https://www.youtube.com/watch?app=desktop&v=J9O0v-iM0TE)
+* I learned the basics of WTForms by watching [Pretty Printed's Intro to Flask-WTF series (5 videos).](https://www.youtube.com/watch?v=vzaXBm-ZVOQ)
+* This [Stack Overflow post](https://stackoverflow.com/questions/28133859/how-to-populate-wtform-select-field-using-mongokit-pymongo) helped me apply the options and values found in my dropdown menu's using WTForms.
+* This [Stack Overflow post](https://stackoverflow.com/questions/12099741/how-do-you-set-a-default-value-for-a-wtforms-selectfield) helped me pre-populate the textarea's and dropdown menu's using WTForms when editing a recipe.
+* I found out about the additional WTForm validators: ActiveURL and AlphaNumeric [here.](https://pypi.org/project/wtforms-validators/)
+* I found out about the python splitlines method [here.](https://www.w3schools.com/python/ref_string_splitlines.asp)
+* I resolved the console error caused by favicon by reading [this article.](https://medium.com/@aurelien.delogu/401-error-on-a-webmanifest-file-cb9e3678b9f3)
+* Code to make the "back to top" button scroll up was from [geeksforgeeks.org](https://www.geeksforgeeks.org/scroll-to-the-top-of-the-page-using-javascript-jquery/#:~:text=The%20scrollTo()%20method%20of,the%20topmost%20and%20leftmost%20point.) and edited accordingly.
+* I made the 404 and 500 error pages by following a walkthrough by [Codemy.com](https://www.youtube.com/watch?app=desktop&v=3O4ZmH5aolg). I made changes where I saw fit to suit my requirements and also added to the code.
+* [W3schools,](https://www.w3schools.com/) [Stack Overflow](https://stackoverflow.com/) & [MDN.](https://developer.mozilla.org/en-US/) For general coding problem solving.
+
+### Content
+* Site layout was inspired by this - [startbootstrap theme.](https://startbootstrap.com/theme/landing-page)
+* The writing in the "why cook together" section was taken from this [HelloFresh blog post](https://blog.hellofresh.com/cooking-together-5-reasons/) and edited accordingly to suit.
+* Home / landing page hero image - [Jimmy Dean via Unsplash.](https://unsplash.com/photos/_4ndmFMFU2o)
+* Why cook together image 1 - [savoytimber.com](https://www.savoytimber.com/help-and-advice/4-kitchen-lessons-weve-all-learned-from-lockdown/)
+* Why cook together image 2 - [themomandcaregiver.com](https://themomandcaregiver.com/cook-with-your-kids-this-march-break/)
+* Why cook together image 3 - [Bonnie Kittle via Unsplash.](https://unsplash.com/photos/kR4QYlK8IuU)
+* Why cook together image 4 - [Dan Gold via Unsplash.](https://unsplash.com/photos/E6HjQaB7UEA)
+* For general inspiration and recipes:
+    * [BBC Good Food.](https://www.bbcgoodfood.com/)
+    * [jamieoliver.com](https://www.jamieoliver.com/)
+    * [deliciousmagazine.co.uk](https://www.deliciousmagazine.co.uk/)
+
+### Acknowledgements
+* Ed Bradley - [MS3 Lead Call via Slack.](https://us02web.zoom.us/rec/play/Oue_1UJem3uxbPmzdT40ysKMOh4urdHf2M7ABy0zoHTGubzwWXedDZ31n1HOF0WwVNwYg34X_qrKcfiQ.FiJ8qeUidncmPnYi)
+* My mentor Brian Macharia for all the feedback and aiding in the planning and execution of this site.
+* Tim Nelson for his Thorin & company and Task Manager walkthrough projects that were part of the course content. I used both of these projects as a guide as I worked my way through the making of my site.
+* Tutor support at Code Institute for their help and support when needed most.
+* README examples:
+    * [crypticCaroline.](https://github.com/crypticCaroline/puppyplaymates/blob/master/README.md)
+    * [AJGreaves.](https://github.com/AJGreaves/portrait-artist/blob/master/README.md)
+    * [Code Institute template.](https://github.com/Code-Institute-Solutions/readme-template).
