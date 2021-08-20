@@ -384,7 +384,7 @@ def delete_profile(user):
     else:
         if user == session["user"]:
             # Removes all recipes by the user.
-            mongo.db.recipes.delete_one({"author": session["user"]})
+            mongo.db.recipes.remove({"author": session["user"]})
             mongo.db.users.delete_one({"username": session["user"]})
             # Removes session cookie.
             session.pop("user")
