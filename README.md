@@ -14,7 +14,7 @@ GitHub repository can be viewed here - [mitchdavenport88/family-feasts](https://
 ### Strategy
 The aim is to create a simple, user friendly recipe e-book using the functionality of creating, reading, updating and deleting data objects. The sites premise is built around the idea of getting households (primarily families) cooking together, spending time together and making tea time that little bit more exciting! Although the site will have a family orientated feel and be suited for users of all ages there is no reason why it shouldn’t also be suitable for other types of users such as couples and housemates as the message is still relevant.
 
-Any user should be able to access and view recipes that have been uploaded to the platform. Results and information should be shown in an appropriate and clear way, with the user having the ability to filter and search for recipes by using keywords or ingredients. In order to create, edit and delete recipes users will have to register. Once registered users will also have access to their own personal profile page/dashboard where their uploaded recipes will be displayed. The site’s admin will have all these privileges along with the ability to edit and delete other user’s entries along with being able to add further content at a later date.
+Any user should be able to access and view recipes that have been uploaded to the platform. Results and information should be shown in an appropriate and clear way, with the user having the ability to filter and search for recipes by using keywords or ingredients. In order to create, edit and delete recipes users will have to register. Once registered users will also have access to their own personal profile page/dashboard where their uploaded recipes will be displayed. The site’s admin will have all these privileges as well as the ability to edit and delete other user’s entries along with being able to add further content at a later date.
 
 ### User Stories
 As a first time user I'd like:
@@ -135,14 +135,14 @@ As the site is aimed particularity at families, any design decisions made were d
 * Icons representing the social media links appear in the footer of every page. Each icon is associated with the intended destination and clicking them will send the user there via a new window/tab.
 
 ### Navigational
-* Fixed navigation bar so links to any other section of the website are accessible at any point making for easy navigation around.
+* Fixed navigation bar so links to any other section of the website are accessible at any point making for easier navigation.
 * The logo has a secondary feature as a link back to the home page. All other links are where a user would expect to find them making for good UX.
 * The menu button on smaller screen widths features Font Awesome’s icon “fa-bars”, which is associated with this dropdown menu function.
 
 ### Buttons & links
 * Call-to-action buttons are used throughout the site to engage with the user and point them to relevant pages of the site or to perform certain functions.
 * Buttons will invert colour when hovered showing the user it is clickable in order to get them to engage with it.
-* I’ve put a hover classes on the navigation links and social media links to encourage interaction.
+* I’ve put hover classes on the navigation links and social media links to encourage interaction.
 
 ### Home
 * A hero image fills the majority of the page (83vh) when it first loads. I’ve used a hero image as I believe it sets the tone by giving a professional and modern feel as well as an initial wow factor. I’ve not gone 100vh with the image in this instance as I wanted to show that there was further content below.
@@ -150,13 +150,13 @@ As the site is aimed particularity at families, any design decisions made were d
 ### Recipes & individual recipe pages
 * I have chosen to use cards to display each individual recipe. By breaking all the recipes into individual cards and adding some division between them I felt was the best way to display this amount of information without overwhelming a user.
 * Buttons can be used for filtering the recipes shown and the search function means that a user can find what they are after quickly and more efficiently.
-* Call-to-action buttons used on cards to aid in both navigation and to get users using functions.
+* Call-to-action buttons are used on cards to aid in both navigation and to get users using functions.
 * Individual recipe pages show all the recipe information in a clear and concise manner.
 * Back to top button at the bottom of the individual pages aids with navigation, adds interaction and improves UX.
 
 ### Forms – register, login, add and edit recipes
 * Inputs are labelled and have instructions where necessary so it’s clear what goes into each field.
-* All fields are required to submit all forms, messages will appear to when this isn't the case.
+* All fields are required to submit all forms, messages will appear when this isn't the case.
 * All inputted data is validated so forms will only accept data how we’d like it. More accurate data provided by a user will help the site look more professional by producing a more informative collection of recipes that will then get displayed throughout the site.
 * Flash messages are used to relay information back to the user if something was successful or not or if something can't be accessed.
 
@@ -167,12 +167,12 @@ As the site is aimed particularity at families, any design decisions made were d
 ### User profile & error pages
 * Each user is allocated their own profile page, this serves as the user’s central hub and is personalised to them. This is where they’re first directed when logged in and it can be only accessed by them.
 * All their uploaded recipes will appear on this page and from here they will be able to view and maintain uploads easier. From this hub a user can pretty much access any other part of the site easily making for good user experience and convenience.
-* An error page will display in the instances a 404 or 500 error occurs. Not that this will be a regular occurrence but if this situation arises the user will be provided with a link back to the home page.
+* An error page will display in the instances where a 404 or 500 error occurs. Not that this will be a regular occurrence but if this situation arises the user will be provided with a link back to the home page.
 
 ### Features left to implement
 * Introduce some pagination onto the pages where large numbers of recipes could be displayed. This would help to keep the site user-friendly and make navigation around even easier.
 * I would like to have a section on the home page showing the latest recipes that have been uploaded onto the site.
-* I'd like to create a page on the site similar to the manage category page but for controlling users (editing and deleting them) on the site. This would only be accessible to admin just like the categories page and would make the management of users an easier task.
+* I'd like to create a page on the site similar to the manage category page but for controlling users (editing and deleting them). This would only be accessible to admin just like the manage categories page and would make the management of users an easier task.
 * A gallery page where we could display pictures that were sent to us via social media outlets showing people having fun in the kitchen! This could encourage others to do so too!
 
 ## Database design
