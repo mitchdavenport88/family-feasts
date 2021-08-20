@@ -289,7 +289,7 @@ def edit_recipe(id):
         form.recipe_steps.data = ('\n'.join(str(ing)
                                   for ing in recipe["recipe_steps"]))
         if form.validate_on_submit():
-            submit = {
+            submit = {"$set": {
                 "recipe_name": request.form.get("recipe_name").title(),
                 "recipe_image": request.form.get("recipe_image"),
                 "category_name": request.form.get("category_name"),
@@ -300,7 +300,7 @@ def edit_recipe(id):
                 "recipe_steps": request.form.get("recipe_steps").splitlines(),
                 # If admin edits recipe original author will remain.
                 "author": recipe["author"]
-            }
+            }}
             mongo.db.recipes.update_one({"_id": ObjectId(id)}, submit)
             flash("your recipe has been updated!")
             return redirect(url_for("view_recipe",
