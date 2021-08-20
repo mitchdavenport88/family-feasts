@@ -103,8 +103,8 @@ Register and login forms - [desktop](readme-docs/wireframes/userforms-desktop.pn
 [mobile](readme-docs/wireframes/userforms-phone.png).
 
 View recipes - [desktop](readme-docs/wireframes/recipe-menu-desktop.png) | 
-[tablet](readme-docs/wireframes/recipe-menu-phone.png) | 
-[mobile](readme-docs/wireframes/recipe-menu-tablet.png).
+[tablet](readme-docs/wireframes/recipe-menu-tablet.png) | 
+[mobile](readme-docs/wireframes/recipe-menu-phone.png).
 
 Individual recipe page - [desktop](readme-docs/wireframes/view-recipe-desktop.png) | 
 [tablet](readme-docs/wireframes/view-recipe-tablet.png) | 
@@ -155,12 +155,16 @@ As the site is aimed particularity at families, any design decisions made were d
 ### Footer
 * I’ve used icons representing the social media links in the footer of every page. Each icon is associated with the intended destination and clicking them will send the user there via a new window/tab. A hover class to match that found on the navigation bar links has been added again to encourage interaction. -->
 
-<!-- ### Features left to implement -->
+### Features left to implement
+* Introduce some pagination onto the pages where large numbers of recipes could be displayed. This would help to keep the site user-friendly and make navigation around even easier.
+* I would like to have a section on the home page showing the latest recipes that have been uploaded onto the site.
+* I'd like to create a page on the site similar to the manage category page but for controlling users (editing and deleting them) on the site. This would only be accessible to admin just like the categories page and would make the management of users an easier task.
+* A gallery page where we could display pictures that were sent to us via social media outlets showing people having fun in the kitchen! This could encourage others to do so too!
 
 ## Database design
 I’ve used a document-based database within MongoDB to store my data as shown in the course content. After assessing the needs of my site I decided that a database containing three collections would be suitable. The schema of my database is shown below.
-* **Recipes:** Holds all data on the recipes, this data is pulled by the site as and when required to display recipes. Users are able to add to the collection, edit data that exists in the collection and delete data from the collection in the form of recipes.
-* **Categories:** Holds the recipe category names that are used throughout the site and is read in instances such as when dynamically adding buttons on the recipes page and selectable options in the dropdown menu’s on forms. Adding and deleting data to this collection is only allowed by users with is_admin rights.
+* **Recipes:** Holds all data for the recipes, this data is pulled by the site as and when required to display recipes. Users are able to add to the collection, edit data that exists in the collection and delete data from the collection in the form of recipes.
+* **Categories:** Holds the recipe category names that are used throughout the site. These are read in instances such as when dynamically adding buttons on the recipes page and provide the options in the dropdown menu’s found on forms. Adding and deleting data to this collection is only allowed by users with is_admin rights.
 * **Users:** Holds data regarding the user. Data in this collection will be read when logging in, created whilst registering and can be deleted if necessary. Data stored within this collection will also aid in the controlling of admin/user privileges. 
 
 ![Database schema](readme-docs/screenshots/db-categories.jpg)
@@ -229,7 +233,7 @@ You can clone a repository so that it can be worked on locally in an IDE such as
 5. Type `git clone` followed by the link you copied in step 3 into the terminal, this will look something like this: `git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY`
 6. Press **enter** and the clone will be created in your selected / current working directory (cwd).
 
-You will need to reinstall all the dependencies used, you can do this by running the following `pip3 install -r requirements.txt` in the terminal. A new `env.py` file will also have to be created to include all the variables used when flask is initially setting up. These variables are also used in the **Config Vars** section when deployed to Heroku.
+You will need to reinstall all the dependencies used, you can do this by running the following `pip3 install -r requirements.txt` in the terminal. A new `env.py` file will also have to be created to include all the variables used when flask is initially set up. These variables are also used in the **Config Vars** section in Heroku when deployed.
 
 Taken from GitHub's documentation on cloning, which can be found [here.](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository#cloning-a-repository-to-github-desktop)
 
@@ -251,7 +255,7 @@ Taken from GitHub's documentation on cloning, which can be found [here.](https:/
 * [W3schools,](https://www.w3schools.com/) [Stack Overflow](https://stackoverflow.com/) & [MDN.](https://developer.mozilla.org/en-US/) For general coding problem solving.
 
 ### Content
-* Site layout was inspired by this - [startbootstrap theme.](https://startbootstrap.com/theme/landing-page)
+* Site layout was inspired by this [startbootstrap theme.](https://startbootstrap.com/theme/landing-page)
 * The writing in the "why cook together" section was taken from this [HelloFresh blog post](https://blog.hellofresh.com/cooking-together-5-reasons/) and edited accordingly to suit.
 * Home / landing page hero image - [Jimmy Dean via Unsplash.](https://unsplash.com/photos/_4ndmFMFU2o)
 * Why cook together image 1 - [savoytimber.com](https://www.savoytimber.com/help-and-advice/4-kitchen-lessons-weve-all-learned-from-lockdown/)
@@ -264,9 +268,9 @@ Taken from GitHub's documentation on cloning, which can be found [here.](https:/
     * [deliciousmagazine.co.uk](https://www.deliciousmagazine.co.uk/)
 
 ### Acknowledgements
-* Ed Bradley - [MS3 Lead Call via Slack.](https://us02web.zoom.us/rec/play/Oue_1UJem3uxbPmzdT40ysKMOh4urdHf2M7ABy0zoHTGubzwWXedDZ31n1HOF0WwVNwYg34X_qrKcfiQ.FiJ8qeUidncmPnYi)
+* Ed Bradley - MS3 Lead Call via Slack.
 * My mentor Brian Macharia for all the feedback and aiding in the planning and execution of this site.
-* Tim Nelson for his Thorin & company and Task Manager walkthrough projects that were part of the course content. I used both of these projects as a guide as I worked my way through the making of my site.
+* Tim Nelson for his Thorin & Company and Task Manager walkthrough projects that were part of the course content. I used both of these projects as a guide as I worked my way through the making of my site.
 * Tutor support at Code Institute for their help and support when needed most.
 * README examples:
     * [crypticCaroline.](https://github.com/crypticCaroline/puppyplaymates/blob/master/README.md)
