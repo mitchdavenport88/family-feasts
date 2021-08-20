@@ -276,3 +276,22 @@ I also tested compatibility at varying screen sizes to test the responsiveness o
 
 * **"To do all of the above regardless of what device I’m using."**
     * I have done thorough browser compatibility testing as well as responsiveness testing at different breakpoints. I am confident that the site is suitable for use on a wide range of devices and browsers.
+
+### As the site owner / admin I want:
+* **"The ability to edit and delete any recipes regardless of who posted it."**
+    * I’ve put measures in place so that any user that has “is_admin” set to true in the users collection in MongoDB can edit and delete any recipe on the site (they can still add their own recipes too). Setting this to true can only be done through MongoDB currently.
+    * When logged in to an account with admin rights all call-to-action buttons on recipe cards will be visible as shown below. Call-to-action buttons will also be visible on each individual recipe page.
+    * I felt this was an important implement to feature so that any offensive material or spam like posts can be easy be deleted. This way, with these rights I can control the content of the site and maintain its appearance of being a family-orientated platform.
+
+![All recipes page when logged in as admin.](readme-docs/screenshots/user-stories/user-stories10.jpg)
+
+* **"The ability to remove user profiles if needed."**
+    * Currently the only way to achieve this is by doing this manually on the MongoDB dashboard when logged in. Due to time constraints I wasn’t able to administer this functionality through the sites interface but it has been added to my features left to implement list.
+
+* **"To be able to add new categories, edit and delete existing ones."**
+    * The manage category page is only accessible to users that have “is_admin” set to true.
+    * On log in the admin or superuser account will have a "manage category" button as part of their user profile dashboard for quick navigation to the page.
+    * The page is set up as shown below and is very simple to use. The new category gets inputted into the form and on successful submission the category becomes live and can be accessed throughout the site.
+    * To delete a category is just as simple as each category card comes with its own delete button.
+
+![Manage categories page.](readme-docs/screenshots/user-stories/user-stories11.jpg)
