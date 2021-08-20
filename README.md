@@ -130,30 +130,44 @@ As the site is aimed particularity at families, any design decisions made were d
 ![Color Hunt - color palette](readme-docs/screenshots/colorhunt-palette.png)
 
 ## Features
-<!-- ### Page Layout
+### Page Layout
 * Responsive at all breakpoints. By using a combination of media queries, Bootstrap’s responsive grid and built in flexbox capabilities means the sites layout and contents will adapt to the device it’s being viewed on.
+* Icons representing the social media links appear in the footer of every page. Each icon is associated with the intended destination and clicking them will send the user there via a new window/tab.
 
 ### Navigational
-* Fixed navigation bar so links to any other section of the website are accessible at any point.
-* The logo is always in the top left of the page. This also has a secondary feature as a link back to the home page.
-* Navigation links on screen widths of lg and above are displayed inline at the top right of the page where a user would expect to find them.
-    * Different links will appear based on the user been logged in or not as some functions and pages are restricted.
-    * The log in, register and logout links appear as call-to-action buttons and invert colour when hovered over to encourage interaction.
-    * For the same reason I’ve put a hover class on the navigation links, which makes the links orange when hovered over.
-* On screen widths of md and below these links are housed in a dropdown menu, which is toggled on/off via the click of a button. The button features Font Awesome’s icon “fa-bars”, which is associated with this dropdown menu function.
-    * The log in, register and logout call-to-action buttons will now appear as links that appear within the dropdown menu.
+* Fixed navigation bar so links to any other section of the website are accessible at any point making for easy navigation around.
+* The logo has a secondary feature as a link back to the home page. All other links are where a user would expect to find them making for good UX.
+* The menu button on smaller screen widths features Font Awesome’s icon “fa-bars”, which is associated with this dropdown menu function.
+
+### Buttons & links
+* Call-to-action buttons are used throughout the site to engage with the user and point them to relevant pages of the site or to perform certain functions.
+* Buttons will invert colour when hovered showing the user it is clickable in order to get them to engage with it.
+* I’ve put a hover classes on the navigation links and social media links to encourage interaction.
 
 ### Home
-* A hero image of a family sat at the dinner table fills the majority of the page (83vh) when it first loads. I’ve used a hero image as I believe it sets the tone by giving a professional and modern feel as well as an initial wow factor. I’ve not gone 100vh with the image in this instance as I wanted to imply that there was further content below. 
-* A text overlay box is used to display a tagline of “easy recipes to enjoy together!” and a call-to-action button, which will take the user to the recipes page.
-* The about us section is broken down into three sub-categories; save, share and experiment. Each talk about the Family Feasts mission. 
-    * They feature call-to-action buttons to engage with the user and guide them to a relevant part of the site based on what they’re reading.
-    * The three sections are responsive and will stack on top of each other as the screen size decreases. 
-* Why cook together? section follows on from the about us section and adds a bit more context to the page. The images are responsive and get hidden on widths of md and below to display the text only across the width of the screen.
-* All buttons on the site will invert colour when hovered, showing the user it is clickable and to get them to engage with it.
+* A hero image fills the majority of the page (83vh) when it first loads. I’ve used a hero image as I believe it sets the tone by giving a professional and modern feel as well as an initial wow factor. I’ve not gone 100vh with the image in this instance as I wanted to show that there was further content below.
 
-### Footer
-* I’ve used icons representing the social media links in the footer of every page. Each icon is associated with the intended destination and clicking them will send the user there via a new window/tab. A hover class to match that found on the navigation bar links has been added again to encourage interaction. -->
+### Recipes & individual recipe pages
+* I have chosen to use cards to display each individual recipe. By breaking all the recipes into individual cards and adding some division between them I felt was the best way to display this amount of information without overwhelming a user.
+* Buttons can be used for filtering the recipes shown and the search function means that a user can find what they are after quickly and more efficiently.
+* Call-to-action buttons used on cards to aid in both navigation and to get users using functions.
+* Individual recipe pages show all the recipe information in a clear and concise manner.
+* Back to top button at the bottom of the individual pages aids with navigation, adds interaction and improves UX.
+
+### Forms – register, login, add and edit recipes
+* Inputs are labelled and have instructions where necessary so it’s clear what goes into each field.
+* All fields are required to submit all forms, messages will appear to when this isn't the case.
+* All inputted data is validated so forms will only accept data how we’d like it. More accurate data provided by a user will help the site look more professional by producing a more informative collection of recipes that will then get displayed throughout the site.
+* Flash messages are used to relay information back to the user if something was successful or not or if something can't be accessed.
+
+### Logout & deletion modals
+* The buttons are clear and obvious in what they do and function as expected.
+* Deletion of anything on the site is a 2 step process with a user having to confirm they wish to delete an object so accidental deletion of anything can't happen.
+
+### User profile & error pages
+* Each user is allocated their own profile page, this serves as the user’s central hub and is personalised to them. This is where they’re first directed when logged in and it can be only accessed by them.
+* All their uploaded recipes will appear on this page and from here they will be able to view and maintain uploads easier. From this hub a user can pretty much access any other part of the site easily making for good user experience and convenience.
+* An error page will display in the instances a 404 or 500 error occurs. Not that this will be a regular occurrence but if this situation arises the user will be provided with a link back to the home page.
 
 ### Features left to implement
 * Introduce some pagination onto the pages where large numbers of recipes could be displayed. This would help to keep the site user-friendly and make navigation around even easier.
