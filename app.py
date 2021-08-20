@@ -301,7 +301,7 @@ def edit_recipe(id):
                 # If admin edits recipe original author will remain.
                 "author": recipe["author"]
             }
-            mongo.db.recipes.update({"_id": ObjectId(id)}, submit)
+            mongo.db.recipes.update_one({"_id": ObjectId(id)}, submit)
             flash("your recipe has been updated!")
             return redirect(url_for("view_recipe",
                                     id=recipe["_id"]))
@@ -384,8 +384,8 @@ def delete_profile(user):
     else:
         if user == session["user"]:
             # Removes all recipes by the user.
-            mongo.db.recipes.remove({"author": session["user"]})
-            mongo.db.users.remove({"username": session["user"]})
+            mongo.db.recipes.delete_one({"author": session["user"]})
+            mongo.db.users.delete_one({"username": session["user"]})
             # Removes session cookie.
             session.pop("user")
             flash("profile deleted!")
