@@ -4,7 +4,7 @@
 Family Feasts is a cooking e-book that aims to build a library of recipes that will inspire households and families to get off the couch and into the kitchen to cook together! Any member of the family will be able to browse, search and follow recipes that have been posted up by the online community. Users will be encouraged to join the community by signing up to share their family favourites in order to encourage others to cook and spend time with their loved ones.
 
 ## Demo
-The live site can be viewed here - [Family Feasts](https://family-feasts.herokuapp.com/).
+The live site can be viewed here - [Family Feasts](https://family-feast.onrender.com/).
 
 GitHub repository can be viewed here - [mitchdavenport88/family-feasts](https://github.com/mitchdavenport88/family-feasts).
 
